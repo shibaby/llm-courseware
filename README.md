@@ -1,4 +1,4 @@
-# 大模型技术概念 · 一小时通关
+# 大模型技术概念
 
 一份单文件、零依赖的交互式 HTML 课件：从 Token 讲起，把 Prompt、Function Calling、RAG、微调、Agent、多 Agent、MCP、Skills 串成一条线。适合自己自学，也适合投屏讲给别人听。
 

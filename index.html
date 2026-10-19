@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>大模型技术概念 · 一小时通关</title>
+<title>大模型技术概念</title>
 <style>
 :root{
   --bg-0:#101a35; --bg-1:#070a16; --bg-2:#04050c;
@@ -234,6 +234,10 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .concept .btn-enter{margin-top:14px}
 .jingle{position:relative;margin:26px 0 0;padding:26px 24px;border-radius:14px;border:1px solid rgba(129,140,248,.24);background:linear-gradient(120deg,rgba(34,211,238,.07),rgba(129,140,248,.09) 50%,rgba(240,171,252,.07));font-size:18px;line-height:2.1;text-align:center;color:var(--text-2)}
 .jingle::before{content:"“";position:absolute;left:14px;top:-8px;font-size:56px;line-height:1;color:rgba(240,171,252,.3)}
+.j-key{color:#67e8f9;font-weight:800}
+.j-act{color:#f0abfc;font-weight:700}
+.remember .j-key{color:#67e8f9}
+.remember .j-act{color:#f0abfc}
 #concept-map.map-complete .concept{animation:mapGlow 1s ease both}
 #concept-map.map-complete .concept:nth-child(2){animation-delay:.06s}
 #concept-map.map-complete .concept:nth-child(3){animation-delay:.12s}
@@ -430,6 +434,8 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .repeat-illo .r-bubble::before{content:"“";position:absolute;left:7px;top:2px;font-size:26px;color:rgba(34,211,238,.55);font-family:Georgia,serif}
 .repeat-illo .r-bubble:nth-child(2){opacity:.72;transform:translateY(6px)}
 .repeat-illo .r-bubble:nth-child(3){opacity:.42;transform:translateY(12px)}
+.repeat-illo .r-num{color:var(--cyan);font-size:10px;letter-spacing:.08em;margin-right:6px}
+.nowrap{white-space:nowrap}
 .skill-demo{display:grid;grid-template-columns:1.32fr .78fr;gap:18px;align-items:start;text-align:left}
 .manual{display:flex;flex-direction:column;gap:8px;min-width:0}
 .layer{border:1px solid rgba(148,180,255,.18);border-radius:10px;background:linear-gradient(160deg,rgba(129,140,248,.08),rgba(255,255,255,.02));overflow:hidden;transition:border-color .35s,box-shadow .35s,background .35s}
@@ -519,7 +525,7 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .star span{font-size:10.5px;line-height:1.3;text-align:center}
 .star:hover,.star:focus-visible{transform:translate(-50%,-50%) scale(1.06);border-color:rgba(34,211,238,.55)}
 .star.active{transform:translate(-50%,-50%) scale(1.1);border-color:rgba(34,211,238,.75);background:rgba(34,211,238,.12);box-shadow:0 0 18px rgba(34,211,238,.3);color:#f2fbff}
-.star-tip{min-height:22px;margin:8px 0 0;text-align:center;font-size:13.5px;color:var(--muted);transition:color .3s,opacity .3s;opacity:.7}
+.star-tip{min-height:38px;margin:8px 0 0;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.5px;line-height:1.35;color:var(--muted);transition:color .3s,opacity .3s;opacity:.7}
 .star-tip.on{color:#dffaff;opacity:1}
 @keyframes orbitSpin{to{transform:rotate(360deg)}}
 @keyframes corePulse{0%,100%{box-shadow:0 0 26px rgba(34,211,238,.18),inset 0 0 22px rgba(129,140,248,.18)}50%{box-shadow:0 0 44px rgba(34,211,238,.3),inset 0 0 30px rgba(129,140,248,.28)}}
@@ -531,6 +537,9 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 /* ---- Ch7 quiz & ending ---- */
 .quiz{max-width:780px;margin:4px auto 0}
 .quiz-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;font-size:12.5px;color:var(--muted)}
+.quiz-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px}
+.quiz-nav .btn{padding:7px 16px;font-size:12px}
+#quiz-pos{font-size:12px;color:var(--muted);min-width:48px;text-align:center;font-variant-numeric:tabular-nums}
 #quiz-score{color:var(--cyan);font-weight:700;letter-spacing:.02em}
 .quiz-item{display:none}
 .quiz-item.active{display:block;animation:quizIn .28s ease both}
@@ -548,7 +557,7 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .quiz-hint b{color:var(--text-2)}
 .quiz-result{display:none;position:relative;margin-top:6px;padding:22px 18px 18px;text-align:center;border:1px solid rgba(34,211,238,.22);border-radius:14px;background:radial-gradient(circle at 50% 0,rgba(34,211,238,.12),transparent 62%),rgba(255,255,255,.025);overflow:hidden}
 .quiz-result.on{display:block;animation:quizIn .35s ease both}
-.quiz.done .quiz-item,.quiz.done .quiz-bar{display:none}
+.quiz.done .quiz-item,.quiz.done .quiz-bar,.quiz.done .quiz-nav{display:none}
 .quiz-result h4{margin:0 0 6px;font-size:26px;letter-spacing:.02em;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
 .quiz-result p{margin:0 0 14px;color:var(--text-2);font-size:13.5px}
 .burst{position:absolute;inset:0;pointer-events:none}
@@ -610,12 +619,12 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 <div id="progress"><div id="progress-fill"></div></div>
 <div id="progress-nodes" aria-hidden="true"></div>
 <header id="deck-top" aria-hidden="true">
-  <span id="deck-chapter">大模型技术概念 · 一小时通关</span>
+  <span id="deck-chapter">大模型技术概念</span>
   <span id="deck-point">课程封面</span>
 </header>
 <footer id="deck-bottom" aria-hidden="true">
-  <span id="deck-brand">一小时通关</span>
-  <span id="deck-page"><b>01</b> / 31</span>
+  <span id="deck-brand">大模型技术概念</span>
+  <span id="deck-page"><b>01</b> / 30</span>
   <span id="deck-hint">← → 翻页</span>
 </footer>
 <button id="btn-toc" type="button" aria-label="打开课程目录">目录</button>
@@ -623,9 +632,9 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 <main>
   <section class="section cover active in-view" id="cover" data-title="封面">
     <p class="eyebrow">AI 技术通识 · 交互课件</p>
-    <h1 class="cover-title">大模型技术概念<span class="grad">一小时通关</span></h1>
+    <h1 class="cover-title">大模型<span class="grad">技术概念</span></h1>
     <p class="cover-sub">从 Token 到 Agent：把 10 个概念讲成故事</p>
-    <div class="chips"><span>约 60 分钟</span><span>10 个概念</span><span>7 章</span></div>
+    <div class="chips"><span>10 个概念</span><span>7 章</span></div>
     <button class="btn" id="btn-start" type="button">开始学习 →</button>
     <p class="cover-hint">键盘 ← → 翻页 · 右上角目录可跳转 · 每个演示都可重来</p>
   </section>
@@ -633,7 +642,6 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
   <section class="section" data-title="核心：文字接龙大师">
     <div class="chapter-head reveal">
       <h2 class="chapter-title">第 1 章 · 大模型是什么</h2>
-      <span class="chip">约 6 分钟</span>
     </div>
     <h3 class="sec-title">它本质是一台<span class="grad">「文字接龙大师」</span></h3>
     <p class="lead">先忘掉“神经网络”“人工智能”这些吓人的词。大模型做的事只有一件：<strong>看着前面的文字，猜下一个词</strong>。训练时，它把海量书籍、网页、代码读了个遍；使用时，它把你说的每句话当成“接龙的开头”，一个词一个词往下接。</p>
@@ -706,7 +714,6 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
   <section class="section" data-title="使用说明">
     <div class="chapter-head reveal">
       <h2 class="chapter-title">第 2 章 · 概念全家桶</h2>
-      <span class="chip">约 12–15 分钟</span>
     </div>
     <h3 class="sec-title">十个词，<span class="grad">一张图</span></h3>
     <p class="lead">接下来你会反复听到这十个词。先别急着背定义——把每张卡当成一个角色：<strong>点开它，看清它长什么样、负责什么</strong>。混个脸熟，后面再逐个深聊。</p>
@@ -977,7 +984,6 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
   <section class="section" data-title="核心：会办事的实习生">
     <div class="chapter-head reveal">
       <h2 class="chapter-title">第 3 章 · Agent 智能体</h2>
-      <span class="chip">约 8 分钟</span>
     </div>
     <h3 class="sec-title">Agent = 给大脑配上<span class="grad">手脚和循环</span></h3>
     <p class="lead">普通 Chatbot 像坐在窗口后的问答机：你问一句，它答一句。Agent 像被派出去办事的实习生：你只给目标，它自己<strong>想下一步、动手做、看结果</strong>，没办完就继续转。</p>
@@ -1076,7 +1082,6 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
   <section class="section" data-title="问题：M×N 的接口乱麻">
     <div class="chapter-head reveal">
       <h2 class="chapter-title">第 4 章 · MCP</h2>
-      <span class="chip">约 8 分钟</span>
     </div>
     <h3 class="sec-title">每个 AI 应用，都要<span class="grad">重新接一遍工具</span></h3>
     <p class="lead">ChatGPT 要连邮箱、Claude 要连日历、Cursor 要连 GitHub……如果每对组合都单独写一套接口，就是 M×N 条定制线。<b>MCP</b> 要做的，是把它们收成 M+N。</p>
@@ -1095,7 +1100,7 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
     <div class="demo mcp-demo" data-demo="mcp-lines">
       <svg class="mcp-stage" viewBox="0 0 800 420" role="img" aria-label="MCP 把 20 根定制线收成 9 根标准线">
         <defs>
-          <linearGradient id="mcpGrad" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id="mcpGrad" gradientUnits="userSpaceOnUse" x1="150" y1="60" x2="650" y2="360">
             <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#818cf8"/><stop offset="1" stop-color="#f0abfc"/>
           </linearGradient>
         </defs>
@@ -1156,16 +1161,16 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
     <p class="plain-note">类比：Host 是顾客，Client 是前台，Server 是后厨。顾客不直接进厨房，前台负责把话传到。</p>
   </section>
 
-  <section class="section" data-title="事实卡片：MCP 这一年">
+  <section class="section" data-title="事实卡片：MCP 的时间线">
     <h3 class="sec-title">几个<span class="grad">值得记住的事实</span></h3>
     <p class="lead">这些时间点能帮你判断：MCP 已经不是“某个厂商的小工具”，而是行业共同维护的标准。</p>
     <div class="facts">
       <article class="fact"><span class="f-year">2024-11-25</span><p><b>Anthropic</b> 发布 MCP，先在自己的工具生态里跑通。</p></article>
-      <article class="fact"><span class="f-year">2025</span><p>OpenAI（3 月）、Google（4 月）相继采用；微软也在上半年全面接入。</p></article>
+      <article class="fact"><span class="f-year">2025-03 ~ 06</span><p>OpenAI（3 月）、Google（4 月）相继采用；微软也在上半年全面接入。</p></article>
       <article class="fact"><span class="f-year">2025-12-09</span><p>捐给 <b>Linux 基金会</b>旗下 <b>Agentic AI Foundation</b>，变成中立标准。</p></article>
+      <article class="fact"><span class="f-year">2026-01-26</span><p>MCP Apps 成为第一个官方扩展：工具可以带着自己的界面来。</p></article>
       <article class="fact"><span class="f-year">2026-07-28</span><p>规格改为<b>无状态</b>：不再需要握手和会话，部署更简单。</p></article>
       <article class="fact"><span class="f-year">2026-08</span><p>官方注册表全量盘点：<b>22,636</b> 个活跃服务器，且仍在增长。</p></article>
-      <article class="fact"><span class="f-year">2026-01-26</span><p>MCP Apps 成为第一个官方扩展：工具可以带着自己的界面来。</p></article>
     </div>
     <p class="facts-note">Anthropic 的示例：GitHub、Slack、Sentry、Grafana、Splunk 五个服务器、58 个工具，工具定义约占 <b>5.5 万 token</b>。所以“全装上”并不划算——先精选服务器、按需发现工具，才是控制工具定义成本的办法。</p>
   </section>
@@ -1192,25 +1197,24 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
     <section class="section" data-title="问题：每次都从头教">
       <div class="chapter-head reveal">
         <h2 class="chapter-title">第 5 章 · Skills</h2>
-        <span class="chip">约 7 分钟</span>
       </div>
       <h3 class="sec-title">每次都要<span class="grad">重新教一遍</span>？</h3>
       <p class="lead">提示词像口头交代：这次说清楚了，下次换个对话，AI 又忘了；团队里每个人还得各教一遍。</p>
       <div class="repeat-illo" aria-hidden="true">
-        <div class="r-bubble">你要先读需求，再列提纲，最后检查数据……</div>
-        <div class="r-bubble">你要先读需求，再列提纲，最后检查数据……</div>
-        <div class="r-bubble">你要先读需求，再列提纲，最后检查数据……</div>
+        <div class="r-bubble"><span class="r-num">第 1 次</span>你要先读需求，再列提纲，最后检查数据……</div>
+        <div class="r-bubble"><span class="r-num">第 2 次</span>你要先读需求，再列提纲，最后检查数据……</div>
+        <div class="r-bubble"><span class="r-num">第 3 次</span>你要先读需求，再列提纲，最后检查数据……</div>
       </div>
       <div class="cards-3">
-        <article class="card"><span class="tag">一次性</span><h3>Prompt</h3><p>说一次，生效一次。换个人、换个会话，就得重说。</p></article>
+        <article class="card"><span class="tag">一次性</span><h3>Prompt</h3><p>说一次，只生效一次。换个人、换个会话，就得从头再交代一遍。</p></article>
         <article class="card"><span class="tag">会遗忘</span><h3>上下文</h3><p>聊得越久，越容易被新内容挤掉；昨天的好方法，今天不一定还在。</p></article>
-        <article class="card"><span class="tag">可复用</span><h3>Skill</h3><p>把步骤、模板、脚本写成文件，需要时自动翻出来。</p></article>
+        <article class="card"><span class="tag">可复用</span><h3>Skill</h3><p>把步骤、模板、脚本写成文件，需要时自动翻出来，谁都能复用。</p></article>
       </div>
     </section>
 
     <section class="section" data-title="互动：三层渐进披露">
       <h3 class="sec-title">一本会<span class="grad">自己展开</span>的手册</h3>
-      <p class="lead">Agent 平时只记住每本手册的“书名和一句话简介”；真正用到时，才翻开正文，再深才取附件。这叫<strong>渐进式披露</strong>。</p>
+      <p class="lead">Agent 平时只记住每本手册的“书名和一句话简介”；真正用到时，才翻开正文，再深才取附件。这叫<strong class="nowrap">渐进式披露</strong>。</p>
       <div class="demo skill-demo" data-demo="skill-layers">
         <div class="manual">
           <article class="layer layer-meta open">
@@ -1274,25 +1278,6 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
       <p class="plain-note">记住分工：Prompt 说“做什么”，Skill 说“这类事怎么做”。</p>
     </section>
 
-    <section class="section" data-title="彩蛋：Skills 正在你身边">
-      <h3 class="sec-title">彩蛋：<span class="grad">你正在看一个 Skill</span></h3>
-      <p class="lead">这份课件，就是我在 OpenCode 里按一套 Skill 流程做出来的。它不是魔法，而是一个带说明书的文件夹。</p>
-      <div class="egg">
-        <div class="egg-head"><span class="egg-badge">🥚 彩蛋</span><h4>SKILL.md 长什么样？</h4></div>
-        <pre><code>---
-name: courseware-builder
-description: 当用户要把一个技术主题做成互动课件时使用
----
-
-# 互动课件制作流程
-
-1. 先确认受众、时长与视觉风格
-2. 用比喻串联概念，再设计每页的互动
-3. 单文件交付，逐页自检动画与文案</code></pre>
-        <p class="egg-note">模型先看到的是 <code>name</code> + <code>description</code>；发现“这事我会”，才去读正文。这就是渐进式披露。</p>
-      </div>
-    </section>
-
     <section class="section" data-title="记住这个">
       <h3 class="sec-title">Skills = <span class="grad">把经验写成手册</span></h3>
       <aside class="remember">
@@ -1315,10 +1300,9 @@ description: 当用户要把一个技术主题做成互动课件时使用
   <section class="section" data-title="场景：一句话，做一份 PPT">
     <div class="chapter-head reveal">
       <h2 class="chapter-title">第 6 章 · 实战串联</h2>
-      <span class="chip">约 8 分钟</span>
     </div>
     <h3 class="sec-title">一句话，把「季度总结」<span class="grad">变成 PPT</span></h3>
-    <p class="lead">接下来不讲新名词。我们跟着一句真实需求，把前面所有概念串成一条流水线——看看它们各自在什么时候登场。</p>
+    <p class="lead">接下来不讲新名词。我们跟着一句真实需求，把前面所有概念串成一条流水线——看看<span class="nowrap">它们各自在什么时候登场</span>。</p>
     <div class="scene-chat">
       <div class="bubble-user">把这份季度数据整理成 10 页汇报 PPT，周五前给我。</div>
       <div class="bubble-ai">收到。我先读表格，再写大纲，生成后检查版式；缺的资料我会去查。</div>
@@ -1376,11 +1360,10 @@ description: 当用户要把一个技术主题做成互动课件时使用
   <section class="section" data-title="总结：一张星图">
     <div class="chapter-head reveal">
       <h2 class="chapter-title">第 7 章 · 记忆加固</h2>
-      <span class="chip">约 5 分钟</span>
     </div>
     <h3 class="sec-title">把 10 个概念，<span class="grad">收进一张星图</span></h3>
     <p class="lead">点一颗星看比喻，或让它按学习顺序串一遍。</p>
-    <div class="star-wrap" data-demo="starmap-flow">
+    <div class="star-wrap" data-demo="starmap-flow" data-fit="manual">
       <div id="starmap">
         <div class="orbit" aria-hidden="true"></div>
         <svg class="star-links" viewBox="0 0 1000 435" preserveAspectRatio="none" aria-hidden="true">
@@ -1416,11 +1399,11 @@ description: 当用户要把一个技术主题做成互动课件时使用
     <h3 class="sec-title">最后，用一段<span class="grad">顺口溜</span>收尾</h3>
     <p class="lead">不用背定义。跟着节奏读一遍，十个概念自己会排队。</p>
     <div class="jingle-box">
-      <p class="jingle jingle-big" data-jingle="ch7"><span class="j-line">Token 切块进上下文，Prompt 写清要干啥；</span><span class="j-line">工具伸手 RAG 翻书，微调回炉改习惯；</span><span class="j-line">Agent 自己转圈圈，多 Agent 分工不忙乱；</span><span class="j-line">MCP 一个插座通天下，Skills 一本手册随叫随看。</span></p>
+      <p class="jingle jingle-big" data-jingle="ch7"><span class="j-line"><b class="j-key">Token</b> <span class="j-act">切块</span>进<b class="j-key">上下文</b>，<b class="j-key">Prompt</b> <span class="j-act">写清</span>要干啥；</span><span class="j-line"><b class="j-key">工具</b><span class="j-act">伸手</span> <b class="j-key">RAG</b> <span class="j-act">翻书</span>，<b class="j-key">微调</b> <span class="j-act">回炉</span>改习惯；</span><span class="j-line"><b class="j-key">Agent</b> 自己<span class="j-act">转圈圈</span>，<b class="j-key">多 Agent</b> <span class="j-act">分工</span>不忙乱；</span><span class="j-line"><b class="j-key">MCP</b> 一个<span class="j-act">插座</span>通天下，<b class="j-key">Skills</b> 一本<span class="j-act">手册</span>随叫随看。</span></p>
     </div>
     <aside class="remember">
       <span class="label">记住这个</span>
-      <b>顺口溜背的不是字，是场景：切块 → 写工单 → 伸手翻书 → 回炉 → 转圈 → 分工 → 插座 → 手册。</b>
+      <b>顺口溜背的不是字，是场景：<span class="j-act">切块</span> → <span class="j-act">写工单</span> → <span class="j-act">伸手翻书</span> → <span class="j-act">回炉</span> → <span class="j-act">转圈</span> → <span class="j-act">分工</span> → <span class="j-act">插座</span> → <span class="j-act">手册</span>。</b>
     </aside>
     <p class="plain-note">下一节：10 道题，检验一下这些比喻是不是真的长在脑子里了。</p>
     <nav class="sec-nav" aria-label="章节导航">
@@ -1433,7 +1416,7 @@ description: 当用户要把一个技术主题做成互动课件时使用
     <h3 class="sec-title">10 道题，检验<span class="grad">你还记得多少</span></h3>
     <p class="lead">答错不扣分，会给出提示；每题只有一个正确答案。</p>
     <div class="quiz" id="quiz">
-      <div class="quiz-bar"><span id="quiz-score">答对 0/10</span><span>一次一题 · 答对自动进入下一题</span></div>
+      <div class="quiz-bar"><span id="quiz-score">答对 0/10</span><span>一次一题 · 答对自动切题，也可手动切换</span></div>
 
       <div class="quiz-item active" data-concept="token">
         <p class="q"><span class="q-num">01</span>大模型读一句话之前，通常先做什么？</p>
@@ -1545,6 +1528,12 @@ description: 当用户要把一个技术主题做成互动课件时使用
         <p class="quiz-hint"><b>提示：</b>元数据常驻（示例约 100 token/个），正文触发时加载，资源和脚本按需取用。</p>
       </div>
 
+      <div class="quiz-nav" aria-label="题目切换">
+        <button class="btn" id="quiz-prev" type="button">← 上一题</button>
+        <span id="quiz-pos">1 / 10</span>
+        <button class="btn" id="quiz-next" type="button">下一题 →</button>
+      </div>
+
       <div class="quiz-result" id="quiz-result">
         <div class="burst" aria-hidden="true"></div>
         <h4>🎉 10 / 10</h4>
@@ -1559,7 +1548,7 @@ description: 当用户要把一个技术主题做成互动课件时使用
   </section>
 
   <section class="section" id="ending" data-title="完结：通关">
-    <h3 class="sec-title">这一小时，你带走了一张<span class="grad">地图</span></h3>
+    <h3 class="sec-title">现在，你带走了一张<span class="grad">地图</span></h3>
     <p class="lead">忘了定义也没关系——记住比喻，以及它们怎么接力。</p>
     <div class="ending-grid">
       <div class="ending-card"><i>🧱</i><b>Token</b><span>乐高块</span></div>
@@ -1694,7 +1683,7 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
     sec.classList.add('in-view');
     $$('.reveal', sec).forEach(el => el.classList.add('in-view'));
     const chapter = sec.closest('.chapter');
-    const chapterTitle = chapter ? (chapter.querySelector('.chapter-title')?.textContent.trim() || '') : '大模型技术概念 · 一小时通关';
+    const chapterTitle = chapter ? (chapter.querySelector('.chapter-title')?.textContent.trim() || '') : '大模型技术概念';
     if (deckChapter) deckChapter.textContent = chapterTitle;
     if (deckPoint) deckPoint.textContent = sec.id === 'cover' ? '课程封面' : (sec.dataset.title || '');
     if (deckPage) deckPage.innerHTML = `<b>${String(i + 1).padStart(2, '0')}</b> / ${String(list.length).padStart(2, '0')}`;
@@ -1872,6 +1861,8 @@ window.__demos = {};
 function registerDemo(name, impl) {
   const root = document.querySelector(`[data-demo="${name}"]`);
   if (!root) { console.warn(`[demo] missing root: ${name}`); return; }
+  const autoFit = root.dataset.fit !== 'manual';
+  const fit = () => { if (autoFit && window.__fitActive) window.__fitActive(); };
   const state = {
     root,
     running: false,
@@ -1882,15 +1873,15 @@ function registerDemo(name, impl) {
       catch (err) { return Promise.reject(err); }
       if (result && typeof result.then === 'function') {
         state.running = true;
-        return result.finally(() => { state.running = false; if (window.__fitActive) window.__fitActive(); });
+        return result.finally(() => { state.running = false; fit(); });
       }
-      if (window.__fitActive) window.__fitActive();
+      fit();
       return Promise.resolve();
     },
     reset() {
       state.running = false;
       if (impl.reset) impl.reset();
-      if (window.__fitActive) window.__fitActive();
+      fit();
     }
   };
   window.__demos[name] = state;
@@ -2534,7 +2525,6 @@ document.addEventListener('click', e => {
     });
     const st = stars[idx];
     if (st) { tip.textContent = st.dataset.tip; tip.classList.add('on'); }
-    if (window.__fitActive) window.__fitActive();
   }
   map.addEventListener('click', e => {
     const star = e.target.closest('.star[data-concept]');
@@ -2556,7 +2546,6 @@ document.addEventListener('click', e => {
     reset() {
       runId++;
       clear();
-      if (window.__fitActive) window.__fitActive();
     }
   });
 })();
@@ -2586,13 +2575,28 @@ document.addEventListener('click', e => {
   function solvedCount(){ return items.filter(function(it){ return it.classList.contains('solved'); }).length; }
   function paintScore(){ if (scoreEl) scoreEl.textContent = '答对 ' + solvedCount() + '/10'; }
   function fit(){ if (window.__fitActive) window.__fitActive(); }
+  const prevBtn = document.getElementById('quiz-prev');
+  const nextBtn = document.getElementById('quiz-next');
+  const posEl = document.getElementById('quiz-pos');
+  let quizIndex = 0;
+  function paintNav(){
+    if (prevBtn) prevBtn.disabled = quizIndex <= 0;
+    if (nextBtn) nextBtn.disabled = quizIndex >= items.length - 1;
+    if (posEl) posEl.textContent = (quizIndex + 1) + ' / ' + items.length;
+  }
+  function showItem(i, focusIt){
+    if (!items.length) return;
+    quizIndex = Math.min(items.length - 1, Math.max(0, i));
+    items.forEach(function(it, idx){ it.classList.toggle('active', idx === quizIndex); });
+    paintNav();
+    if (focusIt) {
+      const b = items[quizIndex].querySelector('button.opt');
+      if (b && !b.disabled) b.focus({ preventScroll: true });
+    }
+  }
   function activateFirstUnsolved(focusIt){
     const next = items.find(function(it){ return !it.classList.contains('solved'); });
-    items.forEach(function(it){ it.classList.toggle('active', it === next); });
-    if (next && focusIt) {
-      const b = next.querySelector('button.opt');
-      if (b) b.focus({ preventScroll: true });
-    }
+    if (next) showItem(items.indexOf(next), focusIt);
     return next;
   }
   function showResult(){
@@ -2619,7 +2623,6 @@ document.addEventListener('click', e => {
       else if (item.classList.contains('active')) {
         setTimeout(function(){
           if (item.classList.contains('active') && item.classList.contains('solved')) {
-            item.classList.remove('active');
             activateFirstUnsolved(true);
             fit();
           }
@@ -2644,15 +2647,16 @@ document.addEventListener('click', e => {
       if (hint) { hint.classList.remove('on'); hint.setAttribute('aria-hidden', 'true'); }
     });
     if (items[0]) {
-      items[0].classList.add('active');
-      const b = items[0].querySelector('button.opt');
-      if (b) b.focus({ preventScroll: true });
+      showItem(0, true);
     }
     paintScore();
     fit();
   });
+  if (prevBtn) prevBtn.addEventListener('click', function(){ showItem(quizIndex - 1, true); fit(); });
+  if (nextBtn) nextBtn.addEventListener('click', function(){ showItem(quizIndex + 1, true); fit(); });
   const cover = document.getElementById('btn-cover');
   if (cover) cover.addEventListener('click', function(){ window.__nav.goTo(0); });
+  showItem(0, false);
   paintScore();
 })();
 /* @@JS:FEATURES@@ */
@@ -2691,7 +2695,7 @@ SELFTEST('ch1/结构', async () => {
   ok(/幻觉/.test(ch.textContent), '讲幻觉');
   ok(ch.querySelectorAll('.section').length >= 4, '至少 4 节');
   ok(!!ch.querySelector('.remember'), '含「记住这个」');
-  ok(!!ch.querySelector('.chapter-head .chip'), '含时长 chip');
+  ok(!!ch.querySelector('.chapter-head .chapter-title'), '含章节标题');
 });
 SELFTEST('ch1/接龙演示', async () => {
   const d = document.querySelector('[data-demo="chain"]');
@@ -2860,7 +2864,7 @@ SELFTEST('ch5/三层渐进披露', async () => {
   ok(!!ch, '存在 #ch5');
   const txt = ch.textContent;
   ok(/SKILL\.md/.test(txt) && /渐进式披露/.test(txt), '含 SKILL.md 与渐进式披露');
-  ok(!!ch.querySelector('.remember') && !!ch.querySelector('.egg'), '含记住这个与彩蛋');
+  ok(!!ch.querySelector('.remember'), '含「记住这个」');
   const d = ch.querySelector('[data-demo="skill-layers"]');
   ok(!!d, '存在三层演示');
   const start = d.querySelector('[data-start]');
@@ -2917,6 +2921,14 @@ SELFTEST('ch7/星系图', async () => {
   stars[0].click();
   ok(stars[0].classList.contains('active'), '点星高亮');
   ok(ch.querySelector('.star-tip').classList.contains('on'), '比喻提示出现');
+  const sec = map.closest('.section');
+  window.__nav.goTo([...document.querySelectorAll('.section')].indexOf(sec));
+  await new Promise(r => setTimeout(r, 150));
+  const inner = sec.querySelector('.slide-inner');
+  const before = inner.style.transform;
+  stars[1].click();
+  await new Promise(r => setTimeout(r, 80));
+  ok(inner.style.transform === before, '点星不改变整页缩放');
 });
 SELFTEST('ch7/顺口溜两处一致', async () => {
   const a = document.querySelector('[data-jingle="ch2"]').textContent.replace(/\s+/g, '');
@@ -2936,6 +2948,30 @@ SELFTEST('ch7/测验结构', async () => {
     ok(it.querySelectorAll('[data-correct]').length === 1, `第 ${i + 1} 题恰好 1 个正确项`);
   });
   ok(document.querySelector('#quiz-score').textContent.includes('0/10'), '初始计分 0/10');
+});
+SELFTEST('ch7/测验上一题下一题', async () => {
+  const sec = document.querySelector('#quiz').closest('.section');
+  window.__nav.goTo([...document.querySelectorAll('.section')].indexOf(sec));
+  await new Promise(r => setTimeout(r, 120));
+  const items = [...document.querySelectorAll('#quiz .quiz-item')];
+  const prev = document.querySelector('#quiz-prev');
+  const next = document.querySelector('#quiz-next');
+  const pos = document.querySelector('#quiz-pos');
+  const again = document.querySelector('#quiz-again');
+  again.click();
+  await new Promise(r => setTimeout(r, 80));
+  ok(items[0].classList.contains('active') && prev.disabled, '第 1 题：上一题禁用');
+  next.click();
+  ok(items[1].classList.contains('active') && !items[0].classList.contains('active'), '下一题切到第 2 题');
+  ok(items[1].contains(document.activeElement), '焦点进入第 2 题');
+  prev.click();
+  ok(items[0].classList.contains('active'), '上一题回到第 1 题');
+  ok(pos.textContent.includes('1 / 10'), '位置显示 1 / 10');
+  for (let i = 0; i < 9; i++) next.click();
+  ok(items[9].classList.contains('active') && next.disabled, '最后一题：下一题禁用');
+  again.click();
+  await new Promise(r => setTimeout(r, 80));
+  ok(items[0].classList.contains('active') && prev.disabled, '重来回到第 1 题');
 });
 SELFTEST('ch7/测验流程与庆祝', async () => {
   const items = [...document.querySelectorAll('#quiz .quiz-item')];
@@ -3027,7 +3063,7 @@ SELFTEST('final/进度与目录响应 resize', async () => {
   ok(nodes.every(n => n.offsetLeft >= 0), '节点位置有效');
   ok(document.documentElement.scrollWidth <= innerWidth + 1, '无横向溢出');
   const secs = [...document.querySelectorAll('.section')];
-  ok(secs.length === 31, `31 节，实际 ${secs.length}`);
+  ok(secs.length === 30, `30 节，实际 ${secs.length}`);
   ok(document.querySelectorAll('.section.active').length === 1, '恰一节可见');
   const start = window.__nav.index();
   for (let i = 0; i < secs.length; i++) {
