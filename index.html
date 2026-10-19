@@ -199,6 +199,42 @@ main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:96px 28p
 @media (max-width:820px){
   #concept-map{grid-template-columns:1fr}
 }
+/* ---- 第 2 章微演示 ---- */
+.demo-zone.filled{display:block;padding:12px;border-style:solid;background:rgba(4,7,16,.38)}
+.demo-zone.filled .demo{margin:0;padding:2px;border:0;background:none}
+.token-demo .sentence{display:inline-block;padding:6px 2px;font-size:20px;letter-spacing:.08em;color:#fff}
+.token-chips{display:flex;flex-wrap:wrap;gap:7px;min-height:46px;margin:12px 0 0}
+.token-demo .chip{padding:7px 13px;border-radius:8px;border:1px solid rgba(34,211,238,.4);background:rgba(34,211,238,.11);color:#d9fbff;font-size:16px;animation:tokenPop .42s cubic-bezier(.2,.9,.2,1) both;box-shadow:0 0 14px rgba(34,211,238,.12)}
+@keyframes tokenPop{from{opacity:0;transform:translateY(10px) scale(.85) rotate(-2deg)}to{opacity:1;transform:none}}
+.token-note{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
+.context-demo .desk-head{display:flex;justify-content:space-between;gap:10px;font-size:12px;letter-spacing:.08em;color:var(--muted)}
+.context-demo .desk-cap{color:var(--cyan);opacity:.8}
+.desk{display:flex;flex-direction:column;gap:7px;min-height:132px;margin:10px 0 0;padding:12px;border:1px dashed rgba(148,180,255,.2);border-radius:10px;background:repeating-linear-gradient(0deg,rgba(255,255,255,.02) 0 1px,transparent 1px 34px)}
+.desk-item{padding:7px 11px;border-radius:8px;border:1px solid rgba(148,180,255,.16);background:rgba(129,140,248,.09);color:var(--text-2);font-size:13px;animation:deskIn .35s cubic-bezier(.2,.9,.2,1) both}
+.desk-item:nth-child(even){background:rgba(34,211,238,.06);border-color:rgba(34,211,238,.18)}
+@keyframes deskIn{from{opacity:0;transform:translateY(-6px) scale(.98)}to{opacity:1;transform:none}}
+.desk-warn{margin:10px 0 0;padding:8px 11px;border-radius:8px;border:1px solid rgba(240,171,252,.35);background:rgba(240,171,252,.08);color:#f3d4fb;font-size:12px;line-height:1.65;opacity:0;transform:translateY(-4px);transition:.35s}
+.desk-warn.on{opacity:1;transform:none;box-shadow:0 0 18px rgba(240,171,252,.14)}
+.prompt-demo .case-switch{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.case-btn{padding:7px 14px;border-radius:999px;border:1px solid var(--card-border);background:rgba(255,255,255,.03);color:var(--muted);font:inherit;font-size:13px;cursor:pointer;transition:.2s}
+.case-btn:hover{color:#fff;border-color:rgba(34,211,238,.45)}
+.case-btn.active{border-color:rgba(34,211,238,.6);background:rgba(34,211,238,.12);color:#d9fbff;box-shadow:0 0 14px rgba(34,211,238,.14)}
+.out-lazy,.out-good{display:none}
+.out-lazy.on,.out-good.on{display:block;animation:fadeIn .3s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.prompt-demo .bubble-user{width:fit-content;max-width:90%;margin:0 0 8px auto;padding:9px 13px;border-radius:11px 11px 3px 11px;border:1px solid rgba(129,140,248,.26);background:rgba(129,140,248,.13);color:var(--text-2);font-size:13px;line-height:1.7}
+.prompt-demo .bubble-ai{margin:0 0 8px;padding:10px 13px;border-radius:3px 11px 11px 11px;border:1px solid rgba(34,211,238,.2);border-left:2px solid var(--cyan);background:rgba(34,211,238,.05);color:var(--text-2);font-size:13px;line-height:1.8}
+.prompt-demo .bubble-ai b{color:#fff;font-weight:600}
+.fc-steps{display:grid;gap:9px}
+.fc-step{display:flex;gap:12px;align-items:flex-start;padding:11px 13px;border:1px solid rgba(148,180,255,.13);border-radius:10px;background:rgba(255,255,255,.02);opacity:.34;transform:translateX(-6px);transition:opacity .35s,transform .35s,border-color .35s,background .35s,box-shadow .35s}
+.fc-step.on{opacity:1;transform:none;border-color:rgba(34,211,238,.4);background:rgba(34,211,238,.06);box-shadow:0 0 18px rgba(34,211,238,.1)}
+.fc-num{flex:none;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1px solid rgba(148,180,255,.3);font-size:11px;color:var(--muted);transition:.35s}
+.fc-step.on .fc-num{border-color:rgba(34,211,238,.65);color:#d9fbff;background:rgba(34,211,238,.12)}
+.fc-step b{display:block;font-size:12px;letter-spacing:.08em;color:var(--cyan);font-weight:600}
+.fc-step p{margin:2px 0 0;font-size:13px;line-height:1.7;color:var(--text-2)}
+.fc-result{margin:12px 0 0;padding:10px 13px;border-radius:9px;border:1px solid rgba(240,171,252,.28);background:rgba(240,171,252,.06);color:#f3d4fb;font-size:13px;line-height:1.7;opacity:0;transform:translateY(5px);transition:.4s}
+.fc-result.on{opacity:1;transform:none;box-shadow:0 0 20px rgba(240,171,252,.12)}
+.token-demo .demo-controls .btn,.context-demo .demo-controls .btn,.fc-demo .demo-controls .btn{padding:9px 18px;font-size:14px}
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -319,7 +355,17 @@ main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:96px 28p
           <p class="metaphor"><b class="k">比喻</b>乐高积木：句子是拼出来的，token 就是那一块块积木。</p>
           <p class="example"><b class="k">迷你例子</b>“大模型”三个字可能切成 1–3 个 token；英文长单词常被拆成好几块。</p>
           <p class="pitfall"><b class="k">常见误区</b>以为按“字数”计算。计费、上下文上限、输出长度都按 token 算，中英文切法还不一样。</p>
-          <div class="demo-zone" data-zone="token"><span class="zone-ph">微演示 · 待装填</span></div>
+          <div class="demo-zone filled" data-zone="token">
+            <div class="demo token-demo" data-demo="token">
+              <p><span class="sentence">我喜欢学习大模型</span></p>
+              <div class="token-chips" aria-live="polite"></div>
+              <p class="token-note">AI 眼里没有“字”，只有一块块 Token——计费和上下文都按它算。</p>
+              <div class="demo-controls">
+                <button class="btn" type="button" data-start>切块看看</button>
+                <button class="btn" type="button" data-again>重来</button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -332,7 +378,17 @@ main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:96px 28p
           <p class="metaphor"><b class="k">比喻</b>一张工作台：桌面就那么大，摊满了就没地方放新东西。</p>
           <p class="example"><b class="k">迷你例子</b>聊到第 50 轮，早期内容可能被挤出窗口；新开一个对话，台面直接清空。</p>
           <p class="pitfall"><b class="k">常见误区</b>把它当长期记忆。上下文是临时工作台，不会自动跨会话保存。</p>
-          <div class="demo-zone" data-zone="context"><span class="zone-ph">微演示 · 待装填</span></div>
+          <div class="demo-zone filled" data-zone="context">
+            <div class="demo context-demo" data-demo="context">
+              <div class="desk-head"><span>上下文工作台</span><span class="desk-cap">容量有限</span></div>
+              <div class="desk" aria-live="polite"></div>
+              <p class="desk-warn">桌面快满了——这就是上下文窗口，满了就该清一清 / 总结一下。</p>
+              <div class="demo-controls">
+                <button class="btn" type="button" data-start>继续聊</button>
+                <button class="btn" type="button" data-again>重来</button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -345,7 +401,25 @@ main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:96px 28p
           <p class="metaphor"><b class="k">比喻</b>一张工单：写得越具体，交付越靠谱。</p>
           <p class="example"><b class="k">迷你例子</b>“帮我写个总结” vs “你是产品经理，用 5 条要点总结这份会议记录，每条不超过 30 字”。</p>
           <p class="pitfall"><b class="k">常见误区</b>把 Prompt 当咒语，觉得越长越玄。清晰、具体、带例子，通常比堆词更有效。</p>
-          <div class="demo-zone" data-zone="prompt"><span class="zone-ph">微演示 · 待装填</span></div>
+          <div class="demo-zone filled" data-zone="prompt">
+            <div class="demo prompt-demo mode-lazy" data-demo="prompt">
+              <div class="case-switch">
+                <button class="case-btn active" type="button" data-case="lazy">敷衍提问</button>
+                <button class="case-btn" type="button" data-case="good">好工单</button>
+              </div>
+              <div class="out-lazy on">
+                <p class="bubble-user">帮我写点东西。</p>
+                <p class="bubble-ai">好的，你想写什么？请提供主题、读者和字数要求。</p>
+              </div>
+              <div class="out-good">
+                <p class="bubble-user">你是数据分析师。把 3 条销售数据写成周报：华东 +12%、华南 -4%、华北 +7%。用 3 条要点，每条不超过 25 字，最后给一句建议。</p>
+                <p class="bubble-ai"><b>本周销售速览</b><br>· 华东增长 12%，表现最强<br>· 华南下滑 4%，需排查原因<br>· 华北增长 7%，保持稳定<br><b>建议：</b>下周重点复盘华南下滑原因，并复制华东打法。</p>
+              </div>
+              <div class="demo-controls">
+                <button class="btn" type="button" data-again>重来</button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -358,7 +432,20 @@ main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:96px 28p
           <p class="metaphor"><b class="k">比喻</b>给大脑配一双手：大脑下令，手去拿。</p>
           <p class="example"><b class="k">迷你例子</b>查天气：模型说 get_weather(city="上海") → 程序调 API → 返回 26°C → 模型再组织回答。</p>
           <p class="pitfall"><b class="k">常见误区</b>以为模型自己执行了工具。真正动手的是你的代码或平台，模型只负责选工具、填参数。</p>
-          <div class="demo-zone" data-zone="function-calling"><span class="zone-ph">微演示 · 待装填</span></div>
+          <div class="demo-zone filled" data-zone="function-calling">
+            <div class="demo fc-demo" data-demo="fc">
+              <div class="fc-steps">
+                <div class="fc-step"><span class="fc-num">1</span><div><b>AI 说</b><p>我需要调用查天气工具（上海）。</p></div></div>
+                <div class="fc-step"><span class="fc-num">2</span><div><b>工具执行</b><p>get_weather(city="上海") → 晴 · 26°C</p></div></div>
+                <div class="fc-step"><span class="fc-num">3</span><div><b>结果回填</b><p>AI 拿到数据，继续组织回答。</p></div></div>
+              </div>
+              <p class="fc-result">今天上海晴，26 度，适合出去走走。</p>
+              <div class="demo-controls">
+                <button class="btn" type="button" data-start>查天气</button>
+                <button class="btn" type="button" data-again>重来</button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -646,8 +733,14 @@ function registerDemo(name, impl) {
     running: false,
     start() {
       if (state.running) return Promise.resolve();
-      state.running = true;
-      return Promise.resolve().then(() => impl.start()).finally(() => { state.running = false; });
+      let result;
+      try { result = impl.start(); }
+      catch (err) { return Promise.reject(err); }
+      if (result && typeof result.then === 'function') {
+        state.running = true;
+        return result.finally(() => { state.running = false; });
+      }
+      return Promise.resolve();
     },
     reset() {
       state.running = false;
@@ -776,6 +869,161 @@ document.addEventListener('click', e => {
   });
 })();
 
+/* 微演示：Token 切块 */
+(function () {
+  const root = document.querySelector('[data-demo="token"]');
+  if (!root) return;
+  const chips = root.querySelector('.token-chips');
+  const TOKENS = ['我', '喜欢', '学', '习', '大', '模型'];
+  let pending = [];
+  let runId = 0;
+
+  function wait(ms) {
+    return new Promise(resolve => {
+      const id = setTimeout(() => {
+        pending = pending.filter(p => p.id !== id);
+        resolve();
+      }, ms);
+      pending.push({ id, resolve });
+    });
+  }
+  function clearTimers() {
+    pending.forEach(p => { clearTimeout(p.id); p.resolve(); });
+    pending = [];
+  }
+
+  async function start() {
+    clearTimers();
+    const my = ++runId;
+    chips.innerHTML = '';
+    for (const token of TOKENS) {
+      if (my !== runId) return;
+      const chip = document.createElement('span');
+      chip.className = 'chip';
+      chip.textContent = token;
+      chips.appendChild(chip);
+      await wait(360);
+    }
+  }
+
+  function reset() {
+    runId++;
+    clearTimers();
+    chips.innerHTML = '';
+  }
+
+  registerDemo('token', { start, reset });
+})();
+
+/* 微演示：上下文工作台 */
+(function () {
+  const root = document.querySelector('[data-demo="context"]');
+  if (!root) return;
+  const desk = root.querySelector('.desk');
+  const warn = root.querySelector('.desk-warn');
+  const MESSAGES = [
+    '用户：帮我改简历',
+    'AI：好，先看目标岗位……',
+    '用户：改成技术岗',
+    'AI：已调整项目经历顺序',
+    '用户：再加一段实习',
+    'AI：收到，正在补写……'
+  ];
+  let count = 0;
+
+  function start() {
+    if (count >= MESSAGES.length) return;
+    const item = document.createElement('div');
+    item.className = 'desk-item';
+    item.textContent = MESSAGES[count];
+    desk.appendChild(item);
+    count++;
+    if (count >= 5) warn.classList.add('on');
+  }
+
+  function reset() {
+    count = 0;
+    desk.innerHTML = '';
+    warn.classList.remove('on');
+  }
+
+  registerDemo('context', { start, reset });
+})();
+
+/* 微演示：Prompt 工单 */
+(function () {
+  const root = document.querySelector('[data-demo="prompt"]');
+  if (!root) return;
+  const outLazy = root.querySelector('.out-lazy');
+  const outGood = root.querySelector('.out-good');
+  const buttons = [...root.querySelectorAll('[data-case]')];
+
+  function show(mode) {
+    root.classList.toggle('mode-lazy', mode === 'lazy');
+    root.classList.toggle('mode-good', mode === 'good');
+    outLazy.classList.toggle('on', mode === 'lazy');
+    outGood.classList.toggle('on', mode === 'good');
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.case === mode));
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.case)));
+  show('lazy');
+
+  registerDemo('prompt', {
+    start() { show('good'); },
+    reset() { show('lazy'); }
+  });
+})();
+
+/* 微演示：Function Calling 三步 */
+(function () {
+  const root = document.querySelector('[data-demo="fc"]');
+  if (!root) return;
+  const steps = [...root.querySelectorAll('.fc-step')];
+  const result = root.querySelector('.fc-result');
+  let pending = [];
+  let runId = 0;
+
+  function wait(ms) {
+    return new Promise(resolve => {
+      const id = setTimeout(() => {
+        pending = pending.filter(p => p.id !== id);
+        resolve();
+      }, ms);
+      pending.push({ id, resolve });
+    });
+  }
+  function clearTimers() {
+    pending.forEach(p => { clearTimeout(p.id); p.resolve(); });
+    pending = [];
+  }
+
+  async function start() {
+    clearTimers();
+    const my = ++runId;
+    steps.forEach(step => step.classList.remove('on'));
+    result.classList.remove('on');
+    for (const step of steps) {
+      if (my !== runId) return;
+      await wait(320);
+      if (my !== runId) return;
+      step.classList.add('on');
+      await wait(700);
+    }
+    if (my !== runId) return;
+    result.classList.add('on');
+  }
+
+  function reset() {
+    runId++;
+    clearTimers();
+    steps.forEach(step => step.classList.remove('on'));
+    result.classList.remove('on');
+  }
+
+  registerDemo('fc', { start, reset });
+})();
+
 /* @@JS:FEATURES@@ */
 /* 自检框架 */
 window.__SELFTESTS = [];
@@ -848,6 +1096,50 @@ SELFTEST('ch2/探索计数与庆祝', async () => {
   await until(() => map.classList.contains('map-complete'), 2000);
   ok(document.querySelector('#explored-count').textContent.includes('10/10'), '点满 10/10');
   ok(true, '点满触发 .map-complete 庆祝');
+});
+
+SELFTEST('ch2/token 微演示', async () => {
+  const card = document.querySelector('.concept[data-concept="token"] .concept-head');
+  card.click(); // 展开
+  const d = document.querySelector('[data-demo="token"]');
+  const start = d.querySelector('[data-start]');
+  start.click(); start.click(); // 连点防重入
+  await until(() => window.__demos.token.running === false, 30000);
+  ok(d.querySelectorAll('.chip').length === 6, '切块结果恰好 6 块（连点不叠加）');
+  d.querySelector('[data-again]').click();
+  ok(d.querySelectorAll('.chip').length === 0, '重来清空');
+});
+SELFTEST('ch2/上下文微演示', async () => {
+  document.querySelector('.concept[data-concept="context"] .concept-head').click();
+  const d = document.querySelector('[data-demo="context"]');
+  const start = d.querySelector('[data-start]');
+  start.click(); start.click(); start.click();
+  await until(() => d.querySelectorAll('.desk-item').length === 3, 8000);
+  ok(true, '三次点击累积 3 条');
+  while (d.querySelectorAll('.desk-item').length < 5) { start.click(); await until(() => window.__demos.context.running === false, 8000); }
+  ok(d.querySelector('.desk-warn').classList.contains('on'), '第 5 条出现“该清一清了”提示');
+  d.querySelector('[data-again]').click();
+  ok(d.querySelectorAll('.desk-item').length === 0, '重来清空');
+});
+SELFTEST('ch2/prompt 微演示', async () => {
+  document.querySelector('.concept[data-concept="prompt"] .concept-head').click();
+  const d = document.querySelector('[data-demo="prompt"]');
+  ok(d.classList.contains('mode-lazy'), '初始为敷衍提问');
+  d.querySelector('[data-case="good"]').click();
+  ok(d.classList.contains('mode-good') && d.querySelector('.out-good').classList.contains('on'), '切到好工单并显示其输出');
+  ok(!d.querySelector('.out-lazy').classList.contains('on'), '敷衍输出隐藏');
+  d.querySelector('[data-again]').click();
+  ok(d.classList.contains('mode-lazy'), '重来复位');
+});
+SELFTEST('ch2/function calling 微演示', async () => {
+  document.querySelector('.concept[data-concept="function-calling"] .concept-head').click();
+  const d = document.querySelector('[data-demo="fc"]');
+  d.querySelector('[data-start]').click();
+  await until(() => window.__demos.fc.running === false, 30000);
+  ok([...d.querySelectorAll('.fc-step')].every(s => s.classList.contains('on')), '三步全部点亮');
+  ok(d.querySelector('.fc-result').classList.contains('on'), '结果回填显示');
+  d.querySelector('[data-again]').click();
+  ok([...d.querySelectorAll('.fc-step')].every(s => !s.classList.contains('on')), '重来复位三步');
 });
 
 /* @@JS:SELFTEST@@ */
