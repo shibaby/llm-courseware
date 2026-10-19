@@ -568,6 +568,15 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .ending-src{margin:10px 0 0;font-size:10.5px;line-height:1.55;color:var(--muted);text-align:center}
 .ending-actions{display:flex;justify-content:center;margin-top:10px}
 @media(max-width:820px){.ending-grid{grid-template-columns:repeat(5,1fr)}}
+/* ---- starmap chain ---- */
+.star-links{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
+.star-links .const-seg{fill:none;stroke:rgba(148,180,255,.16);stroke-width:2;stroke-linecap:round;transition:stroke-dashoffset .45s ease,stroke .45s,filter .45s}
+.star-links .const-seg.lit{stroke:url(#starLink);filter:drop-shadow(0 0 4px rgba(34,211,238,.55))}
+.star::before{content:attr(data-order);position:absolute;left:-7px;top:-7px;min-width:19px;height:19px;padding:0 3px;border-radius:6px;display:grid;place-items:center;background:#0a1124;border:1px solid rgba(148,180,255,.28);color:#93a7cc;font-size:9px;font-weight:700;letter-spacing:.02em}
+.star.seen::before,.star.active::before{border-color:rgba(34,211,238,.55);color:#dffaff;background:rgba(34,211,238,.12)}
+.star.seen{border-color:rgba(34,211,238,.28)}
+.star-controls{display:flex;justify-content:center;gap:8px;margin-top:8px}
+.star-controls .btn{padding:5px 14px;font-size:12px}
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -1344,10 +1353,19 @@ description: 当用户要把一个技术主题做成互动课件时使用
       <span class="chip">约 5 分钟</span>
     </div>
     <h3 class="sec-title">把 10 个概念，<span class="grad">收进一张星图</span></h3>
-    <p class="lead">点一颗星，找回它的比喻。记住比喻，就记住了概念。</p>
-    <div class="star-wrap">
+    <p class="lead">点一颗星看比喻，或让它按学习顺序串一遍。</p>
+    <div class="star-wrap" data-demo="starmap-flow">
       <div id="starmap">
         <div class="orbit" aria-hidden="true"></div>
+        <svg class="star-links" viewBox="0 0 1000 435" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="starLink" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="940" y2="400">
+              <stop offset="0" stop-color="#22d3ee"/>
+              <stop offset=".55" stop-color="#818cf8"/>
+              <stop offset="1" stop-color="#f0abfc"/>
+            </linearGradient>
+          </defs>
+        </svg>
         <div class="star-core"><b>🧠</b><span>大模型</span></div>
         <button type="button" class="star" data-concept="token" data-tip="🧱 乐高块：AI 眼里的最小文字积木。" style="left:6%;top:50%"><b>🧱</b><span>Token</span></button>
         <button type="button" class="star" data-concept="context" data-tip="🗂️ 工作台：一次能摊开的全部材料，满了要清。" style="left:17%;top:17%"><b>🗂️</b><span>上下文</span></button>
@@ -1361,8 +1379,11 @@ description: 当用户要把一个技术主题做成互动课件时使用
         <button type="button" class="star" data-concept="skills" data-tip="📖 员工手册：需要时自己翻，不占常驻上下文。" style="left:17%;top:83%"><b>📖</b><span>Skills</span></button>
       </div>
       <p class="star-tip" aria-live="polite">点一颗星，看看你还记得多少。</p>
+      <div class="star-controls">
+        <button class="btn" type="button" data-start>串一遍</button>
+        <button class="btn" type="button" data-again>重来</button>
+      </div>
     </div>
-    <p class="plain-note">星图不是用来“看”的，是用来“回忆”的：先想比喻，再想它在哪一章出现过。</p>
   </section>
 
   <section class="section" data-title="顺口溜：一口气背完">
@@ -2357,19 +2378,68 @@ document.addEventListener('click', e => {
     }
   });
 })();
-/* --- ch7 starmap: click a star, show its metaphor --- */
+/* --- ch7 starmap: ordered chain + click a star --- */
 (function(){
-  const map = document.querySelector('#starmap');
-  if (!map) return;
-  const tip = document.querySelector('#ch7 .star-tip');
-  map.addEventListener('click', (e) => {
+  const wrap = document.querySelector('.star-wrap[data-demo="starmap-flow"]');
+  if (!wrap) return;
+  const map = wrap.querySelector('#starmap');
+  const tip = wrap.querySelector('.star-tip');
+  const svg = map.querySelector('.star-links');
+  const stars = [...map.querySelectorAll('.star[data-concept]')];
+  const NS = 'http://www.w3.org/2000/svg';
+  stars.forEach((s, i) => { s.dataset.order = String(i + 1).padStart(2, '0'); });
+  const segs = [];
+  for (let i = 0; i < stars.length - 1; i++) {
+    const ax = parseFloat(stars[i].style.left) * 10, ay = parseFloat(stars[i].style.top) * 4.35;
+    const bx = parseFloat(stars[i + 1].style.left) * 10, by = parseFloat(stars[i + 1].style.top) * 4.35;
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', ax); line.setAttribute('y1', ay);
+    line.setAttribute('x2', bx); line.setAttribute('y2', by);
+    line.setAttribute('class', 'const-seg');
+    const len = Math.hypot(bx - ax, by - ay);
+    line.style.setProperty('--len', len);
+    line.style.strokeDasharray = len;
+    line.style.strokeDashoffset = len;
+    svg.appendChild(line);
+    segs.push(line);
+  }
+  function clear() {
+    stars.forEach(s => s.classList.remove('active', 'seen'));
+    segs.forEach(l => l.classList.remove('lit'));
+    tip.classList.remove('on');
+    tip.textContent = '点一颗星，看看你还记得多少。';
+  }
+  function revealTo(idx) {
+    stars.forEach((s, i) => {
+      s.classList.toggle('seen', i < idx);
+      s.classList.toggle('active', i === idx);
+    });
+    segs.forEach((l, i) => l.classList.toggle('lit', i < idx));
+    const st = stars[idx];
+    if (st) { tip.textContent = st.dataset.tip; tip.classList.add('on'); }
+    if (window.__fitActive) window.__fitActive();
+  }
+  map.addEventListener('click', e => {
     const star = e.target.closest('.star[data-concept]');
     if (!star) return;
-    map.querySelectorAll('.star.active').forEach(s => s.classList.remove('active'));
-    star.classList.add('active');
-    if (tip) {
-      tip.textContent = star.dataset.tip;
-      tip.classList.add('on');
+    revealTo(stars.indexOf(star));
+  });
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  let runId = 0;
+  registerDemo('starmap-flow', {
+    async start() {
+      const id = ++runId;
+      clear();
+      for (let i = 0; i < stars.length; i++) {
+        if (id !== runId) return;
+        revealTo(i);
+        await wait(420);
+      }
+    },
+    reset() {
+      runId++;
+      clear();
+      if (window.__fitActive) window.__fitActive();
     }
   });
 })();
@@ -2741,6 +2811,19 @@ SELFTEST('ch7/空格不误翻节（焦点在按钮上）', async () => {
   ok(window.__nav.index() === idx0, '空格未触发翻节');
 });
 
+SELFTEST('ch7/星链顺序动画', async () => {
+  const wrap = document.querySelector('.star-wrap[data-demo="starmap-flow"]');
+  ok(!!wrap, '星链演示容器存在');
+  const stars = [...wrap.querySelectorAll('.star[data-concept]')];
+  ok(stars.length === 10 && stars[0].dataset.order === '01' && stars[9].dataset.order === '10', '10 星带顺序编号');
+  ok(wrap.querySelectorAll('.const-seg').length === 9, '9 条连线');
+  wrap.querySelector('[data-start]').click();
+  await until(() => window.__demos['starmap-flow'].running === false, 12000);
+  ok(wrap.querySelectorAll('.const-seg.lit').length === 9, '串完后 9 段全亮');
+  ok(stars[9].classList.contains('active'), '最后一星高亮');
+  wrap.querySelector('[data-again]').click();
+  ok(wrap.querySelectorAll('.const-seg.lit').length === 0, '重来清除连线');
+});
 /* @@JS:SELFTEST@@ */
 
 window.addEventListener('load', async () => {
