@@ -2577,18 +2577,32 @@ document.addEventListener('click', e => {
       burst.appendChild(s);
     }
   }
+  items.forEach(function(it){
+    const h = it.querySelector('.quiz-hint');
+    if (h) { h.setAttribute('role', 'status'); h.setAttribute('aria-live', 'polite'); h.setAttribute('aria-hidden', 'true'); }
+  });
+  if (scoreEl) { scoreEl.setAttribute('role', 'status'); scoreEl.setAttribute('aria-live', 'polite'); }
+  if (result) result.setAttribute('aria-live', 'polite');
   function solvedCount(){ return items.filter(function(it){ return it.classList.contains('solved'); }).length; }
   function paintScore(){ if (scoreEl) scoreEl.textContent = '答对 ' + solvedCount() + '/10'; }
   function fit(){ if (window.__fitActive) window.__fitActive(); }
-  function activateFirstUnsolved(){
+  function activateFirstUnsolved(focusIt){
     const next = items.find(function(it){ return !it.classList.contains('solved'); });
     items.forEach(function(it){ it.classList.toggle('active', it === next); });
+    if (next && focusIt) {
+      const b = next.querySelector('button.opt');
+      if (b) b.focus({ preventScroll: true });
+    }
     return next;
   }
   function showResult(){
     if (result) result.classList.add('on');
     quiz.classList.add('done');
     paintScore();
+    setTimeout(function(){
+      const b = document.getElementById('quiz-again');
+      if (b && result && result.classList.contains('on')) b.focus({ preventScroll: true });
+    }, 80);
   }
   quiz.addEventListener('click', function(e){
     const opt = e.target.closest('.opt');
@@ -2606,7 +2620,7 @@ document.addEventListener('click', e => {
         setTimeout(function(){
           if (item.classList.contains('active') && item.classList.contains('solved')) {
             item.classList.remove('active');
-            activateFirstUnsolved();
+            activateFirstUnsolved(true);
             fit();
           }
         }, 620);
@@ -2615,7 +2629,7 @@ document.addEventListener('click', e => {
     } else {
       opt.classList.add('wrong');
       const hint = item.querySelector('.quiz-hint');
-      if (hint) hint.classList.add('on');
+      if (hint) { hint.classList.add('on'); hint.setAttribute('aria-hidden', 'false'); }
       fit();
     }
   });
@@ -2627,9 +2641,13 @@ document.addEventListener('click', e => {
       it.classList.remove('solved','active');
       it.querySelectorAll('.opt').forEach(function(b){ b.disabled = false; b.classList.remove('wrong','correct'); });
       const hint = it.querySelector('.quiz-hint');
-      if (hint) hint.classList.remove('on');
+      if (hint) { hint.classList.remove('on'); hint.setAttribute('aria-hidden', 'true'); }
     });
-    if (items[0]) items[0].classList.add('active');
+    if (items[0]) {
+      items[0].classList.add('active');
+      const b = items[0].querySelector('button.opt');
+      if (b) b.focus({ preventScroll: true });
+    }
     paintScore();
     fit();
   });
@@ -2850,7 +2868,9 @@ SELFTEST('ch5/三层渐进披露', async () => {
   ok(d.querySelector('#skill-meter').textContent.includes('100'), '初始计量 ≈100 token');
   start.click();
   ok(d.querySelectorAll('.layer.open').length === 1, '展开是渐进的');
+  ok(start.disabled, '过渡中禁用按钮');
   await until(() => d.querySelectorAll('.layer.open').length === 2, 3000);
+  ok(!start.disabled, '一层展开后恢复按钮');
   ok(d.querySelector('#skill-meter').textContent.includes('4,000'), '翻开正文后 ≈4,000');
   start.click();
   await until(() => d.querySelectorAll('.layer.open').length === 3, 3000);
@@ -2858,6 +2878,15 @@ SELFTEST('ch5/三层渐进披露', async () => {
   ok(d.querySelector('.script-note').classList.contains('on'), '出现“脚本只有输出进上下文”说明');
   d.querySelector('[data-again]').click();
   ok(d.querySelectorAll('.layer.open').length === 1 && d.querySelector('#skill-meter').textContent.includes('100'), '重来复位');
+  start.click();
+  start.click();
+  await new Promise(r => setTimeout(r, 700));
+  ok(d.querySelectorAll('.layer.open').length === 2, '连点只开一层');
+  d.querySelector('[data-again]').click();
+  start.click();
+  d.querySelector('[data-again]').click();
+  await new Promise(r => setTimeout(r, 700));
+  ok(d.querySelectorAll('.layer.open').length === 1 && d.querySelector('#skill-meter').textContent.includes('100'), '重来取消挂起的展开');
 });
 
 SELFTEST('ch6/实战串联', async () => {
@@ -2924,6 +2953,23 @@ SELFTEST('ch7/测验流程与庆祝', async () => {
   ok(!!document.querySelector('#ending') && /通关/.test(document.querySelector('#ending').textContent), '完结彩蛋出现');
   document.querySelector('#quiz-again').click();
   ok(!document.querySelector('#quiz-result').classList.contains('on') && !items[0].classList.contains('solved'), '重来复位测验');
+});
+SELFTEST('ch7/测验自动切题与焦点', async () => {
+  const quiz = document.querySelector('#quiz');
+  const sec = quiz.closest('.section');
+  window.__nav.goTo([...document.querySelectorAll('.section')].indexOf(sec));
+  const again = document.querySelector('#quiz-again');
+  again.click();
+  await new Promise(r => setTimeout(r, 120));
+  const first = quiz.querySelector('.quiz-item.active');
+  const opt = first.querySelector('button.opt[data-correct]');
+  opt.focus(); opt.click();
+  ok(first.classList.contains('active'), '答对后保留反馈');
+  await new Promise(r => setTimeout(r, 760));
+  const next = quiz.querySelector('.quiz-item.active');
+  ok(next && next !== first, '约 620ms 后自动切题');
+  ok(next.contains(document.activeElement), '焦点进入下一题');
+  again.click();
 });
 SELFTEST('ch7/空格不误翻节（焦点在按钮上）', async () => {
   const sec = document.querySelector('#quiz').closest('.section');
@@ -3005,6 +3051,10 @@ SELFTEST('final/深链跳转', async () => {
   await new Promise(r => setTimeout(r, 300));
   const target = document.querySelector('#ch4 .section');
   ok(document.querySelectorAll('.section')[window.__nav.index()] === target, '深链跳到第 4 章');
+  history.replaceState(null, '', '#ch5');
+  window.dispatchEvent(new HashChangeEvent('hashchange'));
+  await new Promise(r => setTimeout(r, 300));
+  ok(document.querySelectorAll('.section')[window.__nav.index()] === document.querySelector('#ch5 .section'), 'hashchange 跳到第 5 章');
   window.__nav.goTo(0);
 });
 SELFTEST('final/目录抽屉', async () => {
@@ -3015,10 +3065,18 @@ SELFTEST('final/目录抽屉', async () => {
   btn.click();
   await new Promise(r => setTimeout(r, 120));
   ok(!drawer.hidden && drawer.classList.contains('open'), '目录已打开');
+  ok(getComputedStyle(drawer).display !== 'none', '打开时 display 非 none');
+  ok(Number(getComputedStyle(drawer).zIndex) >= 96, '抽屉层级高于全屏按钮');
   ok(document.activeElement === close, '焦点落在关闭按钮');
+  const focusables = [...drawer.querySelectorAll('button:not([disabled]),a[href]')].filter(el => el.getClientRects().length);
+  ok(focusables.length > 1, '抽屉有可聚焦项');
+  focusables[focusables.length - 1].focus();
+  drawer.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true }));
+  ok(document.activeElement === focusables[0], 'Tab 在抽屉内循环');
   close.click();
   await new Promise(r => setTimeout(r, 420));
   ok(drawer.hidden, '目录已关闭');
+  ok(getComputedStyle(drawer).display === 'none', '关闭后 computed display:none');
   ok(document.activeElement === btn, '焦点回到目录按钮');
 });
 /* @@JS:SELFTEST@@ */
