@@ -340,6 +340,54 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .worker.done .w-bar::after{transform:scaleX(1)}
 .merge-result{margin:11px 0 0;padding:9px 11px;border-radius:8px;border:1px solid rgba(240,171,252,.3);background:rgba(240,171,252,.06);color:#f3d4fb;font-size:12.5px;line-height:1.65;text-align:center;opacity:0;transform:translateY(5px);transition:.4s}
 .merge-result.on{opacity:1;transform:none;box-shadow:0 0 18px rgba(240,171,252,.14)}
+/* ----- Ch3 Agent ----- */
+.agent-compare{margin-top:12px}
+.agent-compare .card p{font-size:13.5px}
+.loop{position:relative;width:min(480px,100%);aspect-ratio:4/3;margin:4px auto 0}
+.loop svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.loop-base{fill:none;stroke:rgba(148,180,255,.16);stroke-width:1.4}
+.loop-flow{fill:none;stroke:url(#loopGrad);stroke-width:2;stroke-dasharray:7 11;filter:drop-shadow(0 0 5px rgba(34,211,238,.55));opacity:0;animation:loopFlow 9s linear infinite}
+.section.active .loop-flow{animation:loopFlow 9s linear infinite,loopFade .8s ease .2s forwards}
+@keyframes loopFlow{to{stroke-dashoffset:-180}}
+@keyframes loopFade{to{opacity:.9}}
+.loop-node{position:absolute;width:128px;padding:10px 12px 9px;border-radius:12px;border:1px solid var(--card-border);background:rgba(9,16,36,.94);color:var(--text);text-align:left;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.28);transition:border-color .25s,box-shadow .25s,background .25s}
+.loop-node b{display:block;font-size:16px;letter-spacing:.06em;line-height:1.2}
+.loop-node span{display:block;font-size:10px;letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;margin-top:1px}
+.loop-node small{display:block;font-size:11px;line-height:1.3;color:var(--muted);margin-top:4px}
+.loop-node:hover,.loop-node.on{border-color:rgba(34,211,238,.65);background:rgba(20,40,70,.96);box-shadow:0 0 0 1px rgba(34,211,238,.22),0 0 26px rgba(34,211,238,.22)}
+.loop-node.on b{color:#7ff0ff}
+.loop-node.n-think{top:0;left:50%;transform:translateX(-50%)}
+.loop-node.n-act{right:0;top:50%;transform:translateY(-50%)}
+.loop-node.n-see{bottom:0;left:50%;transform:translateX(-50%)}
+.loop-node.n-loop{left:0;top:50%;transform:translateY(-50%)}
+.loop-note{text-align:center;font-size:12.5px;color:var(--muted);margin-top:2px}
+.loop-note b{color:var(--text-2)}
+.agent-goal{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:11px;background:rgba(129,140,248,.1);border:1px solid rgba(148,180,255,.2);font-size:13.5px}
+.agent-goal .label{flex:none;font-size:10px;letter-spacing:.14em;color:var(--violet);border:1px solid rgba(129,140,248,.4);border-radius:999px;padding:2px 8px}
+.agent-mini{display:flex;justify-content:center;gap:10px;margin:8px 0 7px}
+.mini-node{font-size:11.5px;letter-spacing:.12em;color:var(--muted);border:1px solid rgba(148,180,255,.18);border-radius:999px;padding:2px 14px;transition:color .2s,background .2s,box-shadow .2s}
+.mini-node.on{color:#061018;background:var(--grad);border-color:transparent;box-shadow:0 0 16px rgba(34,211,238,.35)}
+.step-log{display:flex;flex-direction:column;gap:4px;min-height:140px;max-height:140px;overflow:hidden;padding:8px 12px;border-radius:11px;background:rgba(4,8,20,.55);border:1px solid rgba(148,180,255,.14);font-size:12.5px}
+.log-row{display:flex;gap:8px;line-height:1.35;color:var(--text-2);animation:logIn .3s ease}
+.log-row .ph{flex:none;font-weight:700;color:var(--cyan);font-size:12px}
+.log-row.act .ph{color:var(--violet)}
+.log-row.see .ph{color:var(--pink)}
+@keyframes logIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.task-done{margin-top:7px;padding:8px 12px;border-radius:10px;border:1px solid rgba(34,211,238,.45);background:rgba(34,211,238,.1);font-size:13px;color:#aef4ff;text-align:center;opacity:0;transform:translateY(4px);transition:opacity .35s,transform .35s;pointer-events:none}
+.task-done.on{opacity:1;transform:none}
+.agent-note{font-size:12px;color:var(--muted);margin-top:5px;text-align:center}
+.agent-note b{color:var(--text-2)}
+.mistake{max-width:840px;margin:10px auto 0;border-color:rgba(240,171,252,.28)}
+.mistake h3{font-size:19px;margin:4px 0 6px}
+.mistake p{font-size:13.5px;line-height:1.6}
+.mistake-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin-top:12px;padding:9px;border-radius:10px;background:rgba(4,8,20,.4);font-size:12.5px;color:var(--text-2)}
+.mistake-flow span{color:var(--pink);font-weight:700}
+.mistake-flow em{font-style:normal;color:var(--cyan);font-weight:700}
+.mistake-points{margin-top:10px}
+.mistake-points .card{padding:12px 14px}
+.mistake-points h4{font-size:14px;margin:0 0 4px;color:var(--text)}
+.mistake-points p{font-size:12.5px;line-height:1.5;color:var(--muted);margin:0}
+
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -704,6 +752,105 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
       这十个词不是十种模型，而是<strong>围绕同一颗大脑的十种配件与玩法</strong>：Token 是积木，上下文是工作台，Prompt 是工单；工具、RAG、微调负责补能力；Agent、多 Agent、MCP、Skills 把它们组织成能干活的系统。
     </aside>
     <p class="plain-note">接下来进入第一个深潜章：Agent——看看“会自己干活的实习生”到底怎么转起来。</p>
+    <nav class="sec-nav" aria-label="章节导航">
+      <button type="button" data-nav="prev">← 上一节</button>
+      <button type="button" data-nav="next">下一节 →</button>
+    </nav>
+  </section>
+</section>
+<section class="chapter" id="ch3">
+  <section class="section" data-title="核心：会办事的实习生">
+    <div class="chapter-head reveal">
+      <h2 class="chapter-title">第 3 章 · Agent 智能体</h2>
+      <span class="chip">约 8 分钟</span>
+    </div>
+    <h3 class="sec-title">Agent = 给大脑配上<span class="grad">手脚和循环</span></h3>
+    <p class="lead">普通 Chatbot 像坐在窗口后的问答机：你问一句，它答一句。Agent 像被派出去办事的实习生：你只给目标，它自己<strong>想下一步、动手做、看结果</strong>，没办完就继续转。</p>
+    <div class="cards-3 agent-compare">
+      <article class="card">
+        <span class="tag">Chatbot</span>
+        <h3>问答机</h3>
+        <p>你问：“北京周五天气？”它答：“晴，26℃。”答完就结束，不会顺手替你订票。</p>
+      </article>
+      <article class="card">
+        <span class="tag">Agent</span>
+        <h3>办事员</h3>
+        <p>你说：“帮我订周五去北京的票。”它会查车次、比较、下单、确认，直到出票。</p>
+      </article>
+      <article class="card">
+        <span class="tag">差别</span>
+        <h3>目标 vs 问题</h3>
+        <p>Chatbot 接收“问题”，Agent 接收“目标”。差别不只在模型多聪明，更在外面那圈脚手架。</p>
+      </article>
+    </div>
+    <div class="eq"><span>Agent = <b>模型（大脑）</b></span><span>+ <b>工具（手脚）</b></span><span>+ <b>循环（想 → 做 → 看）</b></span></div>
+    <p class="plain-note">先记住这个公式。下一节把“循环”画出来看。</p>
+  </section>
+
+  <section class="section" data-title="循环：想 → 做 → 看">
+    <h3 class="sec-title">它的工作节奏：<span class="grad">想 → 做 → 看 → 再想</span></h3>
+    <p class="lead">这不是一次性问答，而是一个不停转的圈。点一点四个节点，看看每一格在干什么。</p>
+    <div class="loop" aria-label="Agent 循环图">
+      <svg viewBox="0 0 480 360" aria-hidden="true">
+        <defs>
+          <linearGradient id="loopGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#22d3ee"/>
+            <stop offset=".55" stop-color="#818cf8"/>
+            <stop offset="1" stop-color="#f0abfc"/>
+          </linearGradient>
+        </defs>
+        <ellipse class="loop-base" cx="240" cy="180" rx="160" ry="115"/>
+        <ellipse class="loop-flow" cx="240" cy="180" rx="160" ry="115"/>
+      </svg>
+      <button class="loop-node n-think" type="button" data-phase="think"><b>想</b><span>Reason</span><small>拆目标、定下一步</small></button>
+      <button class="loop-node n-act" type="button" data-phase="act"><b>做</b><span>Act</span><small>调工具、真下手</small></button>
+      <button class="loop-node n-see" type="button" data-phase="see"><b>看</b><span>Observe</span><small>读结果、判断成败</small></button>
+      <button class="loop-node n-loop" type="button" data-phase="loop"><b>循环</b><span>Loop</span><small>没办完，就再来一轮</small></button>
+    </div>
+    <p class="loop-note"><b>想（Reason）+ 做（Act）= ReAct。</b>名字很唬人，直觉就是：边想边做，边做边看。</p>
+  </section>
+
+  <section class="section" data-title="互动：任务步进机">
+    <h3 class="sec-title">亲手推进一次<span class="grad">订票任务</span></h3>
+    <p class="lead">你只给它一个目标。每点一次「走一步」，看它如何想一步、做一步、看一眼。</p>
+    <div class="demo agent-step-demo" data-demo="agent-step">
+      <div class="agent-goal"><span class="label">目标</span>帮我订一张周五去北京的高铁票</div>
+      <div class="agent-mini" aria-hidden="true">
+        <span class="mini-node" data-phase="think">想</span>
+        <span class="mini-node" data-phase="act">做</span>
+        <span class="mini-node" data-phase="see">看</span>
+      </div>
+      <div class="step-log" aria-live="polite"></div>
+      <div class="task-done">✅ 出票成功——从头到尾，只给了一个目标</div>
+      <div class="demo-controls">
+        <button class="btn" type="button" data-start>走一步</button>
+        <button class="btn" type="button" data-again>重来</button>
+      </div>
+      <p class="agent-note">注意：它不是在“一次回答里想完所有事”，而是<b>走一步、看一步</b>——这正是 Agent 和普通问答的分水岭。</p>
+    </div>
+  </section>
+
+  <section class="section" data-title="误区：Agent ≠ 更强的模型">
+    <h3 class="sec-title">最大的误区</h3>
+    <article class="card mistake">
+      <span class="tag">常见误解</span>
+      <h3>“换个更强的模型，就成 Agent 了吧？”</h3>
+      <p>不是。<b>Agent = 模型 + 脚手架。</b>模型负责想，脚手架负责给它工具、记忆、循环和护栏。同一个模型，接上这些能订票；拔掉这些，它仍然只是个聊天框。</p>
+      <div class="mistake-flow">模型 <span>+</span> 工具 <span>+</span> 循环 <span>+</span> 规则 <span>=</span> <em>Agent</em></div>
+    </article>
+    <div class="cards-3 mistake-points">
+      <article class="card"><h4>工具</h4><p>让“想”变成“做”：查资料、调用接口、写文件。</p></article>
+      <article class="card"><h4>记忆</h4><p>记住目标、中间结果和已经试过的路，别每轮都失忆。</p></article>
+      <article class="card"><h4>护栏</h4><p>哪些事能自己做、哪些要先问人、什么时候必须停。</p></article>
+    </div>
+  </section>
+
+  <section class="section" data-title="记住这个">
+    <aside class="remember">
+      <span class="label">记住这个</span>
+      Agent 不是“更聪明的模型”，而是<strong>模型 + 工具 + 循环</strong>：大脑负责想，手脚负责做，眼睛负责看，没办完就继续转。
+    </aside>
+    <p class="plain-note">Agent 要动手，就得有统一的“工具插座”。下一章看看 MCP 怎么把 M×N 根线，收成一根 USB-C。</p>
     <nav class="sec-nav" aria-label="章节导航">
       <button type="button" data-nav="prev">← 上一节</button>
       <button type="button" data-nav="next">下一节 →</button>
@@ -1394,6 +1541,79 @@ document.addEventListener('click', e => {
 
   registerDemo('multi', { start, reset });
 })();
+(function agentDemo(){
+  const ch = document.querySelector('#ch3');
+  if (!ch) return;
+  const nodes = [...ch.querySelectorAll('.loop-node')];
+  nodes.forEach(n => {
+    let t;
+    n.addEventListener('click', () => {
+      nodes.forEach(x => x.classList.remove('on'));
+      n.classList.add('on');
+      clearTimeout(t);
+      t = setTimeout(() => n.classList.remove('on'), 1800);
+    });
+  });
+
+  const d = ch.querySelector('[data-demo="agent-step"]');
+  if (!d) return;
+  const log = d.querySelector('.step-log');
+  const done = d.querySelector('.task-done');
+  const minis = [...d.querySelectorAll('.mini-node')];
+  const steps = [
+    { phase:'think', label:'想', cls:'', text:'拆解需求：订周五去北京的高铁票' },
+    { phase:'act', label:'做', cls:'act', text:'调用工具：查车次（北京，周五）→ 3 个结果' },
+    { phase:'see', label:'看', cls:'see', text:'读结果：G102 / G108 / G116 都可选' },
+    { phase:'think', label:'想', cls:'', text:'比较车次：选早班 G102，准备下单' },
+    { phase:'act', label:'做', cls:'act', text:'调用工具：下单（G102，周五 08:00）' },
+    { phase:'see', label:'看', cls:'see', text:'读结果：出票成功 ✅' }
+  ];
+  let idx = 0, runId = 0, pending = [];
+  const wait = ms => new Promise(res => {
+    const item = { res };
+    item.t = setTimeout(() => {
+      pending = pending.filter(x => x !== item);
+      res();
+    }, ms);
+    pending.push(item);
+  });
+  function light(phase){
+    nodes.forEach(n => n.classList.toggle('on', !!phase && n.dataset.phase === phase));
+    minis.forEach(n => n.classList.toggle('on', !!phase && n.dataset.phase === phase));
+  }
+  async function start(){
+    if (idx >= steps.length) return;
+    const my = runId;
+    const s = steps[idx++];
+    const row = document.createElement('div');
+    row.className = 'log-row ' + s.cls;
+    const ph = document.createElement('span');
+    ph.className = 'ph';
+    ph.textContent = '[' + s.label + ']';
+    const tx = document.createElement('span');
+    tx.textContent = s.text;
+    row.append(ph, tx);
+    log.appendChild(row);
+    light(s.phase);
+    await wait(420);
+    if (my !== runId) return;
+    light('');
+    if (idx >= steps.length) done.classList.add('on');
+    if (window.__fitActive) window.__fitActive();
+  }
+  function reset(){
+    runId++;
+    pending.forEach(x => { clearTimeout(x.t); x.res(); });
+    pending = [];
+    idx = 0;
+    log.innerHTML = '';
+    done.classList.remove('on');
+    light('');
+    if (window.__fitActive) window.__fitActive();
+  }
+  registerDemo('agent-step', { start, reset });
+})();
+
 /* @@JS:FEATURES@@ */
 /* 自检框架 */
 window.__SELFTESTS = [];
@@ -1544,6 +1764,29 @@ SELFTEST('ch2/多 Agent 微演示', async () => {
 SELFTEST('ch2/口诀一致性', async () => {
   const j = document.querySelector('[data-jingle="ch2"]');
   ok(!!j && j.textContent.trim().length >= 20, '存在口诀（≥20 字）');
+});
+SELFTEST('ch3/结构与循环图', async () => {
+  const ch = document.querySelector('#ch3');
+  ok(!!ch, '存在 #ch3');
+  ok(!!ch.querySelector('.remember'), '含「记住这个」');
+  ok(/ReAct/.test(ch.textContent), '提 ReAct');
+  ok(ch.querySelectorAll('.loop-node').length === 4, '循环图 4 节点（想/做/看/循环）');
+  ok(!!ch.querySelector('.mistake'), '含误区卡');
+  await until(async () => { ch.scrollIntoView(); return true; }, 2000);
+});
+SELFTEST('ch3/步进机', async () => {
+  const ch = document.querySelector('#ch3');
+  ch.scrollIntoView();
+  const d = ch.querySelector('[data-demo="agent-step"]');
+  const start = d.querySelector('[data-start]');
+  start.click(); start.click(); // 连点防重入
+  await until(() => window.__demos['agent-step'].running === false, 10000);
+  ok(d.querySelectorAll('.log-row').length === 1, '连点只走一步');
+  for (let i = 0; i < 5; i++) { start.click(); await until(() => window.__demos['agent-step'].running === false, 10000); }
+  ok(d.querySelectorAll('.log-row').length === 6, '全程共 6 步');
+  ok(d.querySelector('.task-done').classList.contains('on'), '完成态出现「✅ 出票成功」');
+  d.querySelector('[data-again]').click();
+  ok(d.querySelectorAll('.log-row').length === 0, '重来清空日志');
 });
 
 /* @@JS:SELFTEST@@ */
