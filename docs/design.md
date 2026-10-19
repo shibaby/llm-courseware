@@ -141,12 +141,15 @@ Function Calling、RAG、微调、多 Agent、上下文等——并希望产出�
 
 ## 7. 内容准确性基准（2026-10）
 
-- **MCP**：2024-11-25 Anthropic 发布；OpenAI 2025-03、Google 2025-04、微软 2025-05 采用；
-  2025-12-09 捐给 Linux 基金会旗下 Agentic AI Foundation；规格历经 5 版，2026-07-28 版改为
-  无状态（无握手/无会话）；2026-10 官方注册表约 40,000 个服务器；2026-01 推出 MCP Apps 扩展
-- **上下文成本**：实测 5 个服务器的工具定义可占约 5.5 万 token（用于"为什么要精简/渐进加载"的论点）
-- **Skills**：SKILL.md + YAML frontmatter（name/description）；三层渐进披露（元数据常驻 ~100 token/个；
-  正文触发时加载 <5k token；资源与脚本按需，脚本只有输出进上下文）
+- **MCP**：2024-11-25 Anthropic 发布；OpenAI 2025-03、Google 2025-04 采用，微软也在
+  2025 年上半年全面接入；2025-12-09 捐给 Linux 基金会旗下 Agentic AI Foundation；
+  规格历经 5 版，2026-07-28 版改为无状态（无握手/无会话）；2026-08 官方注册表全量盘点
+  22,636 个活跃服务器；2026-01-26 推出 MCP Apps 扩展
+- **上下文成本**：Anthropic 的示例——GitHub、Slack、Sentry、Grafana、Splunk 5 个服务器、
+  58 个工具，工具定义约占 5.5 万 token（用于"为什么要精简/渐进加载"的论点）
+- **Skills**：SKILL.md + YAML frontmatter（name/description）；三层渐进披露（元数据常驻
+  ~100 token/个；正文触发时加载 <5k token；资源与脚本按需，脚本只有输出进上下文）；
+  课件中的 100 / 4,000 / 4,400 token 为示例数字，不是固定值
 - **Agent**：ReAct 循环直觉；工具调用即 Function Calling
 - 以上若无新的重大变化，以本稿为准；实现时如发现引用需更新，以官方文档为准
 

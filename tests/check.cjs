@@ -21,6 +21,9 @@ if (exists) {
   chk('哨兵 @@JS:FEATURES@@', html.includes('@@JS:FEATURES@@'));
   chk('哨兵 @@JS:SELFTEST@@', html.includes('@@JS:SELFTEST@@'));
   chk('自检挂载 __selftest', html.includes('__selftest'));
+  chk('文眼「5.5 万 token」', html.includes('5.5 万 token'));
+  chk('文眼「渐进式披露」', html.includes('渐进式披露'));
+  chk('测验 10 题标记', (html.match(/data-concept=/g) || []).length >= 30);
   chk('体积 < 1MB', Buffer.byteLength(html) < 1024 * 1024);
 }
 console.log(`\n${pass} passed, ${fail} failed`);
