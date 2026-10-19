@@ -528,6 +528,46 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .j-line{display:block;transition:color .25s,text-shadow .25s}
 .j-line:hover{color:#fff;text-shadow:0 0 18px rgba(34,211,238,.5)}
 @media(max-width:640px){#starmap{aspect-ratio:1.7/1}.star{width:70px}.star span{font-size:9.5px}.star b{font-size:14px}}
+/* ---- Ch7 quiz & ending ---- */
+.quiz{max-width:780px;margin:4px auto 0}
+.quiz-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;font-size:12.5px;color:var(--muted)}
+#quiz-score{color:var(--cyan);font-weight:700;letter-spacing:.02em}
+.quiz-item{display:none}
+.quiz-item.active{display:block;animation:quizIn .28s ease both}
+@keyframes quizIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.q{font-size:16.5px;line-height:1.55;color:var(--text);margin:0 0 12px;font-weight:600}
+.q-num{display:inline-grid;place-items:center;width:26px;height:26px;margin-right:8px;border-radius:8px;border:1px solid rgba(34,211,238,.3);background:rgba(34,211,238,.08);color:var(--cyan);font-size:11px;font-weight:800;vertical-align:2px}
+.opts{display:grid;gap:7px}
+.opt{width:100%;text-align:left;padding:9px 13px;border:1px solid rgba(148,180,255,.16);border-radius:9px;background:rgba(255,255,255,.025);color:var(--text-2);font:inherit;font-size:13.5px;line-height:1.5;cursor:pointer;transition:border-color .2s,background .2s,color .2s,transform .2s}
+.opt:hover{border-color:rgba(34,211,238,.4);background:rgba(34,211,238,.06);transform:translateX(2px)}
+.opt.wrong{border-color:rgba(248,113,113,.6);background:rgba(248,113,113,.1);color:#fecaca}
+.opt.correct,.quiz-item.solved .opt[data-correct]{border-color:rgba(34,211,238,.6);background:rgba(34,211,238,.12);color:#dffaff;box-shadow:0 0 16px rgba(34,211,238,.12)}
+.quiz-item.solved .opt{cursor:default;pointer-events:none}
+.quiz-hint{margin:9px 0 0;padding-left:2px;font-size:12px;line-height:1.6;color:var(--muted);opacity:0;transition:opacity .25s}
+.quiz-hint.on{opacity:1}
+.quiz-hint b{color:var(--text-2)}
+.quiz-result{display:none;position:relative;margin-top:6px;padding:22px 18px 18px;text-align:center;border:1px solid rgba(34,211,238,.22);border-radius:14px;background:radial-gradient(circle at 50% 0,rgba(34,211,238,.12),transparent 62%),rgba(255,255,255,.025);overflow:hidden}
+.quiz-result.on{display:block;animation:quizIn .35s ease both}
+.quiz.done .quiz-item,.quiz.done .quiz-bar{display:none}
+.quiz-result h4{margin:0 0 6px;font-size:26px;letter-spacing:.02em;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.quiz-result p{margin:0 0 14px;color:var(--text-2);font-size:13.5px}
+.burst{position:absolute;inset:0;pointer-events:none}
+.burst span{position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;background:var(--cyan);opacity:0}
+.burst span:nth-child(3n){background:var(--violet)}
+.burst span:nth-child(3n+1){background:var(--pink)}
+.quiz-result.on .burst span{animation:burst .9s cubic-bezier(.15,.7,.3,1) forwards}
+@keyframes burst{0%{opacity:1;transform:translate(-50%,-50%) rotate(var(--a)) translateX(0) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateX(var(--d)) scale(.15)}}
+.ending-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0 14px}
+.ending-card{padding:9px 8px;border:1px solid rgba(148,180,255,.14);border-radius:9px;background:rgba(255,255,255,.025);text-align:center}
+.ending-card b{display:block;font-size:11.5px;color:#eaf2ff;margin:2px 0}
+.ending-card span{font-size:9.5px;line-height:1.35;color:var(--muted);display:block}
+.ending-card i{font-style:normal;font-size:17px;line-height:1}
+.ending-finale{margin:0 auto;max-width:720px;padding:14px 18px;border:1px solid rgba(240,171,252,.24);border-radius:12px;background:linear-gradient(120deg,rgba(34,211,238,.07),rgba(129,140,248,.08),rgba(240,171,252,.07));text-align:center}
+.ending-finale b{font-size:18px;color:#fff}
+.ending-finale p{margin:4px 0 0;font-size:12.5px;line-height:1.6;color:var(--text-2)}
+.ending-src{margin:10px 0 0;font-size:10.5px;line-height:1.55;color:var(--muted);text-align:center}
+.ending-actions{display:flex;justify-content:center;margin-top:10px}
+@media(max-width:820px){.ending-grid{grid-template-columns:repeat(5,1fr)}}
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -1086,13 +1126,13 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
     <p class="lead">这些时间点能帮你判断：MCP 已经不是“某个厂商的小工具”，而是行业共同维护的标准。</p>
     <div class="facts">
       <article class="fact"><span class="f-year">2024-11-25</span><p><b>Anthropic</b> 发布 MCP，先在自己的工具生态里跑通。</p></article>
-      <article class="fact"><span class="f-year">2025</span><p>OpenAI（3 月）、Google（4 月）、微软（5 月）相继采用。</p></article>
+      <article class="fact"><span class="f-year">2025</span><p>OpenAI（3 月）、Google（4 月）相继采用；微软也在上半年全面接入。</p></article>
       <article class="fact"><span class="f-year">2025-12-09</span><p>捐给 <b>Linux 基金会</b>旗下 <b>Agentic AI Foundation</b>，变成中立标准。</p></article>
       <article class="fact"><span class="f-year">2026-07-28</span><p>规格改为<b>无状态</b>：不再需要握手和会话，部署更简单。</p></article>
-      <article class="fact"><span class="f-year">2026-10</span><p>官方注册表约 <b>4 万</b>个服务器，几乎覆盖常用工具。</p></article>
-      <article class="fact"><span class="f-year">2026-01</span><p>MCP Apps 扩展推出：工具可以带着自己的界面来。</p></article>
+      <article class="fact"><span class="f-year">2026-08</span><p>官方注册表全量盘点：<b>22,636</b> 个活跃服务器，且仍在增长。</p></article>
+      <article class="fact"><span class="f-year">2026-01-26</span><p>MCP Apps 成为第一个官方扩展：工具可以带着自己的界面来。</p></article>
     </div>
-    <p class="facts-note">反面教材：实测 5 个服务器的工具定义就占约 <b>5.5 万 token</b>。所以“全装上”并不划算——这也是下一章 Skills 要解决的事。</p>
+    <p class="facts-note">Anthropic 的示例：GitHub、Slack、Sentry、Grafana、Splunk 五个服务器、58 个工具，工具定义约占 <b>5.5 万 token</b>。所以“全装上”并不划算——这也是下一章 Skills 要解决的事。</p>
   </section>
 
   <section class="section" data-title="误区与记住">
@@ -1167,9 +1207,9 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
           <p class="script-note">脚本运行时，只有它的输出进上下文——本体根本不占地方。</p>
         </div>
         <aside class="meter-panel">
-          <span class="meter-label">当前上下文占用</span>
+          <span class="meter-label">当前上下文占用（示例）</span>
           <b id="skill-meter">≈ 100 token</b>
-          <p class="meter-note">不是“全塞进去”，而是“用到哪层，加载哪层”。</p>
+          <p class="meter-note">不是“全塞进去”，而是“用到哪层，加载哪层”。数字为示例；官方建议正文控制在 5k token 内。</p>
           <div class="demo-controls">
             <button class="btn" type="button" data-start>翻开手册</button>
             <button class="btn" type="button" data-again>重来</button>
@@ -1339,6 +1379,161 @@ description: 当用户要把一个技术主题做成互动课件时使用
     <nav class="sec-nav" aria-label="章节导航">
       <button type="button" data-nav="prev">← 上一节</button>
       <button type="button" data-nav="next">下一节 →</button>
+    </nav>
+  </section>
+
+  <section class="section" data-title="测验：10 题检验">
+    <h3 class="sec-title">10 道题，检验<span class="grad">你还记得多少</span></h3>
+    <p class="lead">答错不扣分，会给出提示；每题只有一个正确答案。</p>
+    <div class="quiz" id="quiz">
+      <div class="quiz-bar"><span id="quiz-score">答对 0/10</span><span>一次一题 · 答对自动进入下一题</span></div>
+
+      <div class="quiz-item active" data-concept="token">
+        <p class="q"><span class="q-num">01</span>大模型读一句话之前，通常先做什么？</p>
+        <div class="opts">
+          <button class="opt" type="button">先把它翻译成英文</button>
+          <button class="opt" type="button" data-correct>把它切成 Token（文本小块）</button>
+          <button class="opt" type="button">先训练一遍模型</button>
+          <button class="opt" type="button">先存进数据库</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>Token 是模型处理文本的基本单位；计费和上下文长度都按它算。</p>
+      </div>
+
+      <div class="quiz-item" data-concept="context">
+        <p class="q"><span class="q-num">02</span>聊到后面，AI 忘了你开头说的要求。最可能的原因是？</p>
+        <div class="opts">
+          <button class="opt" type="button">它没有联网</button>
+          <button class="opt" type="button">它的麦克风坏了</button>
+          <button class="opt" type="button" data-correct>上下文窗口装不下这么多对话</button>
+          <button class="opt" type="button">它不喜欢这个问题</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>上下文像工作台：东西越堆越多，放不下的旧内容就会被挤掉。长对话要学会总结和清空。</p>
+      </div>
+
+      <div class="quiz-item" data-concept="prompt">
+        <p class="q"><span class="q-num">03</span>下面哪个 Prompt 最可能拿到一份能用的周报？</p>
+        <div class="opts">
+          <button class="opt" type="button">写个周报</button>
+          <button class="opt" type="button" data-correct>你是产品经理，把本周 3 项进展写成 5 条要点，面向老板，200 字以内</button>
+          <button class="opt" type="button">周报，快</button>
+          <button class="opt" type="button">帮我写点东西</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>角色、材料、格式、对象越清楚，结果越可控。Prompt 就是一张工单。</p>
+      </div>
+
+      <div class="quiz-item" data-concept="function-calling">
+        <p class="q"><span class="q-num">04</span>Function Calling 本质上让模型做了什么？</p>
+        <div class="opts">
+          <button class="opt" type="button">模型自己运行代码，不经过任何程序</button>
+          <button class="opt" type="button" data-correct>按结构化格式说明要调用哪个工具、参数是什么，由外部程序执行</button>
+          <button class="opt" type="button">把工具训练进模型参数里</button>
+          <button class="opt" type="button">直接修改工具里的数据</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>模型负责“决定 + 填参数”，真正的执行交给宿主程序或工具服务。</p>
+      </div>
+
+      <div class="quiz-item" data-concept="rag">
+        <p class="q"><span class="q-num">05</span>RAG 最适合解决哪类问题？</p>
+        <div class="opts">
+          <button class="opt" type="button">模型打字太慢</button>
+          <button class="opt" type="button">模型需要换一套皮肤</button>
+          <button class="opt" type="button" data-correct>需要查阅最新或私有资料，再基于资料回答</button>
+          <button class="opt" type="button">模型不想回答问题</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>RAG 像开卷考试：先检索资料，再把资料放进上下文作答。</p>
+      </div>
+
+      <div class="quiz-item" data-concept="finetuning">
+        <p class="q"><span class="q-num">06</span>什么情况更该考虑微调，而不是 RAG？</p>
+        <div class="opts">
+          <button class="opt" type="button">缺少最新的事实和资料</button>
+          <button class="opt" type="button" data-correct>希望模型稳定掌握某种风格、格式或领域习惯</button>
+          <button class="opt" type="button">想让模型回答得更短</button>
+          <button class="opt" type="button">想省掉提示词</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>RAG 补知识，微调改习惯。缺最新资料优先 RAG；要固定文风或格式，再考虑微调。</p>
+      </div>
+
+      <div class="quiz-item" data-concept="agent">
+        <p class="q"><span class="q-num">07</span>Agent 与普通聊天机器人的关键区别是什么？</p>
+        <div class="opts">
+          <button class="opt" type="button">参数量一定更大</button>
+          <button class="opt" type="button">不需要用户给目标</button>
+          <button class="opt" type="button" data-correct>会循环“想 → 做 → 看”，调用工具直到完成目标</button>
+          <button class="opt" type="button">只会聊天，不会用工具</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>Agent = 模型（大脑）+ 工具（手脚）+ 循环（自己推进）。</p>
+      </div>
+
+      <div class="quiz-item" data-concept="multi-agent">
+        <p class="q"><span class="q-num">08</span>多 Agent 协作主要适合什么任务？</p>
+        <div class="opts">
+          <button class="opt" type="button">所有任务都该拆成多 Agent</button>
+          <button class="opt" type="button">问题只需要回答一个字</button>
+          <button class="opt" type="button">想让一个模型变成十个模型</button>
+          <button class="opt" type="button" data-correct>任务能拆成相对独立的子任务，适合并行或分工</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>多 Agent 像团队：分工清楚才省时间；简单任务拆开反而增加协调成本。</p>
+      </div>
+
+      <div class="quiz-item" data-concept="mcp">
+        <p class="q"><span class="q-num">09</span>MCP 解决的核心问题是？</p>
+        <div class="opts">
+          <button class="opt" type="button" data-correct>把 M 个应用 × N 个工具的定制连接，收成 M+N 条标准连接</button>
+          <button class="opt" type="button">让模型参数变多</button>
+          <button class="opt" type="button">让 AI 不再需要工具</button>
+          <button class="opt" type="button">替代所有数据库</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>MCP 是 AI 世界的 USB-C：Host → Client → Server，统一插座。</p>
+      </div>
+
+      <div class="quiz-item" data-concept="skills">
+        <p class="q"><span class="q-num">10</span>Skills 的“渐进式披露”指的是？</p>
+        <div class="opts">
+          <button class="opt" type="button">一开始把所有资料塞进上下文</button>
+          <button class="opt" type="button">把模型切成多个小模型</button>
+          <button class="opt" type="button" data-correct>先只加载名称和描述，需要时再展开正文与资源</button>
+          <button class="opt" type="button">只在夜间加载</button>
+        </div>
+        <p class="quiz-hint"><b>提示：</b>元数据常驻（示例约 100 token/个），正文触发时加载，资源和脚本按需取用。</p>
+      </div>
+
+      <div class="quiz-result" id="quiz-result">
+        <div class="burst" aria-hidden="true"></div>
+        <h4>🎉 10 / 10</h4>
+        <p>满分。你已经把 10 个概念串成了一张网。</p>
+        <button class="btn" id="quiz-again" type="button">再测一次</button>
+      </div>
+    </div>
+    <nav class="sec-nav" aria-label="章节导航">
+      <button type="button" data-nav="prev">← 上一节</button>
+      <button type="button" data-nav="next">下一节 →</button>
+    </nav>
+  </section>
+
+  <section class="section" id="ending" data-title="完结：通关">
+    <h3 class="sec-title">这一小时，你带走了一张<span class="grad">地图</span></h3>
+    <p class="lead">忘了定义也没关系——记住比喻，以及它们怎么接力。</p>
+    <div class="ending-grid">
+      <div class="ending-card"><i>🧱</i><b>Token</b><span>乐高块</span></div>
+      <div class="ending-card"><i>🗂️</i><b>上下文</b><span>工作台</span></div>
+      <div class="ending-card"><i>📝</i><b>Prompt</b><span>工单</span></div>
+      <div class="ending-card"><i>🤲</i><b>Function Calling</b><span>手</span></div>
+      <div class="ending-card"><i>📚</i><b>RAG</b><span>开卷参考书</span></div>
+      <div class="ending-card"><i>🔥</i><b>微调</b><span>回炉进修</span></div>
+      <div class="ending-card"><i>🧑‍💼</i><b>Agent</b><span>实习生</span></div>
+      <div class="ending-card"><i>👥</i><b>多 Agent</b><span>团队</span></div>
+      <div class="ending-card"><i>🔌</i><b>MCP</b><span>USB-C 插座</span></div>
+      <div class="ending-card"><i>📖</i><b>Skills</b><span>员工手册</span></div>
+    </div>
+    <div class="ending-finale">
+      <b>🏁 通关！</b>
+      <p>从 Token 到 Agent，你已经能看懂一条 AI 流水线是怎么跑起来的。下一步，去把一个真实任务交给它。</p>
+    </div>
+    <p class="ending-src">资料与出处：MCP 官方规范与官方博客；Linux Foundation / Agentic AI Foundation 新闻稿；Anthropic《Agent Skills》文档与《Introducing advanced tool use》。数据盘点截至 2026-10。</p>
+    <div class="ending-actions"><button class="btn" id="btn-cover" type="button">回到封面 ↺</button></div>
+    <nav class="sec-nav" aria-label="章节导航">
+      <button type="button" data-nav="prev">← 上一节</button>
     </nav>
   </section>
 </section>
@@ -2178,6 +2373,75 @@ document.addEventListener('click', e => {
     }
   });
 })();
+/* ---- Ch7 quiz & ending ---- */
+(function(){
+  const quiz = document.getElementById('quiz');
+  if (!quiz) return;
+  const items = Array.from(quiz.querySelectorAll('.quiz-item'));
+  const scoreEl = document.getElementById('quiz-score');
+  const result = document.getElementById('quiz-result');
+  const burst = result ? result.querySelector('.burst') : null;
+  if (burst && !burst.children.length) {
+    for (let i = 0; i < 24; i++) {
+      const s = document.createElement('span');
+      s.style.setProperty('--a', (i * 15) + 'deg');
+      s.style.setProperty('--d', (34 + (i % 7) * 13) + 'px');
+      s.style.animationDelay = (i * 16) + 'ms';
+      burst.appendChild(s);
+    }
+  }
+  function solvedCount(){ return items.filter(function(it){ return it.classList.contains('solved'); }).length; }
+  function paintScore(){ if (scoreEl) scoreEl.textContent = '答对 ' + solvedCount() + '/10'; }
+  function fit(){ if (window.__fitActive) window.__fitActive(); }
+  function activateFirstUnsolved(){
+    const next = items.find(function(it){ return !it.classList.contains('solved'); });
+    items.forEach(function(it){ it.classList.toggle('active', it === next); });
+    return next;
+  }
+  function showResult(){
+    if (result) result.classList.add('on');
+    quiz.classList.add('done');
+    paintScore();
+  }
+  quiz.addEventListener('click', function(e){
+    const opt = e.target.closest('.opt');
+    if (!opt) return;
+    const item = opt.closest('.quiz-item');
+    if (!item || item.classList.contains('solved')) return;
+    if (opt.hasAttribute('data-correct')) {
+      item.classList.add('solved');
+      opt.classList.add('correct');
+      item.querySelectorAll('.opt').forEach(function(b){ b.disabled = true; });
+      const n = solvedCount();
+      paintScore();
+      if (n === items.length) { showResult(); }
+      else { item.classList.remove('active'); activateFirstUnsolved(); }
+      fit();
+    } else {
+      opt.classList.add('wrong');
+      const hint = item.querySelector('.quiz-hint');
+      if (hint) hint.classList.add('on');
+      fit();
+    }
+  });
+  const again = document.getElementById('quiz-again');
+  if (again) again.addEventListener('click', function(){
+    quiz.classList.remove('done');
+    if (result) result.classList.remove('on');
+    items.forEach(function(it){
+      it.classList.remove('solved','active');
+      it.querySelectorAll('.opt').forEach(function(b){ b.disabled = false; b.classList.remove('wrong','correct'); });
+      const hint = it.querySelector('.quiz-hint');
+      if (hint) hint.classList.remove('on');
+    });
+    if (items[0]) items[0].classList.add('active');
+    paintScore();
+    fit();
+  });
+  const cover = document.getElementById('btn-cover');
+  if (cover) cover.addEventListener('click', function(){ window.__nav.goTo(0); });
+  paintScore();
+})();
 /* @@JS:FEATURES@@ */
 /* 自检框架 */
 window.__SELFTESTS = [];
@@ -2375,7 +2639,7 @@ SELFTEST('ch4/数据流与事实卡', async () => {
   ok(/2024/.test(t) && /Anthropic/.test(t), '含 2024 Anthropic 发布');
   ok(/Linux 基金会/.test(t) && /Agentic AI Foundation/.test(t), '含捐给基金会');
   ok(/无状态/.test(t), '含 2026-07 无状态规格');
-  ok(/4 万/.test(t), '含注册表约 4 万服务器');
+  ok(/22,636/.test(t), '含官方注册表 22,636 个活跃服务器');
 });
 
 SELFTEST('ch5/三层渐进披露', async () => {
@@ -2433,6 +2697,48 @@ SELFTEST('ch7/顺口溜两处一致', async () => {
   const a = document.querySelector('[data-jingle="ch2"]').textContent.replace(/\s+/g, '');
   const b = document.querySelector('[data-jingle="ch7"]').textContent.replace(/\s+/g, '');
   ok(a.length >= 20 && a === b, 'ch2 与 ch7 口诀文字一致');
+});
+
+SELFTEST('ch7/测验结构', async () => {
+  const ch = document.querySelector('#ch7');
+  ok(!!ch, '存在 #ch7');
+  const items = [...document.querySelectorAll('#quiz .quiz-item')];
+  ok(items.length === 10, '10 道题');
+  const ids = items.map(i => i.dataset.concept).sort().join(',');
+  ok(ids === [...window.__CONCEPTS].sort().join(','), '每概念恰好 1 题');
+  items.forEach((it, i) => {
+    ok(it.querySelectorAll('button.opt').length === 4, `第 ${i + 1} 题 4 个选项`);
+    ok(it.querySelectorAll('[data-correct]').length === 1, `第 ${i + 1} 题恰好 1 个正确项`);
+  });
+  ok(document.querySelector('#quiz-score').textContent.includes('0/10'), '初始计分 0/10');
+});
+SELFTEST('ch7/测验流程与庆祝', async () => {
+  const items = [...document.querySelectorAll('#quiz .quiz-item')];
+  const q1 = items[0];
+  const wrong = [...q1.querySelectorAll('button.opt')].find(b => !b.hasAttribute('data-correct'));
+  wrong.click();
+  ok(wrong.classList.contains('wrong'), '答错标记错误');
+  ok(q1.querySelector('.quiz-hint').classList.contains('on'), '答错出现提示');
+  q1.querySelector('[data-correct]').click();
+  ok(q1.classList.contains('solved'), '答对后题目锁定');
+  for (const it of items.slice(1)) it.querySelector('[data-correct]').click();
+  await until(() => document.querySelector('#quiz-result').classList.contains('on'), 4000);
+  ok(document.querySelector('#quiz-score').textContent.includes('10/10'), '满分 10/10');
+  ok(document.querySelectorAll('#quiz-result .burst span').length === 24, '24 颗霓虹粒子庆祝');
+  ok(!!document.querySelector('#ending') && /通关/.test(document.querySelector('#ending').textContent), '完结彩蛋出现');
+  document.querySelector('#quiz-again').click();
+  ok(!document.querySelector('#quiz-result').classList.contains('on') && !items[0].classList.contains('solved'), '重来复位测验');
+});
+SELFTEST('ch7/空格不误翻节（焦点在按钮上）', async () => {
+  const sec = document.querySelector('#quiz').closest('.section');
+  window.__nav.goTo([...document.querySelectorAll('.section')].indexOf(sec));
+  await new Promise(r => setTimeout(r, 300));
+  const btn = document.querySelector('#quiz .quiz-item.active button.opt');
+  btn.focus();
+  const idx0 = window.__nav.index();
+  document.activeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true }));
+  await new Promise(r => setTimeout(r, 400));
+  ok(window.__nav.index() === idx0, '空格未触发翻节');
 });
 
 /* @@JS:SELFTEST@@ */
