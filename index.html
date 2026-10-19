@@ -600,6 +600,9 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
   .burst span{display:none}
 }
 #btn-toc,#btn-fullscreen{background:rgba(7,10,22,.74);backdrop-filter:blur(8px)}
+.drawer[hidden]{display:none}
+#toc-drawer{z-index:96}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -612,7 +615,7 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 </header>
 <footer id="deck-bottom" aria-hidden="true">
   <span id="deck-brand">一小时通关</span>
-  <span id="deck-page"><b>01</b> / 09</span>
+  <span id="deck-page"><b>01</b> / 31</span>
   <span id="deck-hint">← → 翻页</span>
 </footer>
 <button id="btn-toc" type="button" aria-label="打开课程目录">目录</button>
@@ -624,7 +627,7 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
     <p class="cover-sub">从 Token 到 Agent：把 10 个概念讲成故事</p>
     <div class="chips"><span>约 60 分钟</span><span>10 个概念</span><span>7 章</span></div>
     <button class="btn" id="btn-start" type="button">开始学习 →</button>
-    <p class="cover-hint">键盘 ← → 翻节 · 右上角目录可跳转 · 每个演示都可重来</p>
+    <p class="cover-hint">键盘 ← → 翻页 · 右上角目录可跳转 · 每个演示都可重来</p>
   </section>
 <section class="chapter" id="ch1">
   <section class="section" data-title="核心：文字接龙大师">
@@ -683,7 +686,7 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
         <button class="btn" type="button" data-start>开始接龙</button>
         <button class="btn" type="button" data-again>重来</button>
       </div>
-      <p class="chain-note">注意：它不会“想清楚整句话”再开口，而是<b>每 500 毫秒猜一个词</b>，猜完再猜下一个。</p>
+      <p class="chain-note">注意：它不会“想清楚整句话”再开口，而是<b>每 600 毫秒猜一个词</b>，猜完再猜下一个。</p>
     </div>
   </section>
 
@@ -1164,7 +1167,7 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
       <article class="fact"><span class="f-year">2026-08</span><p>官方注册表全量盘点：<b>22,636</b> 个活跃服务器，且仍在增长。</p></article>
       <article class="fact"><span class="f-year">2026-01-26</span><p>MCP Apps 成为第一个官方扩展：工具可以带着自己的界面来。</p></article>
     </div>
-    <p class="facts-note">Anthropic 的示例：GitHub、Slack、Sentry、Grafana、Splunk 五个服务器、58 个工具，工具定义约占 <b>5.5 万 token</b>。所以“全装上”并不划算——这也是下一章 Skills 要解决的事。</p>
+    <p class="facts-note">Anthropic 的示例：GitHub、Slack、Sentry、Grafana、Splunk 五个服务器、58 个工具，工具定义约占 <b>5.5 万 token</b>。所以“全装上”并不划算——先精选服务器、按需发现工具，才是控制工具定义成本的办法。</p>
   </section>
 
   <section class="section" data-title="误区与记住">
@@ -1178,7 +1181,7 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
       <span class="label">记住这个</span>
       <b>MCP = AI 世界的 USB-C。</b>把 M×N 条定制线，收成 M+N 条标准线；Host → Client → Server，各司其职。
     </aside>
-    <p class="plain-note">工具接上了，新的问题来了：工具一多，模型上下文会被“说明书”塞爆。下一章看 Skills 怎么做到“用时才展开”。</p>
+    <p class="plain-note">工具定义的账，要靠“精选 MCP 服务器、按需发现工具”来省；Skills 解决的是另一类问题——流程和资料按需加载。两件事互补，别混为一谈。</p>
     <nav class="sec-nav" aria-label="章节导航">
       <button type="button" data-nav="prev">← 上一节</button>
       <button type="button" data-nav="next">下一节 →</button>
@@ -1189,7 +1192,7 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
     <section class="section" data-title="问题：每次都从头教">
       <div class="chapter-head reveal">
         <h2 class="chapter-title">第 5 章 · Skills</h2>
-        <span class="chip">约 8 分钟</span>
+        <span class="chip">约 7 分钟</span>
       </div>
       <h3 class="sec-title">每次都要<span class="grad">重新教一遍</span>？</h3>
       <p class="lead">提示词像口头交代：这次说清楚了，下次换个对话，AI 又忘了；团队里每个人还得各教一遍。</p>
@@ -1239,9 +1242,9 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
           <p class="script-note">脚本运行时，只有它的输出进上下文——本体根本不占地方。</p>
         </div>
         <aside class="meter-panel">
-          <span class="meter-label">当前上下文占用（示例）</span>
+          <span class="meter-label">当前加载层（示例）</span>
           <b id="skill-meter">≈ 100 token</b>
-          <p class="meter-note">不是“全塞进去”，而是“用到哪层，加载哪层”。数字为示例；官方建议正文控制在 5k token 内。</p>
+          <p class="meter-note">不是“全塞进去”，而是“用到哪层，加载哪层”。数字为示例；经验上正文宜精炼（社区常以 5k token 为参考），细节放参考文件。</p>
           <div class="demo-controls">
             <button class="btn" type="button" data-start>翻开手册</button>
             <button class="btn" type="button" data-again>重来</button>
@@ -1312,7 +1315,7 @@ description: 当用户要把一个技术主题做成互动课件时使用
   <section class="section" data-title="场景：一句话，做一份 PPT">
     <div class="chapter-head reveal">
       <h2 class="chapter-title">第 6 章 · 实战串联</h2>
-      <span class="chip">约 10 分钟</span>
+      <span class="chip">约 8 分钟</span>
     </div>
     <h3 class="sec-title">一句话，把「季度总结」<span class="grad">变成 PPT</span></h3>
     <p class="lead">接下来不讲新名词。我们跟着一句真实需求，把前面所有概念串成一条流水线——看看它们各自在什么时候登场。</p>
@@ -1617,6 +1620,32 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
   const sections = () => $$('.section');
   const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
   let current = 0;
+  const live = document.createElement('div');
+  live.id = 'a11y-status';
+  live.className = 'sr-only';
+  live.setAttribute('role', 'status');
+  live.setAttribute('aria-live', 'polite');
+  document.body.appendChild(live);
+
+  function targetIndex(hash) {
+    if (!hash || hash === '#selftest' || hash.charAt(0) !== '#') return -1;
+    let el = null;
+    try { el = document.querySelector(hash); } catch (e) { return -1; }
+    if (!el) return -1;
+    if (el.classList.contains('chapter')) el = el.querySelector('.section');
+    return el ? sections().indexOf(el) : -1;
+  }
+  function syncHash() {
+    if (location.hash.includes('selftest')) return;
+    const sec = sections()[current];
+    if (!sec) return;
+    const ch = sec.closest('.chapter');
+    const id = ch ? ch.id : (sec.id || '');
+    try {
+      if (id) history.replaceState(null, '', '#' + id);
+      else history.replaceState(null, '', location.pathname + location.search);
+    } catch (e) {}
+  }
 
   function wrapSlides() {
     sections().forEach(sec => {
@@ -1671,6 +1700,11 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
     if (deckPage) deckPage.innerHTML = `<b>${String(i + 1).padStart(2, '0')}</b> / ${String(list.length).padStart(2, '0')}`;
     fitSlide(sec);
     updateProgress();
+    sec.setAttribute('tabindex', '-1');
+    try { sec.focus({ preventScroll: true }); } catch (e) {}
+    const point = deckPoint ? deckPoint.textContent : '';
+    live.textContent = `第 ${i + 1} 页，共 ${list.length} 页：${chapterTitle}${point ? ' · ' + point : ''}`;
+    syncHash();
   }
 
   window.__nav = {
@@ -1703,17 +1737,20 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
       b.className = 'toc-link';
       b.dataset.idx = String(i);
       b.textContent = sec.dataset.title || `第 ${i + 1} 节`;
-      b.addEventListener('click', () => { closeToc(); window.__nav.goTo(i); });
+      b.addEventListener('click', () => { tocReturnFocus = null; closeToc(); window.__nav.goTo(i); });
       group.appendChild(b);
     });
   }
 
+  let tocReturnFocus = null;
   function openToc() {
+    tocReturnFocus = document.activeElement;
     drawer.hidden = false;
     backdrop.hidden = false;
     void drawer.offsetWidth;
     drawer.classList.add('open');
     backdrop.classList.add('open');
+    setTimeout(() => { if (drawer.classList.contains('open')) $('#btn-toc-close').focus(); }, 0);
   }
   function closeToc() {
     drawer.classList.remove('open');
@@ -1722,13 +1759,25 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
       if (!drawer.classList.contains('open')) {
         drawer.hidden = true;
         backdrop.hidden = true;
+        if (tocReturnFocus && tocReturnFocus.focus) tocReturnFocus.focus();
       }
     }, 320);
   }
 
+  drawer.setAttribute('role', 'dialog');
+  drawer.setAttribute('aria-modal', 'true');
+  drawer.setAttribute('aria-label', '课程目录');
   $('#btn-toc').addEventListener('click', () => drawer.classList.contains('open') ? closeToc() : openToc());
   $('#btn-toc-close').addEventListener('click', closeToc);
   backdrop.addEventListener('click', closeToc);
+  drawer.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const f = $$('button, a[href], input, select, textarea', drawer).filter(el => !el.disabled && el.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
 
   function layoutNodes() {
     nodes.innerHTML = '';
@@ -1769,6 +1818,19 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
   $('#btn-start').addEventListener('click', () => window.__nav.goTo(1));
 
+  document.addEventListener('click', e => {
+    const a = e.target instanceof Element ? e.target.closest('a[href^="#ch"]') : null;
+    if (!a) return;
+    const i = targetIndex(a.getAttribute('href'));
+    if (i < 0) return;
+    e.preventDefault();
+    activate(i);
+  });
+  window.addEventListener('hashchange', () => {
+    const i = targetIndex(location.hash);
+    if (i >= 0) activate(i);
+  });
+
   document.addEventListener('keydown', e => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === 'Escape') {
@@ -1802,7 +1864,8 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
   wrapSlides();
   buildToc();
   layoutNodes();
-  activate(0);
+  const initial = targetIndex(location.hash);
+  activate(initial >= 0 ? initial : 0);
 })();
 
 window.__demos = {};
@@ -1847,7 +1910,7 @@ function registerDemo(name, impl) {
     ['到', '在', '往'],
     ['学校', '超市', '家里'],
     ['走', '跳', '睡'],
-    ['步', '操', '鞋'],
+    ['操', '鞋', '武'],
     ['.', '！', '？']
   ];
   const root = document.querySelector('[data-demo="chain"]');
@@ -1931,6 +1994,10 @@ document.addEventListener('click', e => {
   const countEl = document.querySelector('#explored-count');
   const cards = [...map.querySelectorAll('.concept')];
   let explored = 0;
+  cards.forEach(c => {
+    const body = c.querySelector('.concept-body');
+    if (body) body.inert = !c.classList.contains('open');
+  });
 
   function updateCount() {
     if (countEl) countEl.textContent = `已探索 ${explored}/${cards.length}`;
@@ -1949,12 +2016,16 @@ document.addEventListener('click', e => {
       c.classList.remove('open');
       const h = c.querySelector('.concept-head');
       if (h) h.setAttribute('aria-expanded', 'false');
+      const body = c.querySelector('.concept-body');
+      if (body) body.inert = true;
     });
   }
 
   function openCard(card) {
     closeAll();
     card.classList.add('open');
+    const body = card.querySelector('.concept-body');
+    if (body) body.inert = false;
     const head = card.querySelector('.concept-head');
     if (head) head.setAttribute('aria-expanded', 'true');
     map.classList.add('detail');
@@ -2348,6 +2419,7 @@ document.addEventListener('click', e => {
 (function(){
   const d = document.querySelector('[data-demo="mcp-lines"]');
   if (!d) return;
+  d.querySelectorAll('.wires-after line').forEach(l => l.setAttribute('pathLength', '1'));
   registerDemo('mcp-lines', {
     start(){ d.classList.add('mcp-on'); if (window.__fitActive) window.__fitActive(); },
     reset(){ d.classList.remove('mcp-on'); if (window.__fitActive) window.__fitActive(); }
@@ -2361,22 +2433,33 @@ document.addEventListener('click', e => {
   const note = d.querySelector('.script-note');
   const btn = d.querySelector('[data-start]');
   const texts = ['≈ 100 token', '≈ 4,000 token', '≈ 4,400 token'];
-  let step = 0;
+  let step = 0, busy = false, token = 0;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
 
   function render() {
     layers.forEach((layer, i) => layer.classList.toggle('open', i <= step));
     meter.textContent = texts[step];
     note.classList.toggle('on', step >= 2);
-    btn.disabled = step >= 2;
-    btn.textContent = step >= 2 ? '已全部展开' : '翻开手册';
+    btn.disabled = busy || step >= 2;
+    btn.textContent = busy ? '展开中…' : (step >= 2 ? '已全部展开' : '翻开手册');
     if (window.__fitActive) window.__fitActive();
   }
 
   registerDemo('skill-layers', {
-    start() {
-      if (step < 2) { step++; render(); }
+    async start() {
+      if (busy || step >= 2) return;
+      const my = ++token;
+      busy = true;
+      render();
+      await wait(600);
+      if (my !== token) return;
+      step++;
+      busy = false;
+      render();
     },
     reset() {
+      token++;
+      busy = false;
       step = 0;
       render();
     }
@@ -2429,12 +2512,13 @@ document.addEventListener('click', e => {
     line.style.setProperty('--len', len);
     line.style.strokeDasharray = len;
     line.style.strokeDashoffset = len;
+    line.dataset.len = String(len);
     svg.appendChild(line);
     segs.push(line);
   }
   function clear() {
     stars.forEach(s => s.classList.remove('active', 'seen'));
-    segs.forEach(l => l.classList.remove('lit'));
+    segs.forEach(l => { l.classList.remove('lit'); l.style.strokeDashoffset = l.dataset.len; });
     tip.classList.remove('on');
     tip.textContent = '点一颗星，看看你还记得多少。';
   }
@@ -2443,7 +2527,11 @@ document.addEventListener('click', e => {
       s.classList.toggle('seen', i < idx);
       s.classList.toggle('active', i === idx);
     });
-    segs.forEach((l, i) => l.classList.toggle('lit', i < idx));
+    segs.forEach((l, i) => {
+      const on = i < idx;
+      l.classList.toggle('lit', on);
+      l.style.strokeDashoffset = on ? '0' : l.dataset.len;
+    });
     const st = stars[idx];
     if (st) { tip.textContent = st.dataset.tip; tip.classList.add('on'); }
     if (window.__fitActive) window.__fitActive();
@@ -2514,7 +2602,15 @@ document.addEventListener('click', e => {
       const n = solvedCount();
       paintScore();
       if (n === items.length) { showResult(); }
-      else { item.classList.remove('active'); activateFirstUnsolved(); }
+      else if (item.classList.contains('active')) {
+        setTimeout(function(){
+          if (item.classList.contains('active') && item.classList.contains('solved')) {
+            item.classList.remove('active');
+            activateFirstUnsolved();
+            fit();
+          }
+        }, 620);
+      }
       fit();
     } else {
       opt.classList.add('wrong');
@@ -2753,6 +2849,7 @@ SELFTEST('ch5/三层渐进披露', async () => {
   ok(d.querySelectorAll('.layer.open').length === 1, '初始只开元数据层');
   ok(d.querySelector('#skill-meter').textContent.includes('100'), '初始计量 ≈100 token');
   start.click();
+  ok(d.querySelectorAll('.layer.open').length === 1, '展开是渐进的');
   await until(() => d.querySelectorAll('.layer.open').length === 2, 3000);
   ok(d.querySelector('#skill-meter').textContent.includes('4,000'), '翻开正文后 ≈4,000');
   start.click();
@@ -2838,23 +2935,30 @@ SELFTEST('ch7/空格不误翻节（焦点在按钮上）', async () => {
   document.activeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true }));
   await new Promise(r => setTimeout(r, 400));
   ok(window.__nav.index() === idx0, '空格未触发翻节');
+  btn.blur();
+  document.body.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true }));
+  await new Promise(r => setTimeout(r, 400));
+  ok(window.__nav.index() === idx0 + 1, '空格在非按钮处正常翻页');
 });
 
 SELFTEST('ch7/星链顺序动画', async () => {
   const wrap = document.querySelector('.star-wrap[data-demo="starmap-flow"]');
   ok(!!wrap, '星链演示容器存在');
   const stars = [...wrap.querySelectorAll('.star[data-concept]')];
+  const segs = [...wrap.querySelectorAll('.const-seg')];
   ok(stars.length === 10 && stars[0].dataset.order === '01' && stars[9].dataset.order === '10', '10 星带顺序编号');
-  ok(wrap.querySelectorAll('.const-seg').length === 9, '9 条连线');
+  ok(segs.length === 9, '9 条连线');
   wrap.querySelector('[data-start]').click();
   await until(() => window.__demos['starmap-flow'].running === false, 12000);
-  ok(wrap.querySelectorAll('.const-seg.lit').length === 9, '串完后 9 段全亮');
+  ok(segs.filter(l => l.classList.contains('lit')).length === 9, '串完后 9 段全亮');
+  ok(segs.every(l => l.style.strokeDashoffset === '0'), '连线 offset 归零');
   ok(stars[9].classList.contains('active'), '最后一星高亮');
   wrap.querySelector('[data-again]').click();
-  ok(wrap.querySelectorAll('.const-seg.lit').length === 0, '重来清除连线');
+  ok(segs.filter(l => l.classList.contains('lit')).length === 0, '重来清除连线');
+  ok(segs.some(l => l.style.strokeDashoffset !== '0'), '重来后 offset 恢复');
 });
 SELFTEST('final/文眼清单', async () => {
-  const t = document.body.textContent;
+  const t = [...document.querySelectorAll('.section')].map(s => s.textContent).join('');
   ['文字接龙','幻觉','乐高','工作台','员工手册','实习生','开卷考试','回炉进修','USB-C','SKILL.md','渐进式披露','100 token','ReAct','Agentic AI Foundation','无状态','5.5 万 token','22,636']
     .forEach(k => ok(t.includes(k), `文眼 ${k}`));
 });
@@ -2865,6 +2969,8 @@ SELFTEST('final/演示规范', async () => {
     ok(!!d.querySelector('[data-again]'), `${d.dataset.demo} 含重来`);
     if (d.querySelector('[data-start]')) ok(!!window.__demos[d.dataset.demo], `${d.dataset.demo} 已注册`);
   });
+  const wires = [...document.querySelectorAll('.wires-after line')];
+  ok(wires.length === 9 && wires.every(l => l.getAttribute('pathLength') === '1'), 'MCP 连线 pathLength=1');
   ok(!!window.__demos['starmap-flow'], '星链演示已注册');
 });
 SELFTEST('final/进度与目录响应 resize', async () => {
@@ -2874,6 +2980,46 @@ SELFTEST('final/进度与目录响应 resize', async () => {
   ok(nodes.length >= 8, `进度节点 ${nodes.length} ≥ 8`);
   ok(nodes.every(n => n.offsetLeft >= 0), '节点位置有效');
   ok(document.documentElement.scrollWidth <= innerWidth + 1, '无横向溢出');
+  const secs = [...document.querySelectorAll('.section')];
+  ok(secs.length === 31, `31 节，实际 ${secs.length}`);
+  ok(document.querySelectorAll('.section.active').length === 1, '恰一节可见');
+  const start = window.__nav.index();
+  for (let i = 0; i < secs.length; i++) {
+    window.__nav.goTo(i);
+    await new Promise(r => setTimeout(r, 25));
+    const inner = secs[i].querySelector('.slide-inner');
+    const rect = inner.getBoundingClientRect();
+    ok(rect.width <= secs[i].clientWidth + 2, `第 ${i + 1} 节不超宽`);
+    ok(rect.height <= secs[i].clientHeight + 2, `第 ${i + 1} 节不超高`);
+    ok(document.querySelectorAll('.section.active').length === 1, `第 ${i + 1} 节唯一 active`);
+  }
+  window.__nav.goTo(start);
+});
+SELFTEST('final/深链跳转', async () => {
+  const a = document.querySelector('a.btn-enter[href="#ch4"]');
+  ok(!!a, '存在 ch4 深链');
+  const card = a.closest('.concept');
+  card.querySelector('.concept-head').click();
+  await new Promise(r => setTimeout(r, 150));
+  a.click();
+  await new Promise(r => setTimeout(r, 300));
+  const target = document.querySelector('#ch4 .section');
+  ok(document.querySelectorAll('.section')[window.__nav.index()] === target, '深链跳到第 4 章');
+  window.__nav.goTo(0);
+});
+SELFTEST('final/目录抽屉', async () => {
+  const btn = document.querySelector('#btn-toc');
+  const drawer = document.querySelector('#toc-drawer');
+  const close = document.querySelector('#btn-toc-close');
+  btn.focus();
+  btn.click();
+  await new Promise(r => setTimeout(r, 120));
+  ok(!drawer.hidden && drawer.classList.contains('open'), '目录已打开');
+  ok(document.activeElement === close, '焦点落在关闭按钮');
+  close.click();
+  await new Promise(r => setTimeout(r, 420));
+  ok(drawer.hidden, '目录已关闭');
+  ok(document.activeElement === btn, '焦点回到目录按钮');
 });
 /* @@JS:SELFTEST@@ */
 
