@@ -294,6 +294,52 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .fc-result{margin:12px 0 0;padding:10px 13px;border-radius:9px;border:1px solid rgba(240,171,252,.28);background:rgba(240,171,252,.06);color:#f3d4fb;font-size:13px;line-height:1.7;opacity:0;transform:translateY(5px);transition:.4s}
 .fc-result.on{opacity:1;transform:none;box-shadow:0 0 20px rgba(240,171,252,.12)}
 .token-demo .demo-controls .btn,.context-demo .demo-controls .btn,.fc-demo .demo-controls .btn{padding:9px 18px;font-size:14px}
+/* ---- RAG 书架微演示 ---- */
+.rag-demo .shelf{display:flex;align-items:flex-end;gap:7px;min-height:94px;padding:10px 12px 8px;border:1px solid rgba(148,180,255,.18);border-radius:10px;background:linear-gradient(180deg,rgba(129,140,248,.07),rgba(4,7,16,.25));transition:.4s}
+.rag-demo .shelf.lit{border-color:rgba(34,211,238,.45);box-shadow:0 0 22px rgba(34,211,238,.12)}
+.rag-demo .book{flex:1;display:flex;align-items:center;justify-content:center;height:66px;padding:6px 2px;writing-mode:vertical-rl;text-orientation:upright;font-size:10px;line-height:1.2;letter-spacing:.02em;color:#cfe1ff;border:1px solid rgba(148,180,255,.22);border-radius:4px;background:linear-gradient(180deg,rgba(129,140,248,.22),rgba(34,211,238,.08));transition:transform .45s cubic-bezier(.2,.9,.2,1),box-shadow .45s,border-color .45s}
+.rag-demo .book:nth-child(1){height:66px}
+.rag-demo .book:nth-child(2){height:78px}
+.rag-demo .book:nth-child(3){height:64px}
+.rag-demo .book:nth-child(4){height:74px}
+.rag-demo .book:nth-child(5){height:68px}
+.rag-demo .book:nth-child(2n){background:linear-gradient(180deg,rgba(240,171,252,.16),rgba(129,140,248,.09))}
+.rag-demo .book.pulled{transform:translateY(-12px) rotate(-4deg);border-color:rgba(34,211,238,.75);box-shadow:0 0 20px rgba(34,211,238,.28);color:#fff}
+.rag-note{margin:10px 0 0;color:var(--muted);font-size:11.5px;line-height:1.6}
+.rag-answer{margin:10px 0 0;padding:9px 12px;border-radius:8px;border:1px solid rgba(34,211,238,.26);background:rgba(34,211,238,.06);color:var(--text-2);font-size:12.5px;line-height:1.7;opacity:0;transform:translateY(5px);transition:.4s}
+.rag-answer.on{opacity:1;transform:none}
+.rag-src{display:block;margin-top:4px;color:var(--muted);font-size:11px}
+/* ---- 微调 / RAG 切换 ---- */
+.finetune-demo .ft-stage{margin-top:12px;padding:12px;border:1px solid rgba(148,180,255,.16);border-radius:10px;background:rgba(4,7,16,.3)}
+.ft-visual{display:flex;align-items:center;justify-content:center;min-height:86px}
+.ft-rag,.ft-fire{display:none;align-items:flex-end;justify-content:center;gap:7px}
+.finetune-demo.mode-rag .ft-rag{display:flex}
+.finetune-demo.mode-finetune .ft-fire{display:flex}
+.ft-book{width:16px;height:58px;border-radius:3px;border:1px solid rgba(34,211,238,.35);background:linear-gradient(180deg,rgba(34,211,238,.22),rgba(129,140,248,.12))}
+.ft-book:nth-child(2){height:70px}
+.ft-book:nth-child(3){height:50px}
+.ft-lamp{width:24px;height:24px;margin-left:12px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#fff9d6,rgba(240,171,252,.45) 55%,transparent 70%);box-shadow:0 0 22px rgba(240,171,252,.35);animation:pulse 2.4s ease-in-out infinite}
+.ft-flame{width:54px;height:62px;border-radius:50% 50% 46% 46%;background:radial-gradient(circle at 50% 70%,#f0abfc,rgba(129,140,248,.65) 50%,transparent 72%);box-shadow:0 0 28px rgba(240,171,252,.35);animation:pulse 1.8s ease-in-out infinite}
+.ft-brain{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;margin-left:-34px;border-radius:50%;border:1px solid rgba(34,211,238,.5);background:rgba(4,7,16,.75);color:#d9fbff;font-size:12px;letter-spacing:.08em}
+.ft-desc{margin:10px 0 0;padding:9px 11px;border-radius:8px;border-left:2px solid var(--cyan);background:rgba(34,211,238,.05);color:var(--text-2);font-size:12.5px;line-height:1.7}
+/* ---- 多 Agent 微演示 ---- */
+.multi-demo .workers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.multi-demo .worker{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 6px 9px;border:1px solid rgba(148,180,255,.16);border-radius:9px;background:rgba(255,255,255,.02);opacity:.55;transition:.35s}
+.multi-demo .worker.working{opacity:1;border-color:rgba(34,211,238,.45);box-shadow:0 0 16px rgba(34,211,238,.12)}
+.multi-demo .worker.done{opacity:1;border-color:rgba(240,171,252,.45);background:rgba(240,171,252,.05)}
+.w-ico{font-size:17px;color:var(--cyan);line-height:1}
+.worker.done .w-ico{color:var(--pink)}
+.worker b{font-size:12.5px;color:#fff;font-weight:600}
+.w-task{font-size:10.5px;color:var(--muted)}
+.w-state{font-size:10.5px;color:var(--muted)}
+.worker.working .w-state{color:var(--cyan)}
+.worker.done .w-state{color:var(--pink)}
+.w-bar{display:block;width:100%;height:3px;margin-top:4px;border-radius:999px;background:rgba(148,180,255,.15);overflow:hidden;position:relative}
+.w-bar::after{content:"";position:absolute;inset:0;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--cyan),var(--pink));transition:transform .5s ease}
+.worker.working .w-bar::after{transform:scaleX(.6)}
+.worker.done .w-bar::after{transform:scaleX(1)}
+.merge-result{margin:11px 0 0;padding:9px 11px;border-radius:8px;border:1px solid rgba(240,171,252,.3);background:rgba(240,171,252,.06);color:#f3d4fb;font-size:12.5px;line-height:1.65;text-align:center;opacity:0;transform:translateY(5px);transition:.4s}
+.merge-result.on{opacity:1;transform:none;box-shadow:0 0 18px rgba(240,171,252,.14)}
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -527,7 +573,23 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
           <p class="metaphor"><b class="k">比喻</b>开卷考试：答案还在书里，只是先帮你翻到了正确那页。</p>
           <p class="example"><b class="k">迷你例子</b>企业知识库问答：先检索到《报销制度》第 3 段，再让模型据此回答。</p>
           <p class="pitfall"><b class="k">常见误区</b>以为 RAG 会“训练”模型。它不改参数；检索不到、切块不好，回答就会差。</p>
-          <div class="demo-zone" data-zone="rag"><span class="zone-ph">微演示 · 待装填</span></div>
+          <div class="demo-zone filled" data-zone="rag">
+            <div class="demo rag-demo" data-demo="rag">
+              <div class="shelf" aria-hidden="true">
+                <span class="book">产品手册</span>
+                <span class="book">年度财报</span>
+                <span class="book">项目复盘</span>
+                <span class="book">客户访谈</span>
+                <span class="book">技术白皮书</span>
+              </div>
+              <p class="rag-note">embedding：把问题变成「意思坐标」，再去书架里找坐标最近的一本。</p>
+              <p class="rag-answer"><b>回答：</b>项目复盘提到，上线前先做小流量灰度，再逐步放量。<span class="rag-src">资料来源：《项目复盘》第 3 节</span></p>
+              <div class="demo-controls">
+                <button class="btn" type="button" data-start>提问</button>
+                <button class="btn" type="button" data-again>重来</button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -540,7 +602,24 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
           <p class="metaphor"><b class="k">比喻</b>回炉进修：在原有能力上，再上一门专业课。</p>
           <p class="example"><b class="k">迷你例子</b>让模型稳定输出公司格式的工单摘要，用几千条标注样本训练。</p>
           <p class="pitfall"><b class="k">常见误区</b>拿微调塞频繁变化的知识。知识更新用 RAG 更便宜；微调成本高、周期长。</p>
-          <div class="demo-zone" data-zone="finetuning"><span class="zone-ph">微演示 · 待装填</span></div>
+          <div class="demo-zone filled" data-zone="finetuning">
+            <div class="demo finetune-demo mode-rag" data-demo="finetune">
+              <div class="ft-switch">
+                <button class="case-btn active" type="button" data-mode="rag">开卷 · RAG</button>
+                <button class="case-btn" type="button" data-mode="finetune">回炉 · 微调</button>
+              </div>
+              <div class="ft-stage">
+                <div class="ft-visual" aria-hidden="true">
+                  <div class="ft-rag"><span class="ft-book"></span><span class="ft-book"></span><span class="ft-book"></span><span class="ft-lamp"></span></div>
+                  <div class="ft-fire"><span class="ft-flame"></span><span class="ft-brain">AI</span></div>
+                </div>
+                <p class="ft-desc">开卷考试：带着资料答题，资料一拿走，答案就没了。适合知识经常变、需要出处。</p>
+              </div>
+              <div class="demo-controls">
+                <button class="btn" type="button" data-again>重来</button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -566,7 +645,20 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
           <p class="metaphor"><b class="k">比喻</b>一支团队：有人干活、有人复核，但也要开会同步。</p>
           <p class="example"><b class="k">迷你例子</b>写报告：研究员查资料 → 撰稿人写初稿 → 审稿人挑错 → 汇总定稿。</p>
           <p class="pitfall"><b class="k">常见误区</b>以为 Agent 越多越好。协调成本和出错面也会上升，先把一个 Agent 跑稳。</p>
-          <div class="demo-zone" data-zone="multi-agent"><span class="zone-ph">微演示 · 待装填</span></div>
+          <div class="demo-zone filled" data-zone="multi-agent">
+            <div class="demo multi-demo" data-demo="multi">
+              <div class="workers">
+                <div class="worker"><span class="w-ico">▦</span><b>表格员</b><span class="w-task">整理数据</span><span class="w-state">待命</span><i class="w-bar"></i></div>
+                <div class="worker"><span class="w-ico">✎</span><b>设计员</b><span class="w-task">排版配色</span><span class="w-state">待命</span><i class="w-bar"></i></div>
+                <div class="worker"><span class="w-ico">✓</span><b>校对员</b><span class="w-task">检查错漏</span><span class="w-state">待命</span><i class="w-bar"></i></div>
+              </div>
+              <p class="merge-result">三个人各干一摊，合成一份完整 PPT。</p>
+              <div class="demo-controls">
+                <button class="btn" type="button" data-start>分派任务</button>
+                <button class="btn" type="button" data-again>重来</button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -1174,6 +1266,134 @@ document.addEventListener('click', e => {
   registerDemo('fc', { start, reset });
 })();
 
+/* 微演示：RAG 开卷检索 */
+(function () {
+  const root = document.querySelector('[data-demo="rag"]');
+  if (!root) return;
+  const shelf = root.querySelector('.shelf');
+  const books = [...root.querySelectorAll('.book')];
+  const answer = root.querySelector('.rag-answer');
+  let pending = [];
+  let runId = 0;
+
+  function wait(ms) {
+    return new Promise(resolve => {
+      const id = setTimeout(() => {
+        pending = pending.filter(p => p.id !== id);
+        resolve();
+      }, ms);
+      pending.push({ id, resolve });
+    });
+  }
+  function clearTimers() {
+    pending.forEach(p => { clearTimeout(p.id); p.resolve(); });
+    pending = [];
+  }
+  function reset() {
+    runId++;
+    clearTimers();
+    shelf.classList.remove('lit');
+    books.forEach(b => b.classList.remove('pulled'));
+    answer.classList.remove('on');
+  }
+
+  async function start() {
+    reset();
+    const my = runId;
+    shelf.classList.add('lit');
+    await wait(450);
+    if (my !== runId) return;
+    books[2].classList.add('pulled');
+    await wait(600);
+    if (my !== runId) return;
+    answer.classList.add('on');
+  }
+
+  registerDemo('rag', { start, reset });
+})();
+
+/* 微演示：RAG 开卷 vs 微调回炉 */
+(function () {
+  const root = document.querySelector('[data-demo="finetune"]');
+  if (!root) return;
+  const desc = root.querySelector('.ft-desc');
+  const buttons = [...root.querySelectorAll('[data-mode]')];
+  const TEXT = {
+    rag: '开卷考试：带着资料答题，资料一拿走，答案就没了。适合知识经常变、需要出处。',
+    finetune: '回炉进修：把知识炼进模型本身，不再需要带书。适合固定风格/格式，但花时间花成本。'
+  };
+
+  function show(mode) {
+    root.classList.toggle('mode-rag', mode === 'rag');
+    root.classList.toggle('mode-finetune', mode === 'finetune');
+    desc.textContent = TEXT[mode];
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.mode)));
+  show('rag');
+
+  registerDemo('finetune', {
+    start() { show('finetune'); },
+    reset() { show('rag'); }
+  });
+})();
+
+/* 微演示：多 Agent 分工 */
+(function () {
+  const root = document.querySelector('[data-demo="multi"]');
+  if (!root) return;
+  const workers = [...root.querySelectorAll('.worker')];
+  const merge = root.querySelector('.merge-result');
+  let pending = [];
+  let runId = 0;
+
+  function wait(ms) {
+    return new Promise(resolve => {
+      const id = setTimeout(() => {
+        pending = pending.filter(p => p.id !== id);
+        resolve();
+      }, ms);
+      pending.push({ id, resolve });
+    });
+  }
+  function clearTimers() {
+    pending.forEach(p => { clearTimeout(p.id); p.resolve(); });
+    pending = [];
+  }
+
+  function reset() {
+    runId++;
+    clearTimers();
+    workers.forEach(w => {
+      w.classList.remove('working', 'done');
+      const s = w.querySelector('.w-state');
+      if (s) s.textContent = '待命';
+    });
+    merge.classList.remove('on');
+  }
+
+  async function start() {
+    reset();
+    const my = runId;
+    for (const w of workers) {
+      if (my !== runId) return;
+      w.classList.add('working');
+      const s = w.querySelector('.w-state');
+      if (s) s.textContent = '处理中…';
+      await wait(620);
+      if (my !== runId) return;
+      w.classList.remove('working');
+      w.classList.add('done');
+      if (s) s.textContent = '完成 ✓';
+      await wait(180);
+    }
+    if (my !== runId) return;
+    merge.classList.add('on');
+  }
+
+  registerDemo('multi', { start, reset });
+})();
 /* @@JS:FEATURES@@ */
 /* 自检框架 */
 window.__SELFTESTS = [];
@@ -1290,6 +1510,40 @@ SELFTEST('ch2/function calling 微演示', async () => {
   ok(d.querySelector('.fc-result').classList.contains('on'), '结果回填显示');
   d.querySelector('[data-again]').click();
   ok([...d.querySelectorAll('.fc-step')].every(s => !s.classList.contains('on')), '重来复位三步');
+});
+
+SELFTEST('ch2/rag 微演示', async () => {
+  document.querySelector('.concept[data-concept="rag"] .concept-head').click();
+  const d = document.querySelector('[data-demo="rag"]');
+  d.querySelector('[data-start]').click();
+  await until(() => window.__demos.rag.running === false, 30000);
+  ok(d.querySelectorAll('.book.pulled').length === 1, '恰好抽出 1 本资料');
+  ok(d.querySelector('.rag-answer').classList.contains('on'), '显示带出处的回答');
+  d.querySelector('[data-again]').click();
+  ok(d.querySelectorAll('.book.pulled').length === 0, '重来复位');
+});
+SELFTEST('ch2/微调微演示', async () => {
+  document.querySelector('.concept[data-concept="finetuning"] .concept-head').click();
+  const d = document.querySelector('[data-demo="finetune"]');
+  d.querySelector('[data-mode="finetune"]').click();
+  ok(d.classList.contains('mode-finetune'), '切到回炉进修画面');
+  ok(/回炉/.test(d.querySelector('.ft-desc').textContent), '描述随模式变化');
+  d.querySelector('[data-mode="rag"]').click();
+  ok(d.classList.contains('mode-rag'), '切回开卷考试画面');
+});
+SELFTEST('ch2/多 Agent 微演示', async () => {
+  document.querySelector('.concept[data-concept="multi-agent"] .concept-head').click();
+  const d = document.querySelector('[data-demo="multi"]');
+  d.querySelector('[data-start]').click();
+  await until(() => window.__demos.multi.running === false, 40000);
+  ok([...d.querySelectorAll('.worker')].every(w => w.classList.contains('done')), '三个小人全部完成');
+  ok(d.querySelector('.merge-result').classList.contains('on'), '结果汇总显示');
+  d.querySelector('[data-again]').click();
+  ok([...d.querySelectorAll('.worker')].every(w => !w.classList.contains('done')), '重来复位');
+});
+SELFTEST('ch2/口诀一致性', async () => {
+  const j = document.querySelector('[data-jingle="ch2"]');
+  ok(!!j && j.textContent.trim().length >= 20, '存在口诀（≥20 字）');
 });
 
 /* @@JS:SELFTEST@@ */
