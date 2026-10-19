@@ -507,6 +507,27 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .journey-note{margin-top:9px;padding:7px 12px;border-left:2px solid rgba(129,140,248,.5);background:rgba(129,140,248,.07);border-radius:0 8px 8px 0;font-size:11px;line-height:1.6;color:var(--muted)}
 .journey-note b{color:var(--text-2)}
 @media(max-width:640px){.journey{grid-template-columns:repeat(2,1fr)}.j-node:not(.j-end)::after{display:none}}
+/* --- ch7 starmap & jingle --- */
+.star-wrap{max-width:860px;margin:4px auto 0}
+#starmap{position:relative;width:100%;aspect-ratio:2.3/1;margin:0 auto}
+.orbit{position:absolute;inset:12% 5%;border:1px dashed rgba(148,180,255,.18);border-radius:50%;animation:orbitSpin 50s linear infinite}
+.star-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(92px,13vw,120px);aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:radial-gradient(circle at 40% 35%,rgba(34,211,238,.32),rgba(129,140,248,.18) 55%,rgba(4,5,12,.92));border:1px solid rgba(34,211,238,.45);box-shadow:0 0 30px rgba(34,211,238,.2),inset 0 0 24px rgba(129,140,248,.2);animation:corePulse 3.6s ease-in-out infinite;z-index:2}
+.star-core b{font-size:clamp(24px,3vw,32px);line-height:1}
+.star-core span{font-size:11px;color:#cfe1ff;letter-spacing:.12em}
+.star{position:absolute;width:clamp(76px,9.5vw,92px);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 4px 6px;border:1px solid rgba(148,180,255,.2);border-radius:10px;background:rgba(255,255,255,.035);color:var(--text-2);cursor:pointer;transition:transform .3s,border-color .3s,box-shadow .3s,background .3s;z-index:3}
+.star b{font-size:16px;line-height:1.1}
+.star span{font-size:10.5px;line-height:1.3;text-align:center}
+.star:hover,.star:focus-visible{transform:translate(-50%,-50%) scale(1.06);border-color:rgba(34,211,238,.55)}
+.star.active{transform:translate(-50%,-50%) scale(1.1);border-color:rgba(34,211,238,.75);background:rgba(34,211,238,.12);box-shadow:0 0 18px rgba(34,211,238,.3);color:#f2fbff}
+.star-tip{min-height:22px;margin:8px 0 0;text-align:center;font-size:13.5px;color:var(--muted);transition:color .3s,opacity .3s;opacity:.7}
+.star-tip.on{color:#dffaff;opacity:1}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}
+@keyframes corePulse{0%,100%{box-shadow:0 0 26px rgba(34,211,238,.18),inset 0 0 22px rgba(129,140,248,.18)}50%{box-shadow:0 0 44px rgba(34,211,238,.3),inset 0 0 30px rgba(129,140,248,.28)}}
+.jingle-box{padding:18px 24px;border:1px solid rgba(148,180,255,.16);border-radius:14px;background:linear-gradient(160deg,rgba(129,140,248,.09),rgba(34,211,238,.04));max-width:860px;margin:14px auto 0}
+.jingle-big{margin:0;font-size:clamp(19px,2.5vw,27px);line-height:1.85;letter-spacing:.02em;color:#e8f1ff;text-align:center}
+.j-line{display:block;transition:color .25s,text-shadow .25s}
+.j-line:hover{color:#fff;text-shadow:0 0 18px rgba(34,211,238,.5)}
+@media(max-width:640px){#starmap{aspect-ratio:1.7/1}.star{width:70px}.star span{font-size:9.5px}.star b{font-size:14px}}
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -1270,6 +1291,51 @@ description: 当用户要把一个技术主题做成互动课件时使用
       <b>Prompt 开口，Agent 接单；Skills 翻手册，MCP 接工具；Function Calling 跑循环，RAG 补知识；多 Agent 分工，最后交付。</b>
     </aside>
     <p class="plain-note">下一章不学新概念：我们把整张地图拧成一颗“记忆星球”，再用 10 道题检验一下。</p>
+    <nav class="sec-nav" aria-label="章节导航">
+      <button type="button" data-nav="prev">← 上一节</button>
+      <button type="button" data-nav="next">下一节 →</button>
+    </nav>
+  </section>
+</section>
+<section class="chapter" id="ch7">
+  <section class="section" data-title="总结：一张星图">
+    <div class="chapter-head reveal">
+      <h2 class="chapter-title">第 7 章 · 记忆加固</h2>
+      <span class="chip">约 5 分钟</span>
+    </div>
+    <h3 class="sec-title">把 10 个概念，<span class="grad">收进一张星图</span></h3>
+    <p class="lead">点一颗星，找回它的比喻。记住比喻，就记住了概念。</p>
+    <div class="star-wrap">
+      <div id="starmap">
+        <div class="orbit" aria-hidden="true"></div>
+        <div class="star-core"><b>🧠</b><span>大模型</span></div>
+        <button type="button" class="star" data-concept="token" data-tip="🧱 乐高块：AI 眼里的最小文字积木。" style="left:6%;top:50%"><b>🧱</b><span>Token</span></button>
+        <button type="button" class="star" data-concept="context" data-tip="🗂️ 工作台：一次能摊开的全部材料，满了要清。" style="left:17%;top:17%"><b>🗂️</b><span>上下文</span></button>
+        <button type="button" class="star" data-concept="prompt" data-tip="📝 工单：目标、材料、格式，写清楚才办得准。" style="left:38%;top:7%"><b>📝</b><span>Prompt</span></button>
+        <button type="button" class="star" data-concept="function-calling" data-tip="✋ 手：让模型真的去查、去算、去下单。" style="left:61%;top:7%"><b>✋</b><span>工具调用</span></button>
+        <button type="button" class="star" data-concept="rag" data-tip="📚 开卷考试：先翻参考书，再回答。" style="left:83%;top:17%"><b>📚</b><span>RAG</span></button>
+        <button type="button" class="star" data-concept="finetuning" data-tip="🔥 回炉进修：用专门数据改“习惯”。" style="left:94%;top:50%"><b>🔥</b><span>微调</span></button>
+        <button type="button" class="star" data-concept="agent" data-tip="🧑‍💼 实习生：给个目标，自己想办法办完。" style="left:83%;top:83%"><b>🧑‍💼</b><span>Agent</span></button>
+        <button type="button" class="star" data-concept="multi-agent" data-tip="👥 团队：各管一摊，最后合并。" style="left:61%;top:93%"><b>👥</b><span>多 Agent</span></button>
+        <button type="button" class="star" data-concept="mcp" data-tip="🔌 USB-C 插座：一个标准接口，接上所有工具。" style="left:38%;top:93%"><b>🔌</b><span>MCP</span></button>
+        <button type="button" class="star" data-concept="skills" data-tip="📖 员工手册：需要时自己翻，不占常驻上下文。" style="left:17%;top:83%"><b>📖</b><span>Skills</span></button>
+      </div>
+      <p class="star-tip" aria-live="polite">点一颗星，看看你还记得多少。</p>
+    </div>
+    <p class="plain-note">星图不是用来“看”的，是用来“回忆”的：先想比喻，再想它在哪一章出现过。</p>
+  </section>
+
+  <section class="section" data-title="顺口溜：一口气背完">
+    <h3 class="sec-title">最后，用一段<span class="grad">顺口溜</span>收尾</h3>
+    <p class="lead">不用背定义。跟着节奏读一遍，十个概念自己会排队。</p>
+    <div class="jingle-box">
+      <p class="jingle jingle-big" data-jingle="ch7"><span class="j-line">Token 切块进上下文，Prompt 写清要干啥；</span><span class="j-line">工具伸手 RAG 翻书，微调回炉改习惯；</span><span class="j-line">Agent 自己转圈圈，多 Agent 分工不忙乱；</span><span class="j-line">MCP 一个插座通天下，Skills 一本手册随叫随看。</span></p>
+    </div>
+    <aside class="remember">
+      <span class="label">记住这个</span>
+      <b>顺口溜背的不是字，是场景：切块 → 写工单 → 伸手翻书 → 回炉 → 转圈 → 分工 → 插座 → 手册。</b>
+    </aside>
+    <p class="plain-note">下一节：10 道题，检验一下这些比喻是不是真的长在脑子里了。</p>
     <nav class="sec-nav" aria-label="章节导航">
       <button type="button" data-nav="prev">← 上一节</button>
       <button type="button" data-nav="next">下一节 →</button>
@@ -2096,6 +2162,22 @@ document.addEventListener('click', e => {
     }
   });
 })();
+/* --- ch7 starmap: click a star, show its metaphor --- */
+(function(){
+  const map = document.querySelector('#starmap');
+  if (!map) return;
+  const tip = document.querySelector('#ch7 .star-tip');
+  map.addEventListener('click', (e) => {
+    const star = e.target.closest('.star[data-concept]');
+    if (!star) return;
+    map.querySelectorAll('.star.active').forEach(s => s.classList.remove('active'));
+    star.classList.add('active');
+    if (tip) {
+      tip.textContent = star.dataset.tip;
+      tip.classList.add('on');
+    }
+  });
+})();
 /* @@JS:FEATURES@@ */
 /* 自检框架 */
 window.__SELFTESTS = [];
@@ -2332,6 +2414,25 @@ SELFTEST('ch6/实战串联', async () => {
   ok(d.querySelector('.finale-line').classList.contains('on'), '收束句出现');
   d.querySelector('[data-again]').click();
   ok(d.querySelectorAll('.j-node.lit').length === 0, '重来复位');
+});
+
+SELFTEST('ch7/星系图', async () => {
+  const ch = document.querySelector('#ch7');
+  ok(!!ch, '存在 #ch7');
+  const map = ch.querySelector('#starmap');
+  ok(!!map.querySelector('.star-core'), '中心大脑存在');
+  const stars = [...map.querySelectorAll('.star[data-concept]')];
+  ok(stars.length === 10, '10 颗星');
+  const ids = stars.map(s => s.dataset.concept).sort().join(',');
+  ok(ids === [...window.__CONCEPTS].sort().join(','), '星图概念枚举一致');
+  stars[0].click();
+  ok(stars[0].classList.contains('active'), '点星高亮');
+  ok(ch.querySelector('.star-tip').classList.contains('on'), '比喻提示出现');
+});
+SELFTEST('ch7/顺口溜两处一致', async () => {
+  const a = document.querySelector('[data-jingle="ch2"]').textContent.replace(/\s+/g, '');
+  const b = document.querySelector('[data-jingle="ch7"]').textContent.replace(/\s+/g, '');
+  ok(a.length >= 20 && a === b, 'ch2 与 ch7 口诀文字一致');
 });
 
 /* @@JS:SELFTEST@@ */
