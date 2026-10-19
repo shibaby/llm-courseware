@@ -152,6 +152,53 @@ main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:96px 28p
 .cand-word.pick{border-color:rgba(34,211,238,.75);background:rgba(34,211,238,.16);color:#fff;animation:none;box-shadow:0 0 18px rgba(34,211,238,.3)}
 .chain-note{margin:12px 0 0;color:var(--muted);font-size:13px;line-height:1.75}
 .chain-note b{color:var(--cyan);font-weight:500}
+/* ---- 第 2 章 · 概念地图 ---- */
+.map-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:26px 0 0}
+.map-bar h3{margin:0;font-size:15px;font-weight:600;letter-spacing:.12em;color:var(--muted)}
+.map-count{margin:0;padding:7px 14px;border-radius:999px;border:1px solid rgba(34,211,238,.32);background:linear-gradient(100deg,rgba(34,211,238,.12),rgba(129,140,248,.1));color:#cfeeff;font-size:14px;letter-spacing:.04em;white-space:nowrap;transition:border-color .3s,box-shadow .3s}
+.map-count.done{border-color:rgba(34,211,238,.7);box-shadow:0 0 22px rgba(34,211,238,.28);color:#fff}
+#concept-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0 0}
+.concept{position:relative;overflow:hidden;border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg);backdrop-filter:blur(8px);transition:border-color .25s,box-shadow .3s,transform .25s}
+.concept::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--grad);opacity:.35}
+.concept:hover{border-color:rgba(148,180,255,.28)}
+.concept.explored{border-color:rgba(34,211,238,.42);box-shadow:0 0 0 1px rgba(34,211,238,.1),0 10px 30px rgba(4,8,20,.32)}
+.concept-head{display:flex;align-items:center;gap:12px;width:100%;padding:15px 18px;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:background .2s}
+.concept-head:hover{background:rgba(129,140,248,.06)}
+.c-num{font-size:12px;letter-spacing:.12em;color:var(--muted);font-variant-numeric:tabular-nums}
+.c-name{font-size:17px;font-weight:600;color:#fff;letter-spacing:.01em;line-height:1.5}
+.c-name .cn{margin-left:8px;color:var(--muted);font-size:13px;font-weight:400}
+.c-hint{margin-left:auto;position:relative;width:20px;height:20px;flex:none;border-radius:50%;border:1px solid rgba(148,180,255,.3);transition:border-color .3s,box-shadow .3s}
+.c-hint::before,.c-hint::after{content:"";position:absolute;left:50%;top:50%;background:var(--cyan);border-radius:2px;transform:translate(-50%,-50%);transition:transform .3s,opacity .3s}
+.c-hint::before{width:9px;height:1.5px}
+.c-hint::after{width:1.5px;height:9px}
+.concept.open .c-hint{border-color:rgba(34,211,238,.6);box-shadow:0 0 14px rgba(34,211,238,.25)}
+.concept.open .c-hint::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+.concept-body{max-height:0;opacity:0;overflow:hidden;padding:0 18px;transition:max-height .5s cubic-bezier(.2,.8,.2,1),opacity .3s ease,padding .3s}
+.concept.open .concept-body{max-height:1200px;opacity:1;padding:0 18px 18px}
+.concept-body p{margin:9px 0 0;font-size:14px;line-height:1.8;color:var(--text-2)}
+.concept-body .k{display:inline-block;min-width:4.6em;margin-right:6px;font-size:12px;font-weight:600;letter-spacing:.08em;vertical-align:1px}
+.def .k{color:var(--cyan)}
+.metaphor .k{color:var(--violet)}
+.example .k{color:#7dd3fc}
+.pitfall .k{color:var(--pink)}
+.demo-zone{margin-top:14px;min-height:64px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px dashed rgba(148,180,255,.22);border-radius:10px;background:rgba(34,211,238,.035);color:var(--muted);font-size:12px;letter-spacing:.08em}
+.concept .btn-enter{margin-top:14px}
+.jingle{position:relative;margin:26px 0 0;padding:26px 24px;border-radius:14px;border:1px solid rgba(129,140,248,.24);background:linear-gradient(120deg,rgba(34,211,238,.07),rgba(129,140,248,.09) 50%,rgba(240,171,252,.07));font-size:18px;line-height:2.1;text-align:center;color:var(--text-2)}
+.jingle::before{content:"“";position:absolute;left:14px;top:-8px;font-size:56px;line-height:1;color:rgba(240,171,252,.3)}
+#concept-map.map-complete .concept{animation:mapGlow 1s ease both}
+#concept-map.map-complete .concept:nth-child(2){animation-delay:.06s}
+#concept-map.map-complete .concept:nth-child(3){animation-delay:.12s}
+#concept-map.map-complete .concept:nth-child(4){animation-delay:.18s}
+#concept-map.map-complete .concept:nth-child(5){animation-delay:.24s}
+#concept-map.map-complete .concept:nth-child(6){animation-delay:.3s}
+#concept-map.map-complete .concept:nth-child(7){animation-delay:.36s}
+#concept-map.map-complete .concept:nth-child(8){animation-delay:.42s}
+#concept-map.map-complete .concept:nth-child(9){animation-delay:.48s}
+#concept-map.map-complete .concept:nth-child(10){animation-delay:.54s}
+@keyframes mapGlow{0%,100%{box-shadow:0 0 0 rgba(34,211,238,0)}45%{box-shadow:0 0 30px rgba(34,211,238,.3);border-color:rgba(34,211,238,.6)}}
+@media (max-width:820px){
+  #concept-map{grid-template-columns:1fr}
+}
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -237,6 +284,178 @@ main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:96px 28p
       大模型是一颗<strong>超级大脑</strong>，但被关在聊天框里。它不知道新事、不记你、动不了手，还会自信地胡说。后面所有技术，都在给它补<strong>手、记忆、参考书和员工手册</strong>。
     </aside>
     <p class="plain-note">接下来先逛一张“概念全家桶”地图，把 Token、Prompt、RAG、MCP、Skills、Agent 这些词一次认全；然后再逐个拆开。</p>
+    <nav class="sec-nav" aria-label="章节导航">
+      <button type="button" data-nav="prev">← 上一节</button>
+      <button type="button" data-nav="next">下一节 →</button>
+    </nav>
+  </section>
+</section>
+<section class="chapter" id="ch2">
+  <div class="chapter-head reveal">
+    <h2 class="chapter-title">第 2 章 · 概念全家桶</h2>
+    <span class="chip">约 12–15 分钟</span>
+  </div>
+
+  <section class="section" data-title="使用说明">
+    <h3 class="sec-title">十个词，<span class="grad">一张图</span></h3>
+    <p class="lead">接下来你会反复听到这十个词。先别急着背定义——把每张卡当成一个角色：<strong>点开它，看清它长什么样、负责什么</strong>。混个脸熟，后面再逐个深聊。</p>
+    <div class="eq"><span>基础机制 <b>Token · 上下文 · Prompt</b></span><span>能力增强 <b>Tool · RAG · 微调</b></span><span>系统能力 <b>Agent · 多 Agent · MCP · Skills</b></span></div>
+    <p class="plain-note">建议玩法：从上到下点开 10 张卡；计数满格时，会有一点小庆祝。Agent、MCP、Skills 三张卡底部有深潜入口，随时可以跳章。</p>
+  </section>
+
+  <section class="section" data-title="概念地图">
+    <h3 class="sec-title">点开每张卡，<span class="grad">认识一个新角色</span></h3>
+    <div class="map-bar">
+      <h3>概念卡片</h3>
+      <p id="explored-count" class="map-count">已探索 0/10</p>
+    </div>
+    <div id="concept-map">
+      <article class="concept" data-concept="token">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">01</span><span class="c-name">Token<span class="cn">词元</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>模型读写文字的最小单位。文字先被切成一个个 token，模型才能处理。</p>
+          <p class="metaphor"><b class="k">比喻</b>乐高积木：句子是拼出来的，token 就是那一块块积木。</p>
+          <p class="example"><b class="k">迷你例子</b>“大模型”三个字可能切成 1–3 个 token；英文长单词常被拆成好几块。</p>
+          <p class="pitfall"><b class="k">常见误区</b>以为按“字数”计算。计费、上下文上限、输出长度都按 token 算，中英文切法还不一样。</p>
+          <div class="demo-zone" data-zone="token"><span class="zone-ph">微演示 · 待装填</span></div>
+        </div>
+      </article>
+
+      <article class="concept" data-concept="context">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">02</span><span class="c-name">Context<span class="cn">上下文</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>模型这一次能“看见”的全部文字：系统提示、聊天记录、贴进去的资料、工具返回结果。</p>
+          <p class="metaphor"><b class="k">比喻</b>一张工作台：桌面就那么大，摊满了就没地方放新东西。</p>
+          <p class="example"><b class="k">迷你例子</b>聊到第 50 轮，早期内容可能被挤出窗口；新开一个对话，台面直接清空。</p>
+          <p class="pitfall"><b class="k">常见误区</b>把它当长期记忆。上下文是临时工作台，不会自动跨会话保存。</p>
+          <div class="demo-zone" data-zone="context"><span class="zone-ph">微演示 · 待装填</span></div>
+        </div>
+      </article>
+
+      <article class="concept" data-concept="prompt">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">03</span><span class="c-name">Prompt<span class="cn">提示词</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>你交给模型的工单：角色、任务、材料、输出要求，都在这里说清。</p>
+          <p class="metaphor"><b class="k">比喻</b>一张工单：写得越具体，交付越靠谱。</p>
+          <p class="example"><b class="k">迷你例子</b>“帮我写个总结” vs “你是产品经理，用 5 条要点总结这份会议记录，每条不超过 30 字”。</p>
+          <p class="pitfall"><b class="k">常见误区</b>把 Prompt 当咒语，觉得越长越玄。清晰、具体、带例子，通常比堆词更有效。</p>
+          <div class="demo-zone" data-zone="prompt"><span class="zone-ph">微演示 · 待装填</span></div>
+        </div>
+      </article>
+
+      <article class="concept" data-concept="function-calling">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">04</span><span class="c-name">Function Calling<span class="cn">工具调用</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>模型不直接干活，而是输出“调用哪个工具、传什么参数”，由外部程序执行，再把结果回填。</p>
+          <p class="metaphor"><b class="k">比喻</b>给大脑配一双手：大脑下令，手去拿。</p>
+          <p class="example"><b class="k">迷你例子</b>查天气：模型说 get_weather(city="上海") → 程序调 API → 返回 26°C → 模型再组织回答。</p>
+          <p class="pitfall"><b class="k">常见误区</b>以为模型自己执行了工具。真正动手的是你的代码或平台，模型只负责选工具、填参数。</p>
+          <div class="demo-zone" data-zone="function-calling"><span class="zone-ph">微演示 · 待装填</span></div>
+        </div>
+      </article>
+
+      <article class="concept" data-concept="rag">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">05</span><span class="c-name">RAG<span class="cn">检索增强</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>先从你的资料库里检索相关片段，再把片段塞进上下文，让模型“照着材料回答”。（embedding：把文字变成向量，按语义找相近内容）</p>
+          <p class="metaphor"><b class="k">比喻</b>开卷考试：答案还在书里，只是先帮你翻到了正确那页。</p>
+          <p class="example"><b class="k">迷你例子</b>企业知识库问答：先检索到《报销制度》第 3 段，再让模型据此回答。</p>
+          <p class="pitfall"><b class="k">常见误区</b>以为 RAG 会“训练”模型。它不改参数；检索不到、切块不好，回答就会差。</p>
+          <div class="demo-zone" data-zone="rag"><span class="zone-ph">微演示 · 待装填</span></div>
+        </div>
+      </article>
+
+      <article class="concept" data-concept="finetuning">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">06</span><span class="c-name">Fine-tuning<span class="cn">微调</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>用一批示例继续训练模型，让它更符合某种风格、格式或判断习惯。</p>
+          <p class="metaphor"><b class="k">比喻</b>回炉进修：在原有能力上，再上一门专业课。</p>
+          <p class="example"><b class="k">迷你例子</b>让模型稳定输出公司格式的工单摘要，用几千条标注样本训练。</p>
+          <p class="pitfall"><b class="k">常见误区</b>拿微调塞频繁变化的知识。知识更新用 RAG 更便宜；微调成本高、周期长。</p>
+          <div class="demo-zone" data-zone="finetuning"><span class="zone-ph">微演示 · 待装填</span></div>
+        </div>
+      </article>
+
+      <article class="concept" data-concept="agent">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">07</span><span class="c-name">Agent<span class="cn">智能体</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>模型 + 工具 + 循环：想一步、做一步、看结果、再想下一步，直到完成任务。</p>
+          <p class="metaphor"><b class="k">比喻</b>一个实习生：会自己查资料、动手试，也会犯错，需要边界和检查。</p>
+          <p class="example"><b class="k">迷你例子</b>“找出本周新增客户并整理成表”：查数据库 → 读结果 → 补字段 → 输出表格。</p>
+          <p class="pitfall"><b class="k">常见误区</b>以为 Agent 是更强的模型。它通常是普通模型 + 脚手架（工具、循环、记忆、权限）。</p>
+          <a class="btn-enter" href="#ch3">去第 3 章深潜 Agent →</a>
+        </div>
+      </article>
+
+      <article class="concept" data-concept="multi-agent">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">08</span><span class="c-name">Multi-Agent<span class="cn">多智能体</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>多个角色化 Agent 分工协作，比如一个写、一个查、一个审。</p>
+          <p class="metaphor"><b class="k">比喻</b>一支团队：有人干活、有人复核，但也要开会同步。</p>
+          <p class="example"><b class="k">迷你例子</b>写报告：研究员查资料 → 撰稿人写初稿 → 审稿人挑错 → 汇总定稿。</p>
+          <p class="pitfall"><b class="k">常见误区</b>以为 Agent 越多越好。协调成本和出错面也会上升，先把一个 Agent 跑稳。</p>
+          <div class="demo-zone" data-zone="multi-agent"><span class="zone-ph">微演示 · 待装填</span></div>
+        </div>
+      </article>
+
+      <article class="concept" data-concept="mcp">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">09</span><span class="c-name">MCP<span class="cn">模型上下文协议</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>一套开放协议，让 AI 应用用统一方式连接外部工具和数据源（Host ↔ Client ↔ Server）。</p>
+          <p class="metaphor"><b class="k">比喻</b>USB-C 插座：设备各不相同，接口统一。</p>
+          <p class="example"><b class="k">迷你例子</b>同一个 MCP 服务器，可以被不同 AI 客户端复用，不必为每个模型重写一遍接入。</p>
+          <p class="pitfall"><b class="k">常见误区</b>以为 MCP 是模型或某个工具。它是“连接标准”，工具本身还是外部服务。</p>
+          <a class="btn-enter" href="#ch4">去第 4 章深潜 MCP →</a>
+        </div>
+      </article>
+
+      <article class="concept" data-concept="skills">
+        <button class="concept-head" type="button" aria-expanded="false">
+          <span class="c-num">10</span><span class="c-name">Skills<span class="cn">技能</span></span><span class="c-hint" aria-hidden="true"></span>
+        </button>
+        <div class="concept-body">
+          <p class="def"><b class="k">是什么</b>把一套流程、规范、脚本打包成“技能”，模型按需加载，不必一次全塞进上下文。</p>
+          <p class="metaphor"><b class="k">比喻</b>员工手册：平时只记目录，遇到任务再翻对应章节。</p>
+          <p class="example"><b class="k">迷你例子</b>一个“周报技能”包含格式、检查清单和脚本；触发时才读取正文。</p>
+          <p class="pitfall"><b class="k">常见误区</b>以为 Skills 等于一段长 prompt。它支持分层加载、附带脚本，更像可复用的工作包。</p>
+          <a class="btn-enter" href="#ch5">去第 5 章深潜 Skills →</a>
+        </div>
+      </article>
+    </div>
+    <p class="plain-note">不用一次全记住。第 3–5 章会把 Agent、MCP、Skills 拆开深讲，第 6 章再把所有概念串成一次真实任务。</p>
+  </section>
+
+  <section class="section" data-title="全家福口诀（预告）">
+    <h3 class="sec-title">先送你一段<span class="grad">全家福口诀</span></h3>
+    <p class="lead">第 7 章还会再见到它。现在先读一遍，看看能认出几个角色。</p>
+    <p class="jingle" data-jingle="ch2">Token 切块进上下文，Prompt 写清要干啥；<br>工具伸手 RAG 翻书，微调回炉改习惯；<br>Agent 自己转圈圈，多 Agent 分工不忙乱；<br>MCP 一个插座通天下，Skills 一本手册随叫随看。</p>
+    <p class="plain-note">读不顺没关系——等第 6 章把它们串成一次“做 PPT”的任务，这段口诀就会自动对上号。</p>
+  </section>
+
+  <section class="section" data-title="记住这个">
+    <aside class="remember">
+      <span class="label">记住这个</span>
+      这十个词不是十种模型，而是<strong>围绕同一颗大脑的十种配件与玩法</strong>：Token 是积木，上下文是工作台，Prompt 是工单；工具、RAG、微调负责补能力；Agent、多 Agent、MCP、Skills 把它们组织成能干活的系统。
+    </aside>
+    <p class="plain-note">接下来进入第一个深潜章：Agent——看看“会自己干活的实习生”到底怎么转起来。</p>
     <nav class="sec-nav" aria-label="章节导航">
       <button type="button" data-nav="prev">← 上一节</button>
       <button type="button" data-nav="next">下一节 →</button>
@@ -526,6 +745,37 @@ document.addEventListener('click', e => {
   else if (btn.dataset.nav === 'prev') window.__nav.prev();
 });
 
+/* 第 2 章 · 概念地图 */
+(function () {
+  const map = document.querySelector('#concept-map');
+  if (!map) return;
+  const countEl = document.querySelector('#explored-count');
+  const cards = [...map.querySelectorAll('.concept')];
+  let explored = 0;
+
+  function updateCount() {
+    if (countEl) countEl.textContent = `已探索 ${explored}/${cards.length}`;
+    if (explored === cards.length) {
+      map.classList.add('map-complete');
+      if (countEl) countEl.classList.add('done');
+    }
+  }
+
+  map.addEventListener('click', e => {
+    const head = e.target instanceof Element ? e.target.closest('.concept-head') : null;
+    if (!head) return;
+    const card = head.closest('.concept');
+    if (!card) return;
+    const open = card.classList.toggle('open');
+    head.setAttribute('aria-expanded', String(open));
+    if (open && !card.classList.contains('explored')) {
+      card.classList.add('explored');
+      explored++;
+      updateCount();
+    }
+  });
+})();
+
 /* @@JS:FEATURES@@ */
 /* 自检框架 */
 window.__SELFTESTS = [];
@@ -575,6 +825,29 @@ SELFTEST('ch1/接龙演示', async () => {
   ok(d.querySelectorAll('.out .tok').length === 6, '共接出 6 个 token（他每天早晨…）');
   d.querySelector('[data-again]').click();
   ok(d.querySelectorAll('.out .tok').length === 0, '重来清空输出');
+});
+
+SELFTEST('ch2/地图结构', async () => {
+  const map = document.querySelector('#concept-map');
+  ok(!!map, '存在概念地图');
+  const cards = [...map.querySelectorAll('.concept[data-concept]')];
+  ok(cards.length === 10, '10 张概念卡');
+  const ids = cards.map(c => c.dataset.concept).sort().join(',');
+  ok(ids === [...window.__CONCEPTS].sort().join(','), 'data-concept 与约定枚举一致');
+  ok(cards.every(c => c.querySelector('.def') && c.querySelector('.metaphor') && c.querySelector('.example') && c.querySelector('.pitfall')), '每卡四段齐全');
+  ok([...map.querySelectorAll('.demo-zone')].length === 7, '7 个微演示占位');
+  ok(!!map.querySelector('.concept[data-concept="agent"] .btn-enter[href="#ch3"]') && !!map.querySelector('.concept[data-concept="mcp"] .btn-enter[href="#ch4"]') && !!map.querySelector('.concept[data-concept="skills"] .btn-enter[href="#ch5"]'), '三张入口卡跳转正确');
+});
+SELFTEST('ch2/探索计数与庆祝', async () => {
+  const map = document.querySelector('#concept-map');
+  const heads = [...map.querySelectorAll('.concept-head')];
+  heads[0].click();
+  ok(map.querySelectorAll('.concept.explored').length === 1, '打开一卡计 1');
+  ok(/#?已探索\s*1\s*\/\s*10/.test(document.querySelector('#explored-count').textContent), '计数文本 1/10');
+  heads.forEach(h => h.click());
+  await until(() => map.classList.contains('map-complete'), 2000);
+  ok(document.querySelector('#explored-count').textContent.includes('10/10'), '点满 10/10');
+  ok(true, '点满触发 .map-complete 庆祝');
 });
 
 /* @@JS:SELFTEST@@ */
