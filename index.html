@@ -388,6 +388,42 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
 .mistake-points h4{font-size:14px;margin:0 0 4px;color:var(--text)}
 .mistake-points p{font-size:12.5px;line-height:1.5;color:var(--muted);margin:0}
 
+/* ---- Chapter 4 · MCP ---- */
+.mcp-stage{display:block;width:100%;max-width:700px;margin:6px auto 2px;border:1px solid var(--card-border);border-radius:14px;background:radial-gradient(ellipse at 50% 50%,rgba(34,211,238,.08),rgba(7,10,22,.5))}
+.mcp-stage text{font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif}
+.mcp-stage .wire-label{font-size:13px;font-weight:600;fill:#b9c9e8}
+.mcp-stage .wires-before{transition:opacity .55s ease}
+.mcp-stage .wires-before line{stroke:rgba(148,180,255,.28);stroke-width:1.1}
+.mcp-demo.mcp-on .mcp-stage .wires-before{opacity:0}
+.mcp-stage .wires-after{opacity:0}
+.mcp-demo.mcp-on .mcp-stage .wires-after{opacity:1}
+.mcp-stage .wires-after line{stroke:url(#mcpGrad);stroke-width:1.8;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1)}
+.mcp-demo.mcp-on .mcp-stage .wires-after line{stroke-dashoffset:0}
+.mcp-stage .wires-after line:nth-child(2n){transition-delay:.08s}
+.mcp-stage .wires-after line:nth-child(3n){transition-delay:.16s}
+.mcp-stage .hub{opacity:0;transform:scale(.55);transform-box:fill-box;transform-origin:center;transition:opacity .45s ease,transform .55s cubic-bezier(.2,.9,.2,1)}
+.mcp-demo.mcp-on .mcp-stage .hub{opacity:1;transform:scale(1)}
+.mcp-stage .hub circle{fill:rgba(129,140,248,.18);stroke:url(#mcpGrad);stroke-width:2;filter:drop-shadow(0 0 14px rgba(34,211,238,.45))}
+.mcp-stage .hub text{fill:#fff;font-size:22px;font-weight:800;text-anchor:middle;letter-spacing:.06em}
+.mcp-stage .hub .hub-sub{font-size:10px;font-weight:500;fill:#a9bce0;letter-spacing:.12em}
+.mcp-cap{text-align:center;font-size:14px;color:var(--muted);min-height:22px;margin:6px 0 0}
+.mcp-cap b{color:var(--text)}
+.mcp-cap .cap-after{display:none}
+.mcp-demo.mcp-on .mcp-cap .cap-before{display:none}
+.mcp-demo.mcp-on .mcp-cap .cap-after{display:inline}
+.flow{display:grid;grid-template-columns:1fr 46px 1fr 46px 1fr;gap:8px;align-items:stretch;margin-top:20px}
+.flow-node{padding:14px 14px 12px;border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg)}
+.flow-node .f-tag{font-size:.7rem;letter-spacing:.12em;color:var(--cyan);font-weight:700}
+.flow-node h4{margin:6px 0 4px;font-size:1.02rem}
+.flow-node p{margin:0;font-size:.86rem;color:var(--muted);line-height:1.5}
+.flow-wire{align-self:center;height:2px;border-radius:2px;background:repeating-linear-gradient(90deg,rgba(34,211,238,.85) 0 6px,transparent 6px 12px);background-size:24px 2px;animation:flowDash 1s linear infinite}
+@keyframes flowDash{to{background-position:24px 0}}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.fact{padding:12px 14px;border:1px solid var(--card-border);border-radius:12px;background:var(--card-bg)}
+.fact .f-year{display:block;font-size:.72rem;letter-spacing:.08em;color:var(--cyan);margin-bottom:4px}
+.fact p{margin:0;font-size:.88rem;line-height:1.5;color:var(--text-2)}
+.facts-note{margin-top:10px;font-size:.85rem;color:var(--muted)}
+@media(max-width:820px){.facts{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr;gap:10px}.flow-wire{width:2px;height:18px;margin:0 auto;background:repeating-linear-gradient(180deg,rgba(34,211,238,.85) 0 6px,transparent 6px 12px);background-size:2px 24px;animation:flowDashV 1s linear infinite}@keyframes flowDashV{to{background-position:0 24px}}}
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -851,6 +887,122 @@ main{position:relative;z-index:1;max-width:1080px;height:100vh;height:100dvh;mar
       Agent 不是“更聪明的模型”，而是<strong>模型 + 工具 + 循环</strong>：大脑负责想，手脚负责做，眼睛负责看，没办完就继续转。
     </aside>
     <p class="plain-note">Agent 要动手，就得有统一的“工具插座”。下一章看看 MCP 怎么把 M×N 根线，收成一根 USB-C。</p>
+    <nav class="sec-nav" aria-label="章节导航">
+      <button type="button" data-nav="prev">← 上一节</button>
+      <button type="button" data-nav="next">下一节 →</button>
+    </nav>
+  </section>
+</section>
+<section class="chapter" id="ch4">
+  <section class="section" data-title="问题：M×N 的接口乱麻">
+    <div class="chapter-head reveal">
+      <h2 class="chapter-title">第 4 章 · MCP</h2>
+      <span class="chip">约 8 分钟</span>
+    </div>
+    <h3 class="sec-title">每个 AI 应用，都要<span class="grad">重新接一遍工具</span></h3>
+    <p class="lead">ChatGPT 要连邮箱、Claude 要连日历、Cursor 要连 GitHub……如果每对组合都单独写一套接口，就是 M×N 条定制线。<b>MCP</b> 要做的，是把它们收成 M+N。</p>
+    <div class="cards-3">
+      <article class="card"><span class="tag">应用方</span><h3>M 个应用</h3><p>ChatGPT、Claude、Copilot、Cursor……每家都想连上同一批工具。</p></article>
+      <article class="card"><span class="tag">工具方</span><h3>N 个工具</h3><p>邮箱、日历、数据库、GitHub、文件——每家都有自己的接口。</p></article>
+      <article class="card"><span class="tag">结果</span><h3>M×N 套胶水</h3><p>每加一个应用或工具，都要重写、重测、重新维护一遍。</p></article>
+    </div>
+    <div class="eq"><span><b>M</b> 个应用 × <b>N</b> 个工具</span><span>=</span><span><b>M×N</b> 条定制线</span><span>→ 装上 MCP →</span><span><b>M+N</b> 条标准线</span></div>
+    <p class="plain-note">先别记缩写：把它想成 <b>USB-C</b>——插座统一了，谁都能插。</p>
+  </section>
+
+  <section class="section" data-title="互动：20 根线 → 9 根线">
+    <h3 class="sec-title">把乱麻，收成<span class="grad">一个插座</span></h3>
+    <p class="lead">左边 4 个 AI 应用，右边 5 个工具。没有标准时，它们两两对接；装上 MCP 后，所有线都插到同一个 hub。</p>
+    <div class="demo mcp-demo" data-demo="mcp-lines">
+      <svg class="mcp-stage" viewBox="0 0 800 420" role="img" aria-label="MCP 把 20 根定制线收成 9 根标准线">
+        <defs>
+          <linearGradient id="mcpGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#818cf8"/><stop offset="1" stop-color="#f0abfc"/>
+          </linearGradient>
+        </defs>
+        <g class="wires-before">
+          <line x1="156" y1="70" x2="644" y2="70"/><line x1="156" y1="70" x2="644" y2="140"/><line x1="156" y1="70" x2="644" y2="210"/><line x1="156" y1="70" x2="644" y2="280"/><line x1="156" y1="70" x2="644" y2="350"/>
+          <line x1="156" y1="150" x2="644" y2="70"/><line x1="156" y1="150" x2="644" y2="140"/><line x1="156" y1="150" x2="644" y2="210"/><line x1="156" y1="150" x2="644" y2="280"/><line x1="156" y1="150" x2="644" y2="350"/>
+          <line x1="156" y1="250" x2="644" y2="70"/><line x1="156" y1="250" x2="644" y2="140"/><line x1="156" y1="250" x2="644" y2="210"/><line x1="156" y1="250" x2="644" y2="280"/><line x1="156" y1="250" x2="644" y2="350"/>
+          <line x1="156" y1="330" x2="644" y2="70"/><line x1="156" y1="330" x2="644" y2="140"/><line x1="156" y1="330" x2="644" y2="210"/><line x1="156" y1="330" x2="644" y2="280"/><line x1="156" y1="330" x2="644" y2="350"/>
+        </g>
+        <g class="wires-after">
+          <line x1="156" y1="70" x2="400" y2="210"/><line x1="156" y1="150" x2="400" y2="210"/><line x1="156" y1="250" x2="400" y2="210"/><line x1="156" y1="330" x2="400" y2="210"/>
+          <line x1="400" y1="210" x2="644" y2="70"/><line x1="400" y1="210" x2="644" y2="140"/><line x1="400" y1="210" x2="644" y2="210"/><line x1="400" y1="210" x2="644" y2="280"/><line x1="400" y1="210" x2="644" y2="350"/>
+        </g>
+        <g class="hub">
+          <circle cx="400" cy="210" r="52"/>
+          <text x="400" y="206">MCP</text>
+          <text class="hub-sub" x="400" y="226">标准插座</text>
+        </g>
+        <g>
+          <rect x="24" y="48" width="132" height="44" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(148,180,255,.22)"/>
+          <rect x="24" y="128" width="132" height="44" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(148,180,255,.22)"/>
+          <rect x="24" y="228" width="132" height="44" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(148,180,255,.22)"/>
+          <rect x="24" y="308" width="132" height="44" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(148,180,255,.22)"/>
+          <rect x="644" y="50" width="132" height="40" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(148,180,255,.22)"/>
+          <rect x="644" y="120" width="132" height="40" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(148,180,255,.22)"/>
+          <rect x="644" y="190" width="132" height="40" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(148,180,255,.22)"/>
+          <rect x="644" y="260" width="132" height="40" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(148,180,255,.22)"/>
+          <rect x="644" y="330" width="132" height="40" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(148,180,255,.22)"/>
+          <text class="wire-label" x="90" y="75" text-anchor="middle">ChatGPT</text>
+          <text class="wire-label" x="90" y="155" text-anchor="middle">Claude</text>
+          <text class="wire-label" x="90" y="255" text-anchor="middle">Copilot</text>
+          <text class="wire-label" x="90" y="335" text-anchor="middle">Cursor</text>
+          <text class="wire-label" x="710" y="75" text-anchor="middle">邮箱</text>
+          <text class="wire-label" x="710" y="145" text-anchor="middle">日历</text>
+          <text class="wire-label" x="710" y="215" text-anchor="middle">数据库</text>
+          <text class="wire-label" x="710" y="285" text-anchor="middle">GitHub</text>
+          <text class="wire-label" x="710" y="355" text-anchor="middle">文件</text>
+        </g>
+      </svg>
+      <p class="mcp-cap"><span class="cap-before">现在：<b>20 根</b>定制线，每加一个工具就要再连一遍。</span><span class="cap-after">装上 MCP：<b>9 根</b>标准线——4 进 + 5 出，也就是 <b>M+N</b>。</span></p>
+      <div class="demo-controls">
+        <button class="btn" type="button" data-start>装上 MCP</button>
+        <button class="btn" type="button" data-again>重来</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" data-title="数据流：Host → Client → Server">
+    <h3 class="sec-title">一次调用，<span class="grad">经过谁</span>？</h3>
+    <p class="lead">MCP 不是一根魔法线，而是三段接力。你只需要认识三个角色。</p>
+    <div class="flow">
+      <article class="flow-node"><span class="f-tag">HOST</span><h4>你用的应用</h4><p>ChatGPT、Claude、Cursor……它发起请求，也把结果呈现给你。</p></article>
+      <div class="flow-wire" aria-hidden="true"></div>
+      <article class="flow-node"><span class="f-tag">CLIENT</span><h4>翻译官</h4><p>把“查天气”翻译成 MCP 的标准请求，再把结果译回来。</p></article>
+      <div class="flow-wire" aria-hidden="true"></div>
+      <article class="flow-node"><span class="f-tag">SERVER</span><h4>工具方</h4><p>邮箱、数据库、GitHub 的适配器，真正执行动作并返回数据。</p></article>
+    </div>
+    <p class="plain-note">类比：Host 是顾客，Client 是前台，Server 是后厨。顾客不直接进厨房，前台负责把话传到。</p>
+  </section>
+
+  <section class="section" data-title="事实卡片：MCP 这一年">
+    <h3 class="sec-title">几个<span class="grad">值得记住的事实</span></h3>
+    <p class="lead">这些时间点能帮你判断：MCP 已经不是“某个厂商的小工具”，而是行业共同维护的标准。</p>
+    <div class="facts">
+      <article class="fact"><span class="f-year">2024-11-25</span><p><b>Anthropic</b> 发布 MCP，先在自己的工具生态里跑通。</p></article>
+      <article class="fact"><span class="f-year">2025</span><p>OpenAI（3 月）、Google（4 月）、微软（5 月）相继采用。</p></article>
+      <article class="fact"><span class="f-year">2025-12-09</span><p>捐给 <b>Linux 基金会</b>旗下 <b>Agentic AI Foundation</b>，变成中立标准。</p></article>
+      <article class="fact"><span class="f-year">2026-07-28</span><p>规格改为<b>无状态</b>：不再需要握手和会话，部署更简单。</p></article>
+      <article class="fact"><span class="f-year">2026-10</span><p>官方注册表约 <b>4 万</b>个服务器，几乎覆盖常用工具。</p></article>
+      <article class="fact"><span class="f-year">2026-01</span><p>MCP Apps 扩展推出：工具可以带着自己的界面来。</p></article>
+    </div>
+    <p class="facts-note">反面教材：实测 5 个服务器的工具定义就占约 <b>5.5 万 token</b>。所以“全装上”并不划算——这也是下一章 Skills 要解决的事。</p>
+  </section>
+
+  <section class="section" data-title="误区与记住">
+    <h3 class="sec-title">MCP <span class="grad">不是模型</span></h3>
+    <article class="card mistake">
+      <span class="tag">常见误解</span>
+      <h3>“装了 MCP，AI 就更聪明了？”</h3>
+      <p>不会。MCP 是接口标准，不生产智能，也不训练模型。就像 USB-C 不生产电器——它只负责让插头对得上。真正干活的，还是模型和工具。</p>
+    </article>
+    <aside class="remember">
+      <span class="label">记住这个</span>
+      <b>MCP = AI 世界的 USB-C。</b>把 M×N 条定制线，收成 M+N 条标准线；Host → Client → Server，各司其职。
+    </aside>
+    <p class="plain-note">工具接上了，新的问题来了：工具一多，模型上下文会被“说明书”塞爆。下一章看 Skills 怎么做到“用时才展开”。</p>
     <nav class="sec-nav" aria-label="章节导航">
       <button type="button" data-nav="prev">← 上一节</button>
       <button type="button" data-nav="next">下一节 →</button>
@@ -1614,6 +1766,15 @@ document.addEventListener('click', e => {
   registerDemo('agent-step', { start, reset });
 })();
 
+/* ---- Chapter 4 demo: MCP wire explosion ---- */
+(function(){
+  const d = document.querySelector('[data-demo="mcp-lines"]');
+  if (!d) return;
+  registerDemo('mcp-lines', {
+    start(){ d.classList.add('mcp-on'); if (window.__fitActive) window.__fitActive(); },
+    reset(){ d.classList.remove('mcp-on'); if (window.__fitActive) window.__fitActive(); }
+  });
+})();
 /* @@JS:FEATURES@@ */
 /* 自检框架 */
 window.__SELFTESTS = [];
@@ -1787,6 +1948,31 @@ SELFTEST('ch3/步进机', async () => {
   ok(d.querySelector('.task-done').classList.contains('on'), '完成态出现「✅ 出票成功」');
   d.querySelector('[data-again]').click();
   ok(d.querySelectorAll('.log-row').length === 0, '重来清空日志');
+});
+
+SELFTEST('ch4/MCP 连线爆炸', async () => {
+  const ch = document.querySelector('#ch4'); ch.scrollIntoView();
+  ok(!!ch, '存在 #ch4');
+  ok(/USB-C/.test(ch.textContent), '含 USB-C 比喻');
+  ok(!!ch.querySelector('.remember'), '含「记住这个」');
+  const d = ch.querySelector('[data-demo="mcp-lines"]');
+  ok(d.querySelectorAll('.wires-before line').length === 20, '乱麻 20 根线（4 应用 × 5 工具）');
+  ok(d.querySelectorAll('.wires-after line').length === 9, '星形 9 根线（4+5）');
+  d.querySelector('[data-start]').click();
+  await until(() => d.classList.contains('mcp-on'), 3000);
+  ok(d.classList.contains('mcp-on'), '装上 MCP 后切换形态');
+  d.querySelector('[data-again]').click();
+  ok(!d.classList.contains('mcp-on'), '重来回到乱麻');
+});
+SELFTEST('ch4/数据流与事实卡', async () => {
+  const ch = document.querySelector('#ch4');
+  ok(ch.querySelectorAll('.flow-node').length === 3, 'Host/Client/Server 三节点');
+  ok(ch.querySelectorAll('.fact').length >= 5, '≥5 张事实卡');
+  const t = ch.textContent;
+  ok(/2024/.test(t) && /Anthropic/.test(t), '含 2024 Anthropic 发布');
+  ok(/Linux 基金会/.test(t) && /Agentic AI Foundation/.test(t), '含捐给基金会');
+  ok(/无状态/.test(t), '含 2026-07 无状态规格');
+  ok(/4 万/.test(t), '含注册表约 4 万服务器');
 });
 
 /* @@JS:SELFTEST@@ */
