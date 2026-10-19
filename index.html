@@ -113,6 +113,45 @@ main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:96px 28p
 :focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 @keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes pulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.95;transform:scale(1.08)}}
+/* ---- 第 1 章 ---- */
+.sec-title{margin:0 0 14px;font-size:clamp(20px,2.6vw,27px);line-height:1.4;font-weight:700}
+.sec-title .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:800px;margin:0 0 6px;color:var(--text-2);font-size:17px;line-height:1.9}
+.lead strong{color:#fff;font-weight:600}
+.eq{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
+.eq span{padding:9px 15px;border-radius:10px;border:1px solid rgba(148,180,255,.2);background:rgba(129,140,248,.07);color:var(--text-2);font-size:15px}
+.eq b{color:var(--cyan);font-weight:600}
+.chain-illo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin:32px 0 4px;padding:24px 16px;border:1px dashed rgba(148,180,255,.18);border-radius:14px;background:radial-gradient(60% 100% at 50% 50%,rgba(34,211,238,.06),transparent 70%)}
+.chain-illo .w{padding:9px 15px;border-radius:9px;border:1px solid rgba(148,180,255,.22);background:rgba(129,140,248,.08);color:var(--text-2);font-size:16px}
+.chain-illo .w.hot{border-color:rgba(34,211,238,.6);background:rgba(34,211,238,.13);color:#fff;box-shadow:0 0 22px rgba(34,211,238,.22)}
+.chain-illo .arrow{color:var(--cyan);font-size:15px;font-style:normal;filter:drop-shadow(0 0 6px rgba(34,211,238,.8))}
+.chain-illo .dots{color:var(--muted);letter-spacing:.2em}
+.cards-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:24px 0 14px}
+.cards-3 .card{position:relative;padding-top:24px;overflow:hidden}
+.cards-3 .card::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--grad);opacity:.55}
+.cards-3 .tag{display:block;margin-bottom:10px;font-size:11px;letter-spacing:.18em;color:var(--muted)}
+.cards-3 h3{margin:0 0 8px;font-size:16px;color:#fff;line-height:1.5}
+.cards-3 p{margin:0;color:var(--muted);font-size:14px;line-height:1.8}
+.cards-3 b{color:var(--text-2);font-weight:600}
+.card.wide{grid-column:span 3;background:linear-gradient(100deg,rgba(240,171,252,.06),rgba(129,140,248,.05));border-color:rgba(240,171,252,.2)}
+.card.wide h3{color:var(--pink)}
+.plain-note{margin:14px 0 0;color:var(--muted);font-size:14px;line-height:1.8}
+.plain-note b{color:var(--text-2)}
+.chain-demo{padding:24px}
+.chain-prompt{margin:0 0 4px;font-size:12px;letter-spacing:.14em;color:var(--cyan)}
+.chain-line{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:58px;margin:8px 0 6px;padding:12px 14px;border-radius:10px;background:rgba(4,7,16,.55);border:1px solid rgba(148,180,255,.12)}
+.seed{color:var(--muted);font-size:18px}
+.out{display:flex;flex-wrap:wrap;gap:6px}
+.tok{padding:6px 12px;border-radius:8px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.4);color:#d9fbff;font-size:18px;animation:tokIn .38s cubic-bezier(.2,.9,.2,1) both}
+@keyframes tokIn{from{opacity:0;transform:translateY(8px) scale(.9)}to{opacity:1;transform:none}}
+.cand{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:44px;margin:6px 0 2px}
+.cand-label{font-size:12px;color:var(--muted);letter-spacing:.1em}
+.cand-word{padding:7px 13px;border-radius:8px;border:1px solid rgba(148,180,255,.18);background:rgba(255,255,255,.03);color:var(--text-2);font-size:15px;animation:pulse 1.2s ease-in-out infinite}
+.cand-word:nth-child(3){animation-delay:-.4s}
+.cand-word:nth-child(4){animation-delay:-.8s}
+.cand-word.pick{border-color:rgba(34,211,238,.75);background:rgba(34,211,238,.16);color:#fff;animation:none;box-shadow:0 0 18px rgba(34,211,238,.3)}
+.chain-note{margin:12px 0 0;color:var(--muted);font-size:13px;line-height:1.75}
+.chain-note b{color:var(--cyan);font-weight:500}
 /* @@STYLE:CHAPTERS@@ */
 </style>
 </head>
@@ -130,6 +169,80 @@ main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:96px 28p
     <button class="btn" id="btn-start" type="button">开始学习 →</button>
     <p class="cover-hint">键盘 ← → 翻节 · 右上角目录可跳转 · 每个演示都可重来</p>
   </section>
+<section class="chapter" id="ch1">
+  <div class="chapter-head reveal">
+    <h2 class="chapter-title">第 1 章 · 大模型是什么</h2>
+    <span class="chip">约 6 分钟</span>
+  </div>
+
+  <section class="section" data-title="核心：文字接龙大师">
+    <h3 class="sec-title">它本质是一台<span class="grad">「文字接龙大师」</span></h3>
+    <p class="lead">先忘掉“神经网络”“人工智能”这些吓人的词。大模型做的事只有一件：<strong>看着前面的文字，猜下一个词</strong>。训练时，它把海量书籍、网页、代码读了个遍；使用时，它把你说的每句话当成“接龙的开头”，一个词一个词往下接。</p>
+    <div class="eq"><span>训练 = <b>海量阅读</b></span><span>使用 = <b>预测下一个词</b></span><span>输出 = <b>一个词一个词往外蹦</b></span></div>
+    <div class="chain-illo" aria-hidden="true">
+      <span class="w">今天</span><i class="arrow">→</i>
+      <span class="w">天气</span><i class="arrow">→</i>
+      <span class="w">真</span><i class="arrow">→</i>
+      <span class="w hot">好</span><i class="arrow">→</i>
+      <span class="dots">……</span>
+    </div>
+    <p class="plain-note">所以它不是在“查资料”，而是在“接话”。这也解释了它为什么有时特别会说，有时却一本正经地胡说八道。</p>
+  </section>
+
+  <section class="section" data-title="知识卡片：三个「不能」">
+    <h3 class="sec-title">超级大脑，但有三个「不能」</h3>
+    <div class="cards-3">
+      <article class="card">
+        <span class="tag">不能 01</span>
+        <h3>不知道新事</h3>
+        <p>训练数据有时间截止点，之后发生的事它天然不知道。想让它知道，就得<b>把资料递给它</b>——这就是后面 RAG 要干的事。</p>
+      </article>
+      <article class="card">
+        <span class="tag">不能 02</span>
+        <h3>不记你</h3>
+        <p>它只有一个临时工作台叫<b>上下文</b>。新开一个对话，工作台就清空了；聊得越久，台面越满。</p>
+      </article>
+      <article class="card">
+        <span class="tag">不能 03</span>
+        <h3>动不了手</h3>
+        <p>它只能输出文字，不能真的订机票、查天气、改文件。要动手，就得给它配<b>工具（Tool）</b>。</p>
+      </article>
+      <article class="card wide">
+        <span class="tag">副作用</span>
+        <h3>会自信地胡说 = 幻觉</h3>
+        <p>因为它只负责“接得像”，不负责“接得对”。遇到不确定的地方，它也可能用非常肯定的语气编一个答案。<b>重要结论务必自己核对，或让它给出处。</b></p>
+      </article>
+    </div>
+    <p class="plain-note">把人话记住：<b>它是一颗超级大脑，但被关在聊天框里。</b>后面所有技术，都是在给它补东西。</p>
+  </section>
+
+  <section class="section" data-title="互动：文字接龙机">
+    <h3 class="sec-title">亲手接一次龙</h3>
+    <p class="lead">点「开始接龙」，看它如何只做一件事：<strong>每一步，从候选里挑一个最可能的词</strong>。</p>
+    <div class="demo chain-demo" data-demo="chain">
+      <p class="chain-prompt">输入（Prompt）</p>
+      <div class="chain-line"><span class="seed">他每天早晨</span><span class="out"></span></div>
+      <div class="cand" aria-live="polite"></div>
+      <div class="demo-controls">
+        <button class="btn" type="button" data-start>开始接龙</button>
+        <button class="btn" type="button" data-again>重来</button>
+      </div>
+      <p class="chain-note">注意：它不会“想清楚整句话”再开口，而是<b>每 500 毫秒猜一个词</b>，猜完再猜下一个。</p>
+    </div>
+  </section>
+
+  <section class="section" data-title="记住这个">
+    <aside class="remember">
+      <span class="label">记住这个</span>
+      大模型是一颗<strong>超级大脑</strong>，但被关在聊天框里。它不知道新事、不记你、动不了手，还会自信地胡说。后面所有技术，都在给它补<strong>手、记忆、参考书和员工手册</strong>。
+    </aside>
+    <p class="plain-note">接下来先逛一张“概念全家桶”地图，把 Token、Prompt、RAG、MCP、Skills、Agent 这些词一次认全；然后再逐个拆开。</p>
+    <nav class="sec-nav" aria-label="章节导航">
+      <button type="button" data-nav="prev">← 上一节</button>
+      <button type="button" data-nav="next">下一节 →</button>
+    </nav>
+  </section>
+</section>
 <!-- @@CHAPTERS@@ -->
 </main>
 <div id="toc-backdrop" hidden></div>
@@ -331,8 +444,89 @@ function registerDemo(name, impl) {
   });
 }
 
+/* 第 1 章 · 文字接龙机 */
+(function () {
+  const WORDS = ['都会', '去', '公园', '跑', '步', '。'];
+  const DISTRACTORS = [
+    ['喜欢', '想', '要'],
+    ['到', '在', '往'],
+    ['学校', '超市', '家里'],
+    ['走', '跳', '睡'],
+    ['步', '操', '鞋'],
+    ['.', '！', '？']
+  ];
+  const root = document.querySelector('[data-demo="chain"]');
+  if (!root) return;
+  const out = root.querySelector('.out');
+  const cand = root.querySelector('.cand');
+  let pending = [];
+  let runId = 0;
+
+  function wait(ms) {
+    return new Promise(resolve => {
+      const entry = { timer: null, resolve };
+      entry.timer = setTimeout(() => {
+        pending = pending.filter(p => p !== entry);
+        resolve();
+      }, ms);
+      pending.push(entry);
+    });
+  }
+  function clearTimers() {
+    const all = pending;
+    pending = [];
+    all.forEach(p => { clearTimeout(p.timer); p.resolve(); });
+  }
+  function reset() {
+    runId++;
+    clearTimers();
+    out.innerHTML = '';
+    cand.innerHTML = '';
+  }
+  registerDemo('chain', {
+    async start() {
+      reset();
+      const my = runId;
+      for (let i = 0; i < WORDS.length; i++) {
+        if (my !== runId) return;
+        const options = [WORDS[i], ...DISTRACTORS[i]].sort(() => Math.random() - 0.5);
+        cand.innerHTML = '';
+        const label = document.createElement('span');
+        label.className = 'cand-label';
+        label.textContent = '候选词：';
+        cand.appendChild(label);
+        const nodes = options.map(w => {
+          const s = document.createElement('span');
+          s.className = 'cand-word';
+          s.textContent = w;
+          cand.appendChild(s);
+          return s;
+        });
+        await wait(380);
+        if (my !== runId) return;
+        nodes[options.indexOf(WORDS[i])].classList.add('pick');
+        const tok = document.createElement('span');
+        tok.className = 'tok';
+        tok.textContent = WORDS[i];
+        out.appendChild(tok);
+        await wait(220);
+        if (my !== runId) return;
+      }
+      cand.innerHTML = '';
+    },
+    reset
+  });
+})();
+
+/* 通用章节上/下一节按钮 */
+document.addEventListener('click', e => {
+  const btn = e.target instanceof Element ? e.target.closest('[data-nav]') : null;
+  if (!btn) return;
+  if (btn.dataset.nav === 'next') window.__nav.next();
+  else if (btn.dataset.nav === 'prev') window.__nav.prev();
+});
+
 /* @@JS:FEATURES@@ */
-/* @@JS:SELFTEST@@ */
 /* 自检框架 */
 window.__SELFTESTS = [];
 window.__selftest = {
@@ -361,6 +555,30 @@ SELFTEST('nav/开始按钮与目录开合', async () => {
   ok(true, 'Esc 关闭抽屉');
 });
 
+SELFTEST('ch1/结构', async () => {
+  const ch = document.querySelector('#ch1');
+  ok(!!ch, '存在 #ch1');
+  ok(/文字接龙/.test(ch.innerText), '含「文字接龙」比喻');
+  ok(/幻觉/.test(ch.innerText), '讲幻觉');
+  ok(ch.querySelectorAll('.section').length >= 4, '至少 4 节');
+  ok(!!ch.querySelector('.remember'), '含「记住这个」');
+  ok(!!ch.querySelector('.chapter-head .chip'), '含时长 chip');
+});
+SELFTEST('ch1/接龙演示', async () => {
+  const d = document.querySelector('[data-demo="chain"]');
+  ok(!!d && !!window.__demos.chain, '演示存在且已注册');
+  ok(!!d.querySelector('[data-again]'), '有重来按钮');
+  d.querySelector('[data-start]').click();
+  await until(() => d.querySelectorAll('.out .tok').length >= 2, 5000);
+  ok(true, '点击后逐词输出');
+  await until(() => window.__demos.chain.running === false, 30000);
+  ok(d.querySelectorAll('.out .tok').length === 6, '共接出 6 个 token（他每天早晨…）');
+  d.querySelector('[data-again]').click();
+  ok(d.querySelectorAll('.out .tok').length === 0, '重来清空输出');
+});
+
+/* @@JS:SELFTEST@@ */
+
 window.addEventListener('load', async () => {
   if (!location.hash.includes('selftest')) return;
   for (const t of window.__SELFTESTS) {
@@ -370,7 +588,6 @@ window.addEventListener('load', async () => {
   window.__selftest.done = true;
   console.log('[selftest]', JSON.stringify(window.__selftest.summary()));
 });
-/* @@JS:SELFTEST@@ */
 </script>
 </body>
 </html>
