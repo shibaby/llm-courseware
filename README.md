@@ -24,7 +24,7 @@
 
 ## 在线体验
 
-发布后可直接访问：<https://shibaby.github.io/llm-courseware/>
+直接访问：<https://shibaby.github.io/llm-courseware/>
 
 ## 怎么打开
 
